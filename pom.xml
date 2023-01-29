@@ -23,6 +23,9 @@
             <organization>https://github.com/geektcp</organization>
         </developer>
     </developers>
+    <name>thy-core</name>
+    <description>common library for Java</description>
+
     <groupId>com.geektcp.common</groupId>
     <artifactId>thy-core</artifactId>
     <version>1.0.0.RELEASE</version>
