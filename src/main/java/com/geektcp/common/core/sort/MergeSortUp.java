@@ -3,7 +3,7 @@ package com.geektcp.common.core.sort;
 /**
  * @author tanghaiyang on 2019/9/23.
  */
-public class Down2UpMergeSort<T extends Comparable<T>> extends MergeSort<T> {
+public class MergeSortUp<T extends Comparable<T>> extends MergeSort<T> {
 
     @Override
     public void sort(T[] numberArray) {

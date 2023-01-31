@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author tanghaiyang on 2021/5/6 16:59.
  */
-public class CacheBuilder {
+public class CacheBuilder implements Cache{
 
     private static final int TIME_OUT_MINUTES = 10;
 
@@ -31,4 +31,28 @@ public class CacheBuilder {
                 .build(loader);
     }
 
+    @Override
+    public void clean() {
+
+    }
+
+    @Override
+    public void refresh(String key) {
+
+    }
+
+    @Override
+    public void put(String key, Object value) {
+
+    }
+
+    @Override
+    public Object get(String key) {
+        return null;
+    }
+
+    @Override
+    public void delete(String key) {
+
+    }
 }
