@@ -5,29 +5,29 @@ package com.geektcp.common.core.sort;
  */
 public class Heap<T extends Comparable<T>> {
 
-    private T[] heap;
-    private int N = 0;
+    private T[] heapArray;
+    private int seq = 0;
 
-    public Heap(int maxN) {
-        this.heap = (T[]) new Comparable[maxN + 1];
+    public Heap(int maxSeq) {
+        this.heapArray = (T[]) new Comparable[maxSeq + 1];
     }
 
     public boolean isEmpty() {
-        return N == 0;
+        return seq == 0;
     }
 
     public int size() {
-        return N;
+        return seq;
     }
 
     private boolean less(int i, int j) {
-        return heap[i].compareTo(heap[j]) < 0;
+        return heapArray[i].compareTo(heapArray[j]) < 0;
     }
 
     private void swap(int i, int j) {
-        T t = heap[i];
-        heap[i] = heap[j];
-        heap[j] = t;
+        T t = heapArray[i];
+        heapArray[i] = heapArray[j];
+        heapArray[j] = t;
     }
 
     private void swim(int k) {
@@ -38,9 +38,9 @@ public class Heap<T extends Comparable<T>> {
     }
 
     private void sink(int k) {
-        while (2 * k <= N) {
+        while (2 * k <= seq) {
             int j = 2 * k;
-            if (j < N && less(j, j + 1))
+            if (j < seq && less(j, j + 1))
                 j++;
             if (!less(k, j))
                 break;
@@ -49,17 +49,15 @@ public class Heap<T extends Comparable<T>> {
         }
     }
 
-    /*
-    public void insert(Comparable v) {
-        heap[++N] = v;
-        swim(N);
+    public void insert(T v) {
+        heapArray[++seq] = v;
+        swim(seq);
     }
-    */
 
     public T delMax() {
-        T max = heap[1];
-        swap(1, N--);
-        heap[N + 1] = null;
+        T max = heapArray[1];
+        swap(1, seq--);
+        heapArray[seq + 1] = null;
         sink(1);
         return max;
     }

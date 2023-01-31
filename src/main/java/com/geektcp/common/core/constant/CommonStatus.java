@@ -6,7 +6,7 @@ package com.geektcp.common.core.constant;
  * @author tanghaiyang
  *  2021/7/15 14:30
  */
-public enum CommonExceptionStatus implements Status {
+public enum CommonStatus implements Status {
 
     SYSTEM_BUSY(-1, "system is busy."),
     SYSTEM_TIMEOUT(-2, "system timeout "),
@@ -54,7 +54,7 @@ public enum CommonExceptionStatus implements Status {
     private int code;
     private String desc;
 
-    CommonExceptionStatus(Integer code, String desc) {
+    CommonStatus(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -11,46 +11,46 @@ import java.util.List;
 public class QuickSort<T extends Comparable<T>> extends Sort<T> {
 
     @Override
-    public void sort(T[] nums) {
-        shuffle(nums);
-        sort(nums, 0, nums.length - 1);
+    public void sort(T[] numberArray) {
+        shuffle(numberArray);
+        sort(numberArray, 0, numberArray.length - 1);
     }
 
-    private void sort(T[] nums, int l, int h) {
+    private void sort(T[] numberArray, int l, int h) {
         if (h <= l)
             return;
-        int j = partition(nums, l, h);
-        sort(nums, l, j - 1);
-        sort(nums, j + 1, h);
+        int j = partition(numberArray, l, h);
+        sort(numberArray, l, j - 1);
+        sort(numberArray, j + 1, h);
     }
 
-    private void shuffle(T[] nums) {
-        List<Comparable> list = Arrays.asList(nums);
+    private void shuffle(T[] numberArray) {
+        List<Comparable> list = Arrays.asList(numberArray);
         Collections.shuffle(list);
-        list.toArray(nums);
+        list.toArray(numberArray);
     }
 
-    private int partition(T[] nums, int l, int h) {
+    private int partition(T[] numberArray, int l, int h) {
         int i = l, j = h + 1;
-        T v = nums[l];
+        T v = numberArray[l];
         while (true) {
-            while (less(nums[++i], v) && i != h) ;
-            while (less(v, nums[--j]) && j != l) ;
+            while (less(numberArray[++i], v) && i != h) ;
+            while (less(v, numberArray[--j]) && j != l) ;
             if (i >= j)
                 break;
-            swap(nums, i, j);
+            swap(numberArray, i, j);
         }
-        swap(nums, l, j);
+        swap(numberArray, l, j);
         return j;
     }
 
-    public T select(T[] nums, int k) {
-        int l = 0, h = nums.length - 1;
+    public T select(T[] numberArray, int k) {
+        int l = 0, h = numberArray.length - 1;
         while (h > l) {
-            int j = partition(nums, l, h);
+            int j = partition(numberArray, l, h);
 
             if (j == k) {
-                return nums[k];
+                return numberArray[k];
 
             } else if (j > k) {
                 h = j - 1;
@@ -59,6 +59,6 @@ public class QuickSort<T extends Comparable<T>> extends Sort<T> {
                 l = j + 1;
             }
         }
-        return nums[k];
+        return numberArray[k];
     }
 }

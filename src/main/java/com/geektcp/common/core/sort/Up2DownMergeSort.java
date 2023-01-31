@@ -6,18 +6,18 @@ package com.geektcp.common.core.sort;
 public class Up2DownMergeSort<T extends Comparable<T>> extends MergeSort<T> {
 
     @Override
-    public void sort(T[] nums) {
-        aux = (T[]) new Comparable[nums.length];
-        sort(nums, 0, nums.length - 1);
+    public void sort(T[] numberArray) {
+        aux = (T[]) new Comparable[numberArray.length];
+        sort(numberArray, 0, numberArray.length - 1);
     }
 
-    private void sort(T[] nums, int l, int h) {
+    private void sort(T[] numberArray, int l, int h) {
         if (h <= l) {
             return;
         }
         int mid = l + (h - l) / 2;
-        sort(nums, l, mid);
-        sort(nums, mid + 1, h);
-        merge(nums, l, mid, h);
+        sort(numberArray, l, mid);
+        sort(numberArray, mid + 1, h);
+        merge(numberArray, l, mid, h);
     }
 }
