@@ -15,23 +15,23 @@ public class IdGenerator {
     private static final long START_TIME = 1420041600000L;
     private static final long WORKER_ID_BITS = 5L;
     private static final long DATA_CENTER_ID_BITS = 5L;
-    private static final long MAX_WORKER_ID = -1L ^ (-1L << WORKER_ID_BITS);
-    private static final long MAX_DATA_CENTER_ID = -1L ^ (-1L << DATA_CENTER_ID_BITS);
+    private static final long MAX_WORKER_ID = ~(-1L << WORKER_ID_BITS);
+    private static final long MAX_DATA_CENTER_ID = ~(-1L << DATA_CENTER_ID_BITS);
     private static final long SEQUENCE_BITS = 12L;
     private static final long WORKER_ID_SHIFT = SEQUENCE_BITS;
     private static final long CENTER_ID_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
     private static final long TIMESTAMP_LEFT_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS + DATA_CENTER_ID_BITS;
-    private static final long SEQUENCE_MASK = -1L ^ (-1L << SEQUENCE_BITS);
+    private static final long SEQUENCE_MASK = ~(-1L << SEQUENCE_BITS);
 
-    private static long SEQUENCE = 0L;
-    private static long LAST_TIMESTAMP = -1L;
+    private static long sequence = 0L;
+    private static long lastTimeStamp = -1L;
 
     private long workerId;
     private long centerId;
 
     private static IdGenerator instance;
 
-    private static String SPLIT = "_";
+    private static String delimiter = "_";
 
     // private
     private IdGenerator(long workerId, long centerId) {
@@ -48,38 +48,38 @@ public class IdGenerator {
     }
 
     private synchronized long nextId() {
-        long timestamp = timeGen();
-        if (timestamp < LAST_TIMESTAMP) {
-            throw new RuntimeException(String.format(
-                    "Clock moved backwards.  Refusing to generate id for %d milliseconds", LAST_TIMESTAMP - timestamp));
+        long timestamp = timeGenerate();
+        if (timestamp < lastTimeStamp) {
+            throw new IdException(String.format(
+                    "Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimeStamp - timestamp));
         }
 
-        if (LAST_TIMESTAMP == timestamp) {
-            SEQUENCE = (SEQUENCE + 1) & SEQUENCE_MASK;
-            if (SEQUENCE == 0) {
-                timestamp = tilNextMillis(LAST_TIMESTAMP);
+        if (lastTimeStamp == timestamp) {
+            sequence = (sequence + 1) & SEQUENCE_MASK;
+            if (sequence == 0) {
+                timestamp = tilNextMillis(lastTimeStamp);
             }
         } else {
-            SEQUENCE = 0L;
+            sequence = 0L;
         }
 
-        LAST_TIMESTAMP = timestamp;
+        lastTimeStamp = timestamp;
 
         return ((timestamp - START_TIME) << TIMESTAMP_LEFT_SHIFT)
                 | (centerId << CENTER_ID_SHIFT)
                 | (workerId << WORKER_ID_SHIFT)
-                | SEQUENCE;
+                | sequence;
     }
 
     private long tilNextMillis(long lastTimestamp) {
-        long timestamp = timeGen();
+        long timestamp = timeGenerate();
         while (timestamp <= lastTimestamp) {
-            timestamp = timeGen();
+            timestamp = timeGenerate();
         }
         return timestamp;
     }
 
-    private long timeGen() {
+    private long timeGenerate() {
         return System.currentTimeMillis();
     }
 
@@ -109,16 +109,16 @@ public class IdGenerator {
         return instance;
     }
 
-    public static void setSplit(String split) {
-        SPLIT = split;
+    public static void setDelimiter(String c) {
+        delimiter = c;
     }
 
-    public static String getSplit(String split) {
-        return SPLIT;
+    public static String getDelimiter() {
+        return delimiter;
     }
 
     public static String getId(String pre) {
-        return pre + SPLIT + getId();
+        return pre + delimiter + getId();
     }
 
     public static Long getId(long workerId, long centerId) {
@@ -129,4 +129,10 @@ public class IdGenerator {
         return getInstance().nextId();
     }
 
+
+    private class IdException extends RuntimeException {
+        private IdException(String desc) {
+            super(desc);
+        }
+    }
 }
