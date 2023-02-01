@@ -9,7 +9,10 @@ import java.util.Map;
 /**
  * @author tanghaiyang on 2018/4/12.
  */
-public class JSONUtils {
+public class JsonUtils {
+
+    private JsonUtils() {
+    }
 
     public static <T> Map<String, Object> toMap(T bean) {
         String text = JSON.toJSONString(bean);
@@ -39,11 +42,16 @@ public class JSONUtils {
         });
     }
 
-    public static <From, To> To copy(From bean, Class<To> toClass){
-        return JSON.parseObject(JSON.toJSONString(bean), toClass);
+    public static <S, D> D copy(S srcBean, Class<D> dstClass) {
+        return JSON.parseObject(JSON.toJSONString(srcBean), dstClass);
     }
 
-    public static <T> void println(T object) {
-        System.out.println(JSON.toJSONString(object, true));
+    public static <T> String toString(T object) {
+        return toString(object, true);
     }
+
+    public static <T> String toString(T object, boolean isPretty) {
+        return JSON.toJSONString(object, isPretty);
+    }
+
 }

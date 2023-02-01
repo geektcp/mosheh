@@ -10,6 +10,6 @@ common libray for Java
 <dependency>
     <groupId>com.geektcp.common</groupId>
     <artifactId>thy-core</artifactId>
-    <version>1.0.1.RELEASE</version>
+    <version>1.0.0.RELEASE</version>
 </dependency>
 ```
