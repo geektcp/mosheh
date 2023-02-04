@@ -16,6 +16,7 @@ public class SysTest {
     public void testPrint() {
         Sys.println("aaa");
         Sys.println("123");
+
         Assert.assertTrue(true);
     }
 
@@ -38,8 +39,8 @@ public class SysTest {
 
     @Test
     public void testVar() {
+        Sys.p(Sys.getResourceRootPath());
         Sys.p(Sys.getUserHome());
-        Sys.p(Sys.getResourcePath());
         Sys.p(Sys.getFileSeparator());
         Sys.p(Sys.getJdkVersion());
         Sys.p(Sys.getUserHome());
@@ -59,6 +60,14 @@ public class SysTest {
         // linux
         Sys.p(Sys.getEnv("PATH"));
         Sys.p(Sys.getEnv("HOME"));
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testClass() {
+        // windows
+        Sys.p(Sys.getClassPath("com.geektcp.common.core.generator.IdGenerator"));
+
         Assert.assertTrue(true);
     }
 

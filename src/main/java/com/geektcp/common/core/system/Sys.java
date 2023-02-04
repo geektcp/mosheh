@@ -1,6 +1,7 @@
 package com.geektcp.common.core.system;
 
 
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -73,16 +74,34 @@ public class Sys {
 
 
     ////////////// FileSystem ////////////////
-    public static String getResourcePath() {
-        String resourcePath = ThyFileSystem.getResourcePath("/");
-        if(isWindows() && resourcePath.startsWith("/")){
-           return resourcePath.substring(1);
+    private static String filterPath(String path){
+        if(Objects.isNull(path)){
+            return null;
         }
-        return resourcePath;
+        if(isWindows() && path.startsWith("/")){
+            return path.substring(1);
+        }
+        return path;
+    }
+
+    public static String getResourceRootPath() {
+        return filterPath(ThyFileSystem.getResourcePath("/"));
     }
 
     public static String getResourcePath(String name) {
-        return ThyFileSystem.getResourcePath(name);
+        return filterPath(ThyFileSystem.getResourcePath(name));
+    }
+
+    public static Class<?> getClass(String className) {
+        return ThyClass.getClass(className);
+    }
+
+    public static String getClassPath(String className) {
+        return filterPath(ThyClass.getClassPath(className));
+    }
+
+    public static String getClassPath(Class<?> cls) {
+        return ThyClass.getClassPath(cls);
     }
 
 
