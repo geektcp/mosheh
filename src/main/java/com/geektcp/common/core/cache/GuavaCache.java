@@ -1,5 +1,6 @@
 package com.geektcp.common.core.cache;
 
+import com.geektcp.common.core.system.Sys;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -11,13 +12,12 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static com.geektcp.common.core.util.PrintUtils.print;
 
 
 /**
  * @author haiyang.tang on 11.27 027 18:27:09.
  */
-public class GuavaCache<T> implements Cache {
+public class GuavaCache implements Cache {
 
     private GuavaCache() {
     }
@@ -63,7 +63,7 @@ public class GuavaCache<T> implements Cache {
                 list.add(key + " " + CACHE.getIfPresent(key));
             }
         } catch (Exception e) {
-            print(e.getMessage());
+            Sys.p(e.getMessage());
         }
         return list;
     }

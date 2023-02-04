@@ -1,11 +1,10 @@
 package com.geektcp.common.core.cache;
 
+import com.geektcp.common.core.system.Sys;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.*;
 
 import java.util.concurrent.TimeUnit;
-
-import static com.geektcp.common.core.util.PrintUtils.*;
 
 /**
  * @author geektcp on 2019/11/30 0:59.
@@ -20,10 +19,10 @@ public class ThyCache {
                     notification.getKey(),
                     notification.getValue(),
                     notification.getCause());
-            print(describe);
+            Sys.p(describe);
 
             if (notification.getCause().equals(RemovalCause.EXPIRED) && notification.getValue() != null) {
-                printf("remove %s expired cache\n", notification.getKey());
+                Sys.printf("remove %s expired cache\n", notification.getKey());
             }
         }
     };
