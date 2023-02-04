@@ -3,7 +3,7 @@ package com.geektcp.common.core.constant;
 /**
  *
  * 共用 错误码
- * @author tanghaiyang
+ * @author geektcp
  *  2021/7/15 14:30
  */
 public enum CommonStatus implements Status {

@@ -1,7 +1,7 @@
 package com.geektcp.common.core.collection;
 
 /**
- * @author tanghaiyang on 2019/9/28.
+ * @author geektcp on 2019/9/28.
  */
 public interface ThyQueue<Item> extends Iterable<Item> {
 

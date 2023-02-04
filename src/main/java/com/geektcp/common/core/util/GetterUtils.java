@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author tanghaiyang on 2017/12/6.
+ * @author geektcp on 2017/12/6.
  */
 public class GetterUtils {
 

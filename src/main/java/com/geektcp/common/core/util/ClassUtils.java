@@ -1,7 +1,7 @@
 package com.geektcp.common.core.util;
 
 /**
- * @author tanghaiyang on 2018/3/15.
+ * @author geektcp on 2018/3/15.
  */
 public class ClassUtils {
 

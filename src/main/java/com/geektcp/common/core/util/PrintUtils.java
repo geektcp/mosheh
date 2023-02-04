@@ -1,7 +1,7 @@
 package com.geektcp.common.core.util;
 
 /**
- * @author Mr.Tang on 2023/2/1 1:26.
+ * @author geektcp on 2023/2/1 1:26.
  */
 public class PrintUtils {
 

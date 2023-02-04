@@ -2,7 +2,7 @@ package com.geektcp.common.core.sort;
 
 
 /**
- * @author tanghaiyang on 2019/9/23.
+ * @author geektcp on 2019/9/23.
  */
 public class Bubble<T extends Comparable<T>> extends Sort<T> {
 

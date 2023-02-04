@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * @author tanghaiyang on 2019/9/28.
+ * @author geektcp on 2019/9/28.
  */
 public class ListStack<Item> implements ThyStack<Item> {
 

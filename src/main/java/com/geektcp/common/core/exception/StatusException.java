@@ -4,7 +4,7 @@ package com.geektcp.common.core.exception;
 import com.geektcp.common.core.constant.Status;
 
 /**
- * @author tanghaiyang on 2018/5/16.
+ * @author geektcp on 2018/5/16.
  */
 public class StatusException extends BaseException {
 

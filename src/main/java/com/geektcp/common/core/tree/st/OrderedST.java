@@ -3,7 +3,7 @@ package com.geektcp.common.core.tree.st;
 import java.util.List;
 
 /**
- * @author tanghaiyang on 2019/9/28.
+ * @author geektcp on 2019/9/28.
  */
 public interface OrderedST<Key extends Comparable<Key>, Value> {
 

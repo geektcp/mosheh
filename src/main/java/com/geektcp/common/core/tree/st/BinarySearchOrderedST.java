@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author tanghaiyang on 2019/9/28.
+ * @author geektcp on 2019/9/28.
  */
 public class BinarySearchOrderedST<Key extends Comparable<Key>, Value> implements OrderedST<Key, Value> {
 

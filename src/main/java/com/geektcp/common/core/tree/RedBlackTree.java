@@ -1,7 +1,7 @@
 package com.geektcp.common.core.tree;
 
 /**
- * @author tanghaiyang on 2019/9/16.
+ * @author geektcp on 2019/9/16.
  */
 
 import com.google.common.base.Joiner;

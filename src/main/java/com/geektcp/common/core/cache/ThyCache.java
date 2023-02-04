@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import static com.geektcp.common.core.util.PrintUtils.*;
 
 /**
- * @author tanghaiyang on 2019/11/30 0:59.
+ * @author geektcp on 2019/11/30 0:59.
  */
 public class ThyCache {
 

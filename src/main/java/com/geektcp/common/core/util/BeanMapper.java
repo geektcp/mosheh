@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * @author tanghaiyang  2021/5/25 11:12
+ * @author geektcp  2021/5/25 11:12
  */
 public class BeanMapper {
 

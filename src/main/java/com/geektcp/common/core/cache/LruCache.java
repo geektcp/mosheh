@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * @author tanghaiyang on 2019/9/26.
+ * @author geektcp on 2019/9/26.
  */
 public class LruCache<K, V> implements Iterable<K>,Cache {
 

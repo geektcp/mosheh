@@ -3,7 +3,7 @@ package com.geektcp.common.core.collection;
 import java.util.Iterator;
 
 /**
- * @author tanghaiyang on 2019/9/28.
+ * @author geektcp on 2019/9/28.
  */
 public class ArrayStack<Item> implements ThyStack<Item> {
 

@@ -5,7 +5,7 @@ import com.geektcp.common.core.constant.Status;
 import java.text.MessageFormat;
 
 /**
- * @author tanghaiyang on 2018/5/16.
+ * @author geektcp on 2018/5/16.
  */
 
 public class BaseException extends RuntimeException {

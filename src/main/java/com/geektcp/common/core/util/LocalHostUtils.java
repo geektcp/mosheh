@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
- * @author tanghaiyang on 2018/7/4.
+ * @author geektcp on 2018/7/4.
  */
 public class LocalHostUtils {
 

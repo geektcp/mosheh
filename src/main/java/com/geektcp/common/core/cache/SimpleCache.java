@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @author tanghaiyang on 2019/9/26.
+ * @author geektcp on 2019/9/26.
  */
 public class SimpleCache {
     private static Map<String, Object> cacheMap = new HashMap<>();
