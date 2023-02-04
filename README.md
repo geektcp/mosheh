@@ -15,7 +15,3 @@ common libray for Java
 ```
 
 
-### build
-```
-mvn clean javadoc:jar deploy -P release,gpg
-```
