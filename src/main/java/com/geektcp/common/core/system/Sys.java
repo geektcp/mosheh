@@ -17,8 +17,16 @@ public class Sys {
         ThyStream.println(str);
     }
 
+    public static void p(Object str) {
+        ThyStream.println(str);
+    }
+
     public static void println(Object str) {
         ThyStream.print(str);
+    }
+
+    public static void p(String str) {
+        ThyStream.println(str);
     }
 
     public static void println(String str) {

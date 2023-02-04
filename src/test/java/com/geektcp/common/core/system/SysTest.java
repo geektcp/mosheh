@@ -16,15 +16,14 @@ public class SysTest {
     public void testPrint() {
         Sys.println("aaa");
         Sys.println("123");
-
         Assert.assertTrue(true);
     }
 
     @Test
     public void testRuntime() {
-        Sys.println(Sys.availableProcessors());
-        Sys.println(Sys.maxMemory());
-        Sys.println(Sys.totalMemory());
+        Sys.p(Sys.availableProcessors());
+        Sys.p(Sys.maxMemory());
+        Sys.p(Sys.totalMemory());
 
         Assert.assertTrue(true);
     }
@@ -32,21 +31,21 @@ public class SysTest {
     @Test
     public void testProperties() {
         Properties prop = Sys.getProperties();
-        Sys.println(JsonUtils.toString(prop));
+        Sys.p(JsonUtils.toString(prop));
 
         Assert.assertTrue(true);
     }
 
     @Test
     public void testVar() {
-        Sys.println(Sys.getUserHome());
-        Sys.println(Sys.getResourcePath());
-        Sys.println(Sys.getFileSeparator());
-        Sys.println(Sys.getJdkVersion());
-        Sys.println(Sys.getUserHome());
-        Sys.println(Sys.getOsName());
-        Sys.println(Sys.getUserLanguage());
-        Sys.println(Sys.getUserName());
+        Sys.p(Sys.getUserHome());
+        Sys.p(Sys.getResourcePath());
+        Sys.p(Sys.getFileSeparator());
+        Sys.p(Sys.getJdkVersion());
+        Sys.p(Sys.getUserHome());
+        Sys.p(Sys.getOsName());
+        Sys.p(Sys.getUserLanguage());
+        Sys.p(Sys.getUserName());
 
         Assert.assertTrue(true);
     }
@@ -54,12 +53,12 @@ public class SysTest {
     @Test
     public void testEnv() {
         // windows
-        Sys.println(Sys.getEnv("JAVA_HOME"));
-        Sys.println(Sys.getEnv("Path"));
+        Sys.p(Sys.getEnv("JAVA_HOME"));
+        Sys.p(Sys.getEnv("Path"));
 
         // linux
-        Sys.println(Sys.getEnv("PATH"));
-        Sys.println(Sys.getEnv("HOME"));
+        Sys.p(Sys.getEnv("PATH"));
+        Sys.p(Sys.getEnv("HOME"));
         Assert.assertTrue(true);
     }
 
