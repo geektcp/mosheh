@@ -5,11 +5,14 @@ package com.geektcp.common.core.system;
  */
 public class ThyFileSystem {
 
-    public static String getPath() {
-        return getPath("");
+    private ThyFileSystem() {
     }
 
-    public static String getPath(String name){
+    public static String getResourcePath() {
+        return getResourcePath("");
+    }
+
+    public static String getResourcePath(String name){
         return ThyFileSystem.class.getResource(name).getPath();
     }
 

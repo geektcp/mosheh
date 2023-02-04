@@ -7,6 +7,9 @@ import java.io.PrintStream;
  */
 public class ThyStream {
 
+    private ThyStream() {
+    }
+
     private static final PrintStream out = System.out;
     private static final PrintStream err = System.err;
 
@@ -20,17 +23,25 @@ public class ThyStream {
     }
 
     public static void println(Object str) {
-        out.print(str);
+        out.println(str);
+    }
+
+    public static void println(String str) {
+        out.println(str);
     }
 
     public static void print(String str) {
         out.print(str);
     }
 
+    public static void print(long n) {
+        out.print(n);
+    }
+
+
     public static void printf(String format, Object... args) {
         out.format(format, args);
     }
-
 
 
 }
