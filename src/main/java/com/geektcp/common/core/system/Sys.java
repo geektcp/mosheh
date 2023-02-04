@@ -1,6 +1,7 @@
 package com.geektcp.common.core.system;
 
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -72,6 +73,13 @@ public class Sys {
         return ThyRuntime.freeMemory();
     }
 
+    public static int exec(String cmd) throws IOException {
+        return ThyRuntime.exec(cmd);
+    }
+
+    public static void gc() {
+         ThyRuntime.gc();
+    }
 
     ////////////// FileSystem ////////////////
     private static String filterPath(String path){
