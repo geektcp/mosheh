@@ -25,14 +25,7 @@ public class ThyCommand {
     }
 
     public ThyCommand runDir(String dir) {
-        File runDir = new File(dir);
-        if(!runDir.exists()){
-            runDir = new File(Sys.getTmpdir());
-        }
-        if(!runDir.exists()){
-            throw new IOException("runDir is not exist!");
-        }
-        this.dir = runDir;
+        this.dir = new File(dir);
         return this;
     }
 

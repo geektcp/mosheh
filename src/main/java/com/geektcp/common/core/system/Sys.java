@@ -74,7 +74,7 @@ public class Sys {
         return ThyRuntime.freeMemory();
     }
 
-    public static int exec(String cmd) throws IOException {
+    public static Process exec(String cmd) {
         return ThyRuntime.exec(cmd);
     }
 

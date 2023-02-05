@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 public class ShellTest {
 
     @Test
@@ -24,13 +25,40 @@ public class ShellTest {
         Assert.assertTrue(true);
     }
 
-    public void printResults(Process process) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
+
+    @Test
+    public void testExec() throws Exception {
+        Process process = Sys.exec("ls -l");
+        Sys.printCommandResult(process);
+
+        Assert.assertTrue(true);
     }
+
+    @Test
+    public void testExec2() throws Exception {
+        Process process = Sys.getCommandBuilder()
+                .program("pwd")
+                .start();
+        Sys.printCommandResult(process);
+
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testExec3() throws Exception {
+        Process process = Sys.getCommandBuilder()
+                .runDir("/tmp")
+                .program("netstat")
+                .arg("-a")
+                .arg("-n")
+                .arg("-t")
+                .arg("-p")
+                .start();
+        Sys.printCommandResult(process);
+
+        Assert.assertTrue(true);
+    }
+
 
 
 }

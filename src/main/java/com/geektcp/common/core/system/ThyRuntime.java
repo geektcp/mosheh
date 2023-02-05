@@ -26,9 +26,14 @@ public class ThyRuntime {
         return Runtime.getRuntime().availableProcessors();
     }
 
-    public static int exec(String cmd) throws IOException {
-        Process process = Runtime.getRuntime().exec(cmd);
-        return process.exitValue();
+    public static Process exec(String cmd) {
+        Process process = null;
+        try {
+            process = Runtime.getRuntime().exec(cmd);
+        } catch (IOException e) {
+            Sys.p(e.getMessage());
+        }
+        return process;
     }
 
     public static void gc() {
