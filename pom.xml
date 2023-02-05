@@ -28,7 +28,7 @@
 
     <groupId>com.geektcp.common</groupId>
     <artifactId>thy-core</artifactId>
-    <version>1.0.1.RELEASE</version>
+    <version>1.0.2.RELEASE</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
