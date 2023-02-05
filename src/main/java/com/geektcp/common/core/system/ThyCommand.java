@@ -37,7 +37,7 @@ public class ThyCommand {
     }
 
     public Process start() {
-        String[] cmdArray = Lists.toArray(String.class, cmdList);
+        String[] cmdArray = Lists.toArray(cmdList, String.class);
         Process process = null;
         try {
             process = new ProcessBuilder(cmdArray)
