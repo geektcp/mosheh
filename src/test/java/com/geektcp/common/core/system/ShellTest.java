@@ -19,8 +19,7 @@ public class ShellTest {
                 .arg("-t")
                 .arg("-p")
                 .start();
-        printResults(process);
-        process.waitFor();
+        Sys.printCommandResult(process);
 
         Assert.assertTrue(true);
     }

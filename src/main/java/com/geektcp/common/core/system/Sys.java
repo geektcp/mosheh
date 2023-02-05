@@ -52,6 +52,7 @@ public class Sys {
     public static int availableProcessors() {
         return ThyRuntime.availableProcessors();
     }
+
     /**
      * return used max memory in Java virtual machine
      */
@@ -78,15 +79,15 @@ public class Sys {
     }
 
     public static void gc() {
-         ThyRuntime.gc();
+        ThyRuntime.gc();
     }
 
     ////////////// FileSystem ////////////////
-    private static String filterPath(String path){
-        if(Objects.isNull(path)){
+    private static String filterPath(String path) {
+        if (Objects.isNull(path)) {
             return null;
         }
-        if(isWindows() && path.startsWith("/")){
+        if (isWindows() && path.startsWith("/")) {
             return path.substring(1);
         }
         return path;
@@ -200,6 +201,10 @@ public class Sys {
     ////////////// command execute ////////////////
     public static ThyCommand getCommandBuilder() {
         return ThyCommand.getInstance();
+    }
+
+    public static void printCommandResult(Process process) {
+        ThyCommand.printCommandResult(process);
     }
 
 }

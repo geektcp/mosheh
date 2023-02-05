@@ -3,7 +3,9 @@ package com.geektcp.common.core.system;
 import com.geektcp.common.core.collection.Lists;
 import io.jsonwebtoken.io.IOException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -73,6 +75,16 @@ public class ThyCommand {
         return process;
     }
 
-
+    public static void printCommandResult(Process process)  {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line = "";
+        try {
+            while ((line = reader.readLine()) != null) {
+                Sys.p(line);
+            }
+        }catch (Exception e){
+            Sys.p(e.getMessage());
+        }
+    }
 
 }
