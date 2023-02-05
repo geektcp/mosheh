@@ -19,7 +19,7 @@ public class GeneratorTest {
         a = IdGenerator.getId(1, 3);
 
         System.out.println(a);
-        IdGenerator.setDelimiter("/");
+        IdGenerator.setSeparator("/");
         c = IdGenerator.getId("PRE");
 
         System.out.println(c);

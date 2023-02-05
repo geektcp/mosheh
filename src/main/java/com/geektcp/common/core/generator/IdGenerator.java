@@ -31,7 +31,7 @@ public class IdGenerator {
 
     private static IdGenerator instance;
 
-    private static String delimiter = "_";
+    private static String separator = "_";
 
     // private
     private IdGenerator(long workerId, long centerId) {
@@ -109,16 +109,16 @@ public class IdGenerator {
         return instance;
     }
 
-    public static void setDelimiter(String c) {
-        delimiter = c;
+    public static void setSeparator(String c) {
+        separator = c;
     }
 
-    public static String getDelimiter() {
-        return delimiter;
+    public static String getSeparator() {
+        return separator;
     }
 
     public static String getId(String pre) {
-        return pre + delimiter + getId();
+        return pre + separator + getId();
     }
 
     public static Long getId(long workerId, long centerId) {
