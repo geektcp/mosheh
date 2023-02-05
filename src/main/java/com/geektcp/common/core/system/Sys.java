@@ -192,4 +192,10 @@ public class Sys {
         return ThyEnv.getEnv(envName);
     }
 
+
+    ////////////// command execute ////////////////
+    public static ThyCommand getCommandBuilder() {
+        return ThyCommand.getInstance();
+    }
+
 }

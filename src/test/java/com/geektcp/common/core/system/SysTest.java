@@ -2,6 +2,8 @@ package com.geektcp.common.core.system;
 
 import com.geektcp.common.core.util.JsonUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.Assert;
@@ -68,6 +70,20 @@ public class SysTest {
         // windows
         Sys.p(Sys.getClassPath("com.geektcp.common.core.generator.IdGenerator"));
 
+        Assert.assertTrue(true);
+    }
+
+
+    @Test
+    public void testList(){
+        List<String> list = new ArrayList<>();
+        list.add("s1");
+        list.add("s2");
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add(0,"thy");
+        Sys.p(list.get(0));
         Assert.assertTrue(true);
     }
 
