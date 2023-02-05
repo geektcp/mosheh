@@ -130,6 +130,10 @@ public class Sys {
         return ThySystemProperties.getUserName();
     }
 
+    public static String getTmpdir() {
+        return ThySystemProperties.getTmpdir();
+    }
+
     public static String getUserLanguage() {
         return ThySystemProperties.getUserLanguage();
     }

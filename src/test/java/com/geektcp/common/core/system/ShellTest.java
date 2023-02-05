@@ -13,8 +13,11 @@ public class ShellTest {
 
         Process process = Sys.getCommandBuilder()
                 .runDir("/tmp")
-                .program("df")
-                .arg("-h")
+                .program("netstat")
+                .arg("-a")
+                .arg("-n")
+                .arg("-t")
+                .arg("-p")
                 .start();
         printResults(process);
         process.waitFor();

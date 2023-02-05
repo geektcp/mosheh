@@ -1,6 +1,7 @@
 package com.geektcp.common.core.system;
 
 import com.geektcp.common.core.collection.Lists;
+import io.jsonwebtoken.io.IOException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,7 +23,14 @@ public class ThyCommand {
     }
 
     public ThyCommand runDir(String dir) {
-        this.dir = new File(dir);
+        File runDir = new File(dir);
+        if(!runDir.exists()){
+            runDir = new File(Sys.getTmpdir());
+        }
+        if(!runDir.exists()){
+            throw new IOException("runDir is not exist!");
+        }
+        this.dir = runDir;
         return this;
     }
 

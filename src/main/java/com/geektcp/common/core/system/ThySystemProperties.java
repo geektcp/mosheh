@@ -28,6 +28,11 @@ public class ThySystemProperties {
         return prop.getProperty("user.name");
     }
 
+    public static String getTmpdir() {
+        return prop.getProperty("java.io.tmpdir");
+    }
+
+
     public static String getUserLanguage() {
         return prop.getProperty("user.language");
     }
