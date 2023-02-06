@@ -1,7 +1,5 @@
 package com.geektcp.common.core.system;
 
-
-import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
 
