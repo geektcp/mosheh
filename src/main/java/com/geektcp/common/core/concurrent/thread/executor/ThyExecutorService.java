@@ -1,11 +1,11 @@
 package com.geektcp.common.core.concurrent.thread.executor;
 
+import com.geektcp.common.core.concurrent.thread.able.ThyRunnable;
 import com.geektcp.common.core.system.Sys;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,17 +15,34 @@ public class ThyExecutorService {
 
     private ExecutorService asyncExecutor;
 
-    private static Integer poolSize = Sys.availableProcessors() - 1;
-    private static Integer timeout = 40;
-    private static Integer duration = 20;
+    private Integer poolSize;
+    private Integer timeout;
+    private Integer duration;
+
+    private static Integer poolSizeDefault = Sys.availableProcessors() - 1;
+    private static Integer timeoutDefault = 40;
+    private static Integer durationDefault = 20;
 
 
-    @PostConstruct
-    public void postConstruct() {
+    public ThyExecutorService(Integer poolSize, Integer timeout, Integer duration) {
+        this.poolSize = poolSize;
+        this.timeout = timeout;
+        this.duration = duration;
+    }
+
+    public ThyExecutorService(Integer poolSize) {
+        this(poolSize, timeoutDefault, durationDefault);
+    }
+
+    public ThyExecutorService() {
+        this(poolSizeDefault, timeoutDefault, durationDefault);
+    }
+
+
+    public void init() {
         asyncExecutor = Executors.newFixedThreadPool(poolSize);
     }
 
-    @PreDestroy
     public void cleanup() {
         asyncExecutor.shutdown();
         boolean termination = false;
@@ -45,5 +62,17 @@ public class ThyExecutorService {
             Sys.p("easy shutdown asyncExecutor");
         }
     }
+
+    public void submit() {
+        Future future = asyncExecutor.submit(new ThyRunnable());
+        try {
+            Object result = future.get(timeout, TimeUnit.SECONDS);
+            Sys.p(result);
+        } catch (Exception e) {
+            Sys.p(e.getMessage());
+        }
+
+    }
+
 
 }
