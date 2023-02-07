@@ -1,15 +1,16 @@
 package com.geektcp.common.core.tree;
 
-/**
- * @author geektcp on 2019/9/16.
- */
 
+import com.geektcp.common.core.system.Sys;
 import com.google.common.base.Joiner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author geektcp on 2019/9/16.
+ */
 public class RedBlackTree<K extends Comparable<K>, V> {
 
     private static final boolean RED = true;
@@ -34,7 +35,6 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     private Node root;
 
-    // 节点数
     private int size;
 
     public RedBlackTree() {
@@ -70,7 +70,6 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     private Node leftRotate(Node node) {
         Node x = node.right;
 
-        //左旋转
         node.right = x.left;
         x.left = node;
         x.color = node.color;
@@ -94,7 +93,6 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     private Node rightRotate(Node node) {
         Node x = node.left;
 
-        //右旋转
         node.left = x.right;
         x.right = node;
 
@@ -307,7 +305,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
                 }
             });
         }
-        System.out.println(sb.toString());
+        Sys.p(sb.toString());
         if( !nodes.isEmpty()) {
             print(ret);
         }
