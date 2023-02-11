@@ -1,6 +1,9 @@
 package com.geektcp.common.core.system;
 
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -124,6 +127,41 @@ public class Sys {
         return ThyFileSystem.exists(file);
     }
 
+    public static <T> T readJSONObject(String fileName, Class<T> cls) {
+        return ThyFileSystem.readJSONObject(fileName, cls);
+    }
+
+    public static List<Map<String, Object>> readListMap(String fileName) {
+        return ThyFileSystem.readListMap(fileName);
+    }
+
+    public static String readTextFile(String filePath) {
+        return ThyFileSystem.readTextFile(filePath);
+    }
+
+    public static <T> T readObject(String fileName, Class<T> cls) {
+        return ThyFileSystem.readObject(fileName, cls);
+    }
+
+    public static List<File> getFiles(String filePath) {
+        return ThyFileSystem.getFiles(filePath);
+    }
+
+    public static double getDirSize(File file) {
+        return ThyFileSystem.getDirSize(file);
+    }
+
+    public static void listAllFiles(File dir) {
+        ThyFileSystem.listAllFiles(dir);
+    }
+
+    public static boolean copyFile(String src, String dst) {
+        return ThyFileSystem.copyFile(src, dst);
+    }
+
+    public static boolean fastCopy(String src, String dst) {
+        return ThyFileSystem.fastCopy(src, dst);
+    }
 
     ////////////// Class ////////////////
     public static Class<?> getClass(String className) {
