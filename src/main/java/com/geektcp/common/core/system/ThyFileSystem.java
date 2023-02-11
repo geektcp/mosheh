@@ -39,30 +39,24 @@ class ThyFileSystem {
     }
 
     public static boolean mkdir(String file) {
-        boolean ret = false;
         File f = new File(file);
-        if(f.exists()){
-            return false;
-        }
-        if (f.isDirectory()) {
-            return  f.mkdirs();
-        }
-        File parentFile = f.getParentFile();
-        if(!parentFile.exists()){
-            ret = parentFile.mkdirs();
-        }
+        return  f.mkdirs();
+    }
 
-        return ret;
+    public static boolean exists(String file) {
+        File f = new File(file);
+        return  f.exists();
     }
 
     public static boolean touch(String file) {
         boolean ret = false;
-        if(!mkdir(file)){
-            return false;
-        }
         File f = new File(file);
         if(f.exists()){
             return false;
+        }
+        String parent = f.getParent();
+        if(!exists(parent)){
+            mkdir(parent);
         }
         try {
             ret = f.createNewFile();

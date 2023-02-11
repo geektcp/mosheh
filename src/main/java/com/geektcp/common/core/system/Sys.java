@@ -120,6 +120,11 @@ public class Sys {
         return ThyFileSystem.touch(file);
     }
 
+    public static boolean exists(String file) {
+        return ThyFileSystem.exists(file);
+    }
+
+
     ////////////// Class ////////////////
     public static Class<?> getClass(String className) {
         return ThyClass.getClass(className);
