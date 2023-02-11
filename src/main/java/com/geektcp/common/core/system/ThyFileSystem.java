@@ -41,6 +41,9 @@ class ThyFileSystem {
     public static boolean mkdir(String file) {
         boolean ret = false;
         File f = new File(file);
+        if(f.exists()){
+            return false;
+        }
         if (f.isDirectory()) {
             return  f.mkdirs();
         }
@@ -57,8 +60,11 @@ class ThyFileSystem {
         if(!mkdir(file)){
             return false;
         }
+        File f = new File(file);
+        if(f.exists()){
+            return false;
+        }
         try {
-            File f = new File(file);
             ret = f.createNewFile();
         } catch (Exception e) {
             Sys.p(e.getMessage());
