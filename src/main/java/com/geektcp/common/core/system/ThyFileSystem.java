@@ -34,6 +34,10 @@ class ThyFileSystem {
         return f.delete();
     }
 
+    public static boolean mkdirs(String file) {
+        return mkdir(file);
+    }
+
     public static boolean mkdir(String file) {
         boolean ret = false;
         File f = new File(file);
@@ -41,14 +45,20 @@ class ThyFileSystem {
             return  f.mkdirs();
         }
         File parentFile = f.getParentFile();
-        boolean isMkdir = false;
         if(!parentFile.exists()){
-            isMkdir = parentFile.mkdirs();
+            ret = parentFile.mkdirs();
         }
-        if(!isMkdir){
+
+        return ret;
+    }
+
+    public static boolean touch(String file) {
+        boolean ret = false;
+        if(!mkdir(file)){
             return false;
         }
         try {
+            File f = new File(file);
             ret = f.createNewFile();
         } catch (Exception e) {
             Sys.p(e.getMessage());
@@ -56,4 +66,5 @@ class ThyFileSystem {
 
         return ret;
     }
+
 }
