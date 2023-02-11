@@ -100,6 +100,19 @@ public class Sys {
         return filterPath(ThyFileSystem.getResourcePath(name));
     }
 
+    public static boolean mv(String src, String dst) {
+        return ThyFileSystem.mv(src, dst);
+    }
+
+    public static boolean rm(String file) {
+        return ThyFileSystem.rm(file);
+    }
+
+    public static boolean mkdir(String file) {
+        return ThyFileSystem.mkdir(file);
+    }
+
+    ////////////// Class ////////////////
     public static Class<?> getClass(String className) {
         return ThyClass.getClass(className);
     }
