@@ -15,6 +15,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.util.Objects;
 
@@ -23,17 +24,18 @@ import java.util.Objects;
  */
 public class EncryptUtils {
 
-    private static RSA rsa;
     private EncryptUtils(){
     }
 
     private static final String PRIVATE_KEY = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALeUkONNs4v8wuaVqu7pIc1VCB3S56BRo45bwHJWGZtQRMHeM8onxUX/VSeyrADwYFV1nZPH1TCZSo3ilOP+uhKXfNajqjQOKqqyTakCsiSIv1TLKYooGA7IksEv1kQBQ8bvQvNvQ7F/aw2QNNcHPzVt35Vyc7nDG/UNL2+Yyj6JAgMBAAECgYAECUBHvRQ43E9pLCp4SvgfKHLPnAzTY6Qby8TfBqlUtrayR/k9xTLTQ4Y645TgRuipTFcQ8hRr93zSAoSpQBcVasTOiBHEW7bHcez7q02FmI9oR76+V861/09zoVZzOZbI/O6YpzB9PyJkOx+mX3tyOpmhEljL2iD5Gxcm/09psQJBAOFXDszC7iL4LhKEZt3vfwh7dGJqfKVi/qa9IAYxz9Exz8ecUNFOtyPbSDszFPlD+Ta53vw6Zm4/7B+/PdtoXxkCQQDQjvPEo6NgXkbA+pEtlnJoCOsnP6Aq/tSnRgnY/P0qDMFCmOrVXVkfX6VwCKpg/D3UE8KA0Zj9ybckx+zmPXjxAkEAjOobKDMSJi4a6ZuAlHMLdqt1KYI79lTEuFJ2r0kBE2nZ7JK0+18FKdgcAGE+UW6PbwinCAYhPfqdV3EJZqaLKQJAMLsGKE8X8H92xsaFP4KkrrxOvbf3I7SxWXha+rF6MeYTDg2O6VXLajI+BKRxswGdLL2FN/ZBaiNEwLpaFx4L8QJAUoJqx2njplKnzbF4x1irKMWYWwEkD4FubwKl6JD6YWGSjYg7LLmG1MQXtzUqNm7Xb/rBpNBl5/n2AEvS9yjb3Q==";
-
     private static final String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3lJDjTbOL/MLmlaru6SHNVQgd0uegUaOOW8ByVhmbUETB3jPKJ8VF/1UnsqwA8GBVdZ2Tx9UwmUqN4pTj/roSl3zWo6o0Diqqsk2pArIkiL9UyymKKBgOyJLBL9ZEAUPG70Lzb0Oxf2sNkDTXBz81bd+VcnO5wxv1DS9vmMo+iQIDAQAB";
 
-    private static String strParam = "random!Psw#&.$";
+    private static String param = "thy$p*r^#a>s!m#.x@";
+    private static String key = "thy$k*e^#>y!#.x@";
+    private static String algorithm = "AES/GCM/NoPadding";
 
     private static Cipher cipher;
+    private static RSA rsa;
 
     public static RSA getRsa(){
          rsa = new RSA(PRIVATE_KEY, PUBLIC_KEY);
@@ -47,7 +49,7 @@ public class EncryptUtils {
         return rsa;
     }
 
-    private static IvParameterSpec iv = new IvParameterSpec(strParam.getBytes(StandardCharsets.UTF_8));
+    private static IvParameterSpec iv = new IvParameterSpec(param.getBytes(StandardCharsets.UTF_8));
 
     public static String encrypt(String str) {
         RSA rsa = EncryptUtils.getRsa();
@@ -68,12 +70,7 @@ public class EncryptUtils {
         }
     }
 
-
-
-    /**
-     * @param source
-     */
-    public static String desEncrypt(String source) throws Exception {
+    public static String desEncrypt(String source) throws GeneralSecurityException {
         DESKeySpec desKeySpec = getDesKeySpec(source);
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
         SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
@@ -82,10 +79,7 @@ public class EncryptUtils {
                 cipher.doFinal(source.getBytes(StandardCharsets.UTF_8))).toUpperCase();
     }
 
-    /**
-     * @param source
-     */
-    public static String desDecrypt(String source) throws Exception {
+    public static String desDecrypt(String source) throws GeneralSecurityException {
         byte[] src = hex2byte(source.getBytes());
         DESKeySpec desKeySpec = getDesKeySpec(source);
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
@@ -102,13 +96,12 @@ public class EncryptUtils {
     }
 
     ///////////////////////////////////////////////
-    private static DESKeySpec getDesKeySpec(String source) throws Exception {
+    private static DESKeySpec getDesKeySpec(String source) throws GeneralSecurityException {
         if (source == null || source.length() == 0){
             return null;
         }
-        cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-        String strKey = "Passw0rd";
-        return new DESKeySpec(strKey.getBytes(StandardCharsets.UTF_8));
+        cipher = Cipher.getInstance(algorithm);
+        return new DESKeySpec(key.getBytes(StandardCharsets.UTF_8));
     }
 
     private static String byte2hex(byte[] inStr) {

@@ -1,7 +1,6 @@
 package com.geektcp.common.core.system;
 
 import com.geektcp.common.core.collection.Lists;
-import io.jsonwebtoken.io.IOException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,7 +47,6 @@ class ThyCommand {
                     .start();
         } catch (Exception e) {
             Sys.p(e.getMessage());
-            e.printStackTrace();
         }
 
         return process;
@@ -62,7 +60,6 @@ class ThyCommand {
                     .start();
         } catch (Exception e) {
             Sys.p(e.getMessage());
-            e.printStackTrace();
         }
 
         return process;
