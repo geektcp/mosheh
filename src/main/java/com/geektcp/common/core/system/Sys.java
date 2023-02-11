@@ -112,6 +112,14 @@ public class Sys {
         return ThyFileSystem.mkdir(file);
     }
 
+    public static boolean mkdirs(String file) {
+        return ThyFileSystem.mkdirs(file);
+    }
+
+    public static boolean touch(String file) {
+        return ThyFileSystem.touch(file);
+    }
+
     ////////////// Class ////////////////
     public static Class<?> getClass(String className) {
         return ThyClass.getClass(className);
