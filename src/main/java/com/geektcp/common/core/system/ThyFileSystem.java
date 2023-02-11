@@ -3,7 +3,7 @@ package com.geektcp.common.core.system;
 /**
  * @author geektcp on 2023/2/4 23:46.
  */
-public class ThyFileSystem {
+class ThyFileSystem {
 
     private ThyFileSystem() {
     }

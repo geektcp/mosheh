@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * @author geektcp on 2018/3/15.
  */
-public class ThyClass {
+class ThyClass {
 
     private ThyClass() {
     }

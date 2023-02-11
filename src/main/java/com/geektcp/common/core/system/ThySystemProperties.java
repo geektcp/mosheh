@@ -5,7 +5,7 @@ import java.util.Properties;
 /**
  * @author geektcp on 2023/2/5 0:08.
  */
-public class ThySystemProperties {
+class ThySystemProperties {
 
     private ThySystemProperties() {
     }

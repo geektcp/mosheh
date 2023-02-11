@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * @author geektcp on 2022/2/5.
  */
-public class ThyCommand {
+class ThyCommand {
 
     private File dir = null;
     private ArrayList<String> cmdList = new ArrayList<>();

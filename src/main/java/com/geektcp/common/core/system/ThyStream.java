@@ -5,7 +5,7 @@ import java.io.PrintStream;
 /**
  * @author geektcp on 2023/2/4 23:43.
  */
-public class ThyStream {
+class ThyStream {
 
     private ThyStream() {
     }
