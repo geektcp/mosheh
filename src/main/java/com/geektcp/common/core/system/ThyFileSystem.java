@@ -93,10 +93,7 @@ class ThyFileSystem {
     public static String readTextFile(String filePath) {
         StringBuilder result = new StringBuilder();
         try {
-            InputStream readInputStream = ThyFileSystem.class.getClassLoader().getResourceAsStream(filePath);
-            if (Objects.isNull(readInputStream)) {
-                Sys.p("resource file is not exit: " + filePath);
-            }
+            InputStream readInputStream = new FileInputStream(filePath);
             InputStreamReader read = new InputStreamReader(readInputStream, CHARSET);
             BufferedReader bufferedReader = new BufferedReader(read);
 
