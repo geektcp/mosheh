@@ -1,5 +1,9 @@
 package com.geektcp.common.core.system;
 
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -18,7 +22,11 @@ public class Sys {
     }
 
     public static void p(Object str) {
-        ThyStream.println(str);
+        ThyStream.p(str);
+    }
+
+    public static void p(String messagePattern, Object... args) {
+        ThyStream.p(messagePattern, args);
     }
 
     public static void println(Object str) {
@@ -80,6 +88,7 @@ public class Sys {
         ThyRuntime.gc();
     }
 
+
     ////////////// FileSystem ////////////////
     private static String filterPath(String path) {
         if (Objects.isNull(path)) {
@@ -92,13 +101,80 @@ public class Sys {
     }
 
     public static String getResourceRootPath() {
-        return filterPath(ThyFileSystem.getResourcePath("/"));
+        return filterPath(ThyFileSystem.getResourceRootPath());
     }
 
     public static String getResourcePath(String name) {
         return filterPath(ThyFileSystem.getResourcePath(name));
     }
 
+    public static boolean mv(String src, String dst) {
+        return ThyFileSystem.mv(src, dst);
+    }
+
+    public static boolean rm(String file) {
+        return ThyFileSystem.rm(file);
+    }
+
+    public static boolean mkdir(String file) {
+        return ThyFileSystem.mkdir(file);
+    }
+
+    public static boolean mkdirs(String file) {
+        return ThyFileSystem.mkdirs(file);
+    }
+
+    public static boolean touch(String file) {
+        return ThyFileSystem.touch(file);
+    }
+
+    public static boolean exists(String file) {
+        return ThyFileSystem.exists(file);
+    }
+
+    public static List<File> getFiles(String filePath) {
+        return ThyFileSystem.getFiles(filePath);
+    }
+
+    public static double getDirSize(File file) {
+        return ThyFileSystem.getDirSize(file);
+    }
+
+    public static void listAllFiles(File dir) {
+        ThyFileSystem.listAllFiles(dir);
+    }
+
+    public static boolean copyFile(String src, String dst) {
+        return ThyFileSystem.copyFile(src, dst);
+    }
+
+    public static boolean fastCopy(String src, String dst) {
+        return ThyFileSystem.fastCopy(src, dst);
+    }
+
+    ////////////// FileReader ////////////////
+    public static <T> T readJSONObject(String fileName, Class<T> cls) {
+        return ThyFileReader.readJSONObject(fileName, cls);
+    }
+
+    public static List<Map<String, Object>> readListMap(String fileName) {
+        return ThyFileReader.readListMap(fileName);
+    }
+
+    public static String readTextFile(String filePath) {
+        return ThyFileReader.readTextFile(filePath);
+    }
+
+    public static <T> T readObject(String fileName, Class<T> cls) {
+        return ThyFileReader.readObject(fileName, cls);
+    }
+
+    public static Map<String, Object> readXmlFile(String fileName){
+        return ThyFileReader.readXmlFile(fileName);
+    }
+
+
+    ////////////// Class ////////////////
     public static Class<?> getClass(String className) {
         return ThyClass.getClass(className);
     }

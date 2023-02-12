@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author geektcp on 2023/2/5 1:28.
  */
-public class ThyEnv {
+class ThyEnv {
 
     private ThyEnv() {
     }

@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * @author geektcp on 2023/2/4 23:47.
  */
-public class ThyRuntime {
+class ThyRuntime {
 
     private ThyRuntime() {
     }
