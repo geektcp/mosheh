@@ -88,6 +88,7 @@ public class Sys {
         ThyRuntime.gc();
     }
 
+
     ////////////// FileSystem ////////////////
     private static String filterPath(String path) {
         if (Objects.isNull(path)) {
@@ -100,7 +101,11 @@ public class Sys {
     }
 
     public static String getResourceRootPath() {
-        return filterPath(ThyFileSystem.getResourcePath("/"));
+        return filterPath(ThyFileSystem.getResourceRootPath());
+    }
+
+    public static String getResourceClassPath() {
+        return ThyFileSystem.getResourceClassPath();
     }
 
     public static String getResourcePath(String name) {
@@ -131,22 +136,6 @@ public class Sys {
         return ThyFileSystem.exists(file);
     }
 
-    public static <T> T readJSONObject(String fileName, Class<T> cls) {
-        return ThyFileSystem.readJSONObject(fileName, cls);
-    }
-
-    public static List<Map<String, Object>> readListMap(String fileName) {
-        return ThyFileSystem.readListMap(fileName);
-    }
-
-    public static String readTextFile(String filePath) {
-        return ThyFileSystem.readTextFile(filePath);
-    }
-
-    public static <T> T readObject(String fileName, Class<T> cls) {
-        return ThyFileSystem.readObject(fileName, cls);
-    }
-
     public static List<File> getFiles(String filePath) {
         return ThyFileSystem.getFiles(filePath);
     }
@@ -166,6 +155,28 @@ public class Sys {
     public static boolean fastCopy(String src, String dst) {
         return ThyFileSystem.fastCopy(src, dst);
     }
+
+    ////////////// FileReader ////////////////
+    public static <T> T readJSONObject(String fileName, Class<T> cls) {
+        return ThyFileReader.readJSONObject(fileName, cls);
+    }
+
+    public static List<Map<String, Object>> readListMap(String fileName) {
+        return ThyFileReader.readListMap(fileName);
+    }
+
+    public static String readTextFile(String filePath) {
+        return ThyFileReader.readTextFile(filePath);
+    }
+
+    public static <T> T readObject(String fileName, Class<T> cls) {
+        return ThyFileReader.readObject(fileName, cls);
+    }
+
+    public static Map<String, Object> readXmlFile(String fileName){
+        return ThyFileReader.readXmlFile(fileName);
+    }
+
 
     ////////////// Class ////////////////
     public static Class<?> getClass(String className) {

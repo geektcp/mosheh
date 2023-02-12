@@ -1,15 +1,11 @@
 package com.geektcp.common.core.system;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.google.common.collect.Lists;
-
 import java.io.*;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -17,17 +13,31 @@ import java.util.Objects;
  */
 class ThyFileSystem {
 
-    private static final String CHARSET = "utf-8";
-
     private ThyFileSystem() {
     }
 
-    public static String getResourcePath() {
-        return getResourcePath("");
+    public static String getResourceRootPath() {
+        return getResourceClassPath("/");
+    }
+
+    public static String getResourceClassPath() {
+        return getResourceClassPath("");
+    }
+
+    public static String getResourceClassPath(String name) {
+        URL url =  ThyFileSystem.class.getResource(name);
+        if(Objects.isNull(url)){
+            return "";
+        }
+        return url.getPath();
     }
 
     public static String getResourcePath(String name) {
-        return ThyFileSystem.class.getResource(name).getPath();
+        String rootPath = getResourceRootPath();
+        if(name.startsWith("/")){
+            name = name.substring(1);
+        }
+        return rootPath + name;
     }
 
     public static boolean mv(String src, String dst) {
@@ -79,40 +89,6 @@ class ThyFileSystem {
         return ret;
     }
 
-
-    public static <T> T readJSONObject(String fileName, Class<T> cls) {
-        String str = readTextFile(fileName);
-        return JSON.parseObject(str, cls);
-    }
-
-    public static List<Map<String, Object>> readListMap(String fileName) {
-        return JSON.parseObject(readTextFile(fileName), new TypeReference<List<Map<String, Object>>>() {
-        });
-    }
-
-    public static String readTextFile(String filePath) {
-        StringBuilder result = new StringBuilder();
-        try {
-            InputStream readInputStream = new FileInputStream(filePath);
-            InputStreamReader read = new InputStreamReader(readInputStream, CHARSET);
-            BufferedReader bufferedReader = new BufferedReader(read);
-
-            String lineTxt;
-            while ((lineTxt = bufferedReader.readLine()) != null) {
-                result.append(lineTxt);
-                result.append("\n");
-            }
-            read.close();
-        } catch (Exception e) {
-            Sys.p(e.getMessage());
-        }
-        return result.toString();
-    }
-
-    public static <T> T readObject(String fileName, Class<T> objectType) {
-        return JSON.parseObject(readTextFile(fileName), objectType);
-    }
-
     public static List<File> getFiles(String filePath) {
         List<File> listFile = new ArrayList<>();
         try {
@@ -124,7 +100,7 @@ class ThyFileSystem {
                 }
                 String[] files = file.list();
                 if (Objects.isNull(files)) {
-                    return Lists.newArrayList();
+                    return new ArrayList<>();
                 }
                 for (String fileStr : files) {
                     String strPath = filePath + fileStr;
