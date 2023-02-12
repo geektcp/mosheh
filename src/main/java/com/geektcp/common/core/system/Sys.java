@@ -104,10 +104,6 @@ public class Sys {
         return filterPath(ThyFileSystem.getResourceRootPath());
     }
 
-    public static String getResourceClassPath() {
-        return ThyFileSystem.getResourceClassPath();
-    }
-
     public static String getResourcePath(String name) {
         return filterPath(ThyFileSystem.getResourcePath(name));
     }
