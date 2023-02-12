@@ -22,7 +22,11 @@ public class Sys {
     }
 
     public static void p(Object str) {
-        ThyStream.println(str);
+        ThyStream.p(str);
+    }
+
+    public static void p(String messagePattern, Object... args) {
+        ThyStream.p(messagePattern, args);
     }
 
     public static void println(Object str) {
