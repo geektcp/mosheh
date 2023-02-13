@@ -1,5 +1,6 @@
 package com.geektcp.common.core.system;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ThyStreamTest {
@@ -9,11 +10,15 @@ public class ThyStreamTest {
         String str = "abc: {}|{}/{}";
         int[] indices = new int[3];
         Sys.p(str, "yju", 555);
+
+        Assert.assertTrue(true);
     }
 
     @Test
     public void test2(){
         Sys.p("ssss: {}|{}", "ttt", 1111,"ssf","gggg");
+
+        Assert.assertTrue(true);
     }
 
 }

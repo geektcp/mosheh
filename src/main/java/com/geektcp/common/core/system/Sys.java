@@ -89,7 +89,7 @@ public class Sys {
     }
 
 
-    ////////////// FileSystem ////////////////
+    ////////////// ThyResource ////////////////
     private static String filterPath(String path) {
         if (Objects.isNull(path)) {
             return null;
@@ -101,13 +101,35 @@ public class Sys {
     }
 
     public static String getResourceRootPath() {
-        return filterPath(ThyFileSystem.getResourceRootPath());
+        return filterPath(ThyResource.getResourceRootPath());
+    }
+
+    public static String getResourcePath() {
+        return filterPath(ThyResource.getResourcePath());
     }
 
     public static String getResourcePath(String name) {
-        return filterPath(ThyFileSystem.getResourcePath(name));
+        return filterPath(ThyResource.getResourcePath(name));
     }
 
+    public static String getResourceClassPath() {
+        return filterPath(ThyResource.getResourceClassPath());
+    }
+
+    public static String getResourceClassPath(String name) {
+        return filterPath(ThyResource.getResourceClassPath(name));
+    }
+
+    public static String getResourceClassPath(Class<?> cls) {
+        return filterPath(ThyResource.getResourceClassPath(cls));
+    }
+
+    public static String getResourceClassPath(String name, Class<?> cls) {
+        return filterPath(ThyResource.getResourceClassPath(name, cls));
+    }
+
+
+    ////////////// FileSystem ////////////////
     public static boolean mv(String src, String dst) {
         return ThyFileSystem.mv(src, dst);
     }
@@ -281,4 +303,21 @@ public class Sys {
         ThyCommand.printCommandResult(process);
     }
 
+
+    ////////////// ThyHost ////////////////
+    public static String getPublicIp() {
+        return ThyHost.getPublicIp();
+    }
+
+    public static String getPrivateIp() {
+        return ThyHost.getPrivateIp();
+    }
+
+    public static String getHostName() {
+        return ThyHost.getHostName();
+    }
+
+    public static String getLoopbackIp() {
+        return ThyHost.getLoopbackIp();
+    }
 }

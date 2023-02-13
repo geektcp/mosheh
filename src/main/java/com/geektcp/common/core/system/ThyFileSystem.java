@@ -16,30 +16,6 @@ class ThyFileSystem {
     private ThyFileSystem() {
     }
 
-    public static String getResourceRootPath() {
-        return getResourceClassPath("/");
-    }
-
-    public static String getResourceClassPath() {
-        return getResourceClassPath("");
-    }
-
-    public static String getResourceClassPath(String name) {
-        URL url =  ThyFileSystem.class.getResource(name);
-        if(Objects.isNull(url)){
-            return "";
-        }
-        return url.getPath();
-    }
-
-    public static String getResourcePath(String name) {
-        String rootPath = getResourceRootPath();
-        if(name.startsWith("/")){
-            name = name.substring(1);
-        }
-        return rootPath + name;
-    }
-
     public static boolean mv(String src, String dst) {
         File srcFile = new File(src);
         File dstFile = new File(dst);
@@ -188,7 +164,7 @@ class ThyFileSystem {
         return true;
     }
 
-    public static boolean fastCopy(String src, String dist){
+    public static boolean fastCopy(String src, String dist) {
         try (FileInputStream fin = new FileInputStream(src);
              FileOutputStream fout = new FileOutputStream(dist);
         ) {
