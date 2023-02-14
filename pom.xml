@@ -154,7 +154,6 @@
                     <resource>
                         <directory>src/main/resources</directory>
                         <includes>
-                            <include>**/*.properties</include>
                             <include>*</include>
                             <include>**/*</include>
                         </includes>
