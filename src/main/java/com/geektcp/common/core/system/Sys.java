@@ -2,6 +2,7 @@ package com.geektcp.common.core.system;
 
 
 import java.io.File;
+import java.security.Key;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -187,6 +188,22 @@ public class Sys {
         return ThyFileReader.readTextFile(filePath);
     }
 
+    public static String readTextFile(String filePath, String filter) {
+        return ThyFileReader.readTextFile(filePath, filter);
+    }
+
+    public static String readTextFile(String filePath, String filter, boolean isFeedLine) {
+        return ThyFileReader.readTextFile(filePath, filter, isFeedLine);
+    }
+
+    public static String readPrivateKeyFile(String filePath) {
+        return ThyFileReader.readPrivateKeyFile(filePath);
+    }
+
+    public static String readPublicKeyFile(String filePath) {
+        return ThyFileReader.readPublicKeyFile(filePath);
+    }
+
     public static <T> T readObject(String fileName, Class<T> cls) {
         return ThyFileReader.readObject(fileName, cls);
     }
@@ -319,5 +336,26 @@ public class Sys {
 
     public static String getLoopbackIp() {
         return ThyHost.getLoopbackIp();
+    }
+
+    ////////////// ThyEncrypt ////////////////
+    public static String encrypt(String str) {
+        return ThyEncrypt.encrypt(str);
+    }
+
+    public static String decrypt(String str) {
+        return ThyEncrypt.decrypt(str);
+    }
+
+    public static Key buildKey(String secret) {
+        return ThyEncrypt.buildKey(secret);
+    }
+
+    public static String desEncrypt(String source) {
+        return ThyEncrypt.desEncrypt(source);
+    }
+
+    public static String desDecrypt(String source) {
+        return ThyEncrypt.desDecrypt(source);
     }
 }
