@@ -2,8 +2,12 @@ package com.geektcp.common.core.system;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.File;
+import java.util.Map;
 
 public class ThyFileReaderTest {
 
@@ -18,4 +22,11 @@ public class ThyFileReaderTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void read(){
+        Map<String, Object> map =  Sys.readXmlFile(Sys.getResourcePath("test.xml"));
+
+
+
+    }
 }

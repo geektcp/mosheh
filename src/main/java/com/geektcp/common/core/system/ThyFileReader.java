@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -19,7 +20,6 @@ class ThyFileReader {
     private ThyFileReader() {
     }
 
-    private static final String CHARSET = "utf-8";
 
     public static <T> T readJSONObject(String fileName, Class<T> cls) {
         String str = readTextFile(fileName);
@@ -36,7 +36,7 @@ class ThyFileReader {
     }
 
     public static String readPublicKeyFile(String filePath) {
-        return readTextFile(filePath, "PUBLIC KEY",false);
+        return readTextFile(filePath, "PUBLIC KEY", false);
     }
 
     public static String readTextFile(String filePath) {
@@ -55,7 +55,7 @@ class ThyFileReader {
         }
         try {
             InputStream readInputStream = new FileInputStream(filePath);
-            InputStreamReader read = new InputStreamReader(readInputStream, CHARSET);
+            InputStreamReader read = new InputStreamReader(readInputStream, StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(read);
 
             String line;
@@ -89,65 +89,38 @@ class ThyFileReader {
             DocumentBuilder docBuilder = factory.newDocumentBuilder();
             Document doc = docBuilder.parse(inputStream);
             root = doc.getDocumentElement();
+            NodeList nl = root.getChildNodes();
             inputStream.close();
         } catch (Exception e) {
             Sys.p(e);
         }
-        NodeList nodeList = root.getElementsByTagName("CountryRegion");
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
-            if (node instanceof Element) {
-                Element element = (Element) node;
-                String countryname = element.getAttribute("Name");
-                if (countryname.equals("中国")) {
-                    NodeList n2 = element.getChildNodes();
-                    System.out.println("NodeList长度，猜测是节点+孩子的总数：" + n2.getLength());
-                    //总省份数
-                    int count = 0;
-                    //遍历省份信息
-                    for (int j = 0; j < n2.getLength(); j++) {
-                        Node node2 = n2.item(j);
-                        if (node2 instanceof Element) {
-                            count++;
-                            Element e2 = (Element) node2;
-                            //获取省份信息
-                            String provincename = e2.getAttribute("Name");
-                            String code = e2.getAttribute("Code");
-                            System.out.println(provincename + "==" + code);
-                            //
-                            NodeList city = e2.getElementsByTagName("City");
-                            for (int k = 0; k < city.getLength(); k++) {
-                                Node node3 = city.item(k);
-                                if (node3 instanceof Element) {
-                                    Element c = (Element) node3;
-                                    //获取城市信息
-                                    String cityname = c.getAttribute("Name");
-                                    System.out.println("##" + cityname);
-                                    //
-                                    NodeList region = c.getElementsByTagName("Region");
-                                    for (int m = 0; m < region.getLength(); m++) {
-                                        Node node4 = region.item(m);
-                                        if (node4 instanceof Element) {
-                                            Element r = (Element) node4;
-                                            String regionname = r.getAttribute("Name");
-                                            System.out.println("#####" + regionname);
-                                        }
-
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    System.out.println("总省份数目：" + count);
-
-                }
-            }
-
-
-        }
+        parse(root);
 
         return null;
+    }
+
+    private static void parse(Element root) {
+        NodeList dependenciesList = root.getElementsByTagName("dependencies");
+        Sys.p(dependenciesList.getLength());
+        Node dependencies = dependenciesList.item(0);
+        Node dependenceNode = dependencies.getFirstChild();
+        Node dependence = dependenceNode.getNextSibling();
+
+        Node groupIdNode = dependence.getFirstChild();
+        Node groupId = groupIdNode.getNextSibling();
+
+        Node eleNode = groupId.getFirstChild();
+        String ele = eleNode.getNodeValue();
+
+        Sys.p(ele);
+
+
+        String ret = root.getElementsByTagName("dependencies").item(0)
+                .getFirstChild().getNextSibling()
+                .getFirstChild().getNextSibling()
+                .getFirstChild().getNodeValue();
+        Sys.p(ret);
+
     }
 
 }

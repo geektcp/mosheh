@@ -17,6 +17,8 @@ import javax.crypto.spec.IvParameterSpec;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 /**
@@ -33,6 +35,8 @@ class ThyEncrypt {
 
     private static Cipher cipher;
     private static RSA rsa;
+
+    private static IvParameterSpec iv = new IvParameterSpec(PARAM.getBytes(StandardCharsets.UTF_8));
 
     /**
      * PrivateKey
@@ -61,7 +65,32 @@ class ThyEncrypt {
         return rsa;
     }
 
-    private static IvParameterSpec iv = new IvParameterSpec(PARAM.getBytes(StandardCharsets.UTF_8));
+
+    public static String md5(String source) {
+        String result = "";
+        if (source == null || ("".equals(source))) {
+            return result;
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(source.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sign = new StringBuilder();
+            for (byte b : bytes) {
+                int bt = b & 0xff;
+                if (bt < 0) {
+                    bt += 256;
+                }
+                if (bt < 16) {
+                    sign.append(0);
+                }
+                sign.append(Integer.toHexString(bt));
+            }
+            result = sign.toString().toUpperCase();
+        } catch (NoSuchAlgorithmException e) {
+            Sys.p(e.getMessage());
+        }
+        return result;
+    }
 
     public static String encrypt(String str) {
         RSA rsa = ThyEncrypt.getInstance();
