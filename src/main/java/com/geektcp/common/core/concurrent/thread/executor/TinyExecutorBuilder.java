@@ -61,7 +61,7 @@ public class TinyExecutorBuilder {
         return Executors.newScheduledThreadPool(corePoolSize, threadFactory);
     }
 
-    public static ExecutorService newStaticThreadPool(ExecutorService executor) {
+    public static ExecutorService newTinyThreadPool(ExecutorService executor) {
         if (executor == null) {
             throw new NullPointerException();
         }
