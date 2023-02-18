@@ -33,6 +33,13 @@ public class IdGenerator {
 
     private static String separator = "_";
 
+
+    private class IdException extends RuntimeException {
+        private IdException(String desc) {
+            super(desc);
+        }
+    }
+
     // private
     private IdGenerator(long workerId, long centerId) {
         if (workerId > MAX_WORKER_ID || workerId < 0) {
@@ -84,15 +91,12 @@ public class IdGenerator {
     }
 
 
-    // for new Object
+    /**
+     * this is not a static method
+     * @return the the one and only id
+     */
     public Long getNextId() {
         return this.nextId();
-    }
-
-    // static
-    public static IdGenerator setInstance(long workerId, long centerId) {
-        instance = new IdGenerator(workerId, centerId);
-        return instance;
     }
 
     public static IdGenerator getInstance(long workerId, long centerId) {
@@ -117,22 +121,33 @@ public class IdGenerator {
         return separator;
     }
 
+    /**
+     *
+     * @param pre the prefix of id
+     * @return return the String id
+     * for example:
+     *    ds_1076653890125996034
+     */
     public static String getId(String pre) {
         return pre + separator + getId();
     }
 
+    /**
+     * set para of instance
+     * @param workerId instance para
+     * @param centerId instance para
+     * @return return id of a specific instance
+     */
     public static Long getId(long workerId, long centerId) {
-        return getInstance(workerId, centerId).nextId();
+        return getInstance(workerId, centerId).getNextId();
     }
 
+    /**
+     * get the the one and only id
+     * @return id
+     */
     public static Long getId() {
-        return getInstance().nextId();
+        return getInstance().getNextId();
     }
 
-
-    private class IdException extends RuntimeException {
-        private IdException(String desc) {
-            super(desc);
-        }
-    }
 }
