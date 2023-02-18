@@ -23,7 +23,7 @@ public class GeneratorTest {
         c = IdGenerator.getId("PRE");
 
         System.out.println(c);
-        IdGenerator.setInstance(10, 0);
+        IdGenerator.getInstance(10, 0);
 
         a = IdGenerator.getId();
 
