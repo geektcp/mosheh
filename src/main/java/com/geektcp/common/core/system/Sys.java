@@ -400,8 +400,8 @@ public class Sys {
     }
 
     ////////////// ThyString ////////////////
-    public static void setStringSeparator(String separator){
-         ThyString.setStringSeparator(separator);
+    public static void setStringSeparator(String separator) {
+        ThyString.setStringSeparator(separator);
     }
 
     public static boolean contains(String src, String keyword) {
@@ -440,5 +440,12 @@ public class Sys {
         return ThyString.matches(src, regex);
     }
 
+    public static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (Exception e) {
+            p(e.getMessage());
+        }
+    }
 
 }

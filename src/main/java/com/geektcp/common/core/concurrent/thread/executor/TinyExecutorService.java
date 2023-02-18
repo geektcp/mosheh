@@ -3,6 +3,7 @@ package com.geektcp.common.core.concurrent.thread.executor;
 import com.geektcp.common.core.concurrent.thread.able.ThyRunnable;
 import com.geektcp.common.core.system.Sys;
 
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -11,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author geektcp on 2023/2/6 22:47.
  */
-public class ThyExecutorService {
+public class TinyExecutorService {
 
-    private ExecutorService asyncExecutor;
+    private ExecutorService tinyExecutor;
 
     private Integer poolSize;
     private Integer timeout;
@@ -23,48 +24,59 @@ public class ThyExecutorService {
     private static Integer timeoutDefault = 40;
     private static Integer durationDefault = 20;
 
+    private static TinyExecutorService instance;
 
-    public ThyExecutorService(Integer poolSize, Integer timeout, Integer duration) {
+    public TinyExecutorService(Integer poolSize, Integer timeout, Integer duration) {
         this.poolSize = poolSize;
         this.timeout = timeout;
         this.duration = duration;
+
+        init();
     }
 
-    public ThyExecutorService(Integer poolSize) {
+    public TinyExecutorService(Integer poolSize) {
         this(poolSize, timeoutDefault, durationDefault);
     }
 
-    public ThyExecutorService() {
+    public TinyExecutorService() {
         this(poolSizeDefault, timeoutDefault, durationDefault);
+    }
+
+    public static TinyExecutorService getInstance(){
+        if(Objects.isNull(instance)) {
+            return new TinyExecutorService();
+        }
+
+        return instance;
     }
 
 
     public void init() {
-        asyncExecutor = Executors.newFixedThreadPool(poolSize);
+        tinyExecutor = Executors.newFixedThreadPool(poolSize);
     }
 
     public void cleanup() {
-        asyncExecutor.shutdown();
+        tinyExecutor.shutdown();
         boolean termination = false;
-        while (!asyncExecutor.isTerminated()) {
+        while (!tinyExecutor.isTerminated()) {
             try {
-                termination = asyncExecutor.awaitTermination(timeout, TimeUnit.SECONDS);
+                termination = tinyExecutor.awaitTermination(timeout, TimeUnit.SECONDS);
             } catch (InterruptedException ignore) {
                 // do noting
                 Thread.currentThread().interrupt();
             }
         }
         if (!termination) {
-            Sys.printf("force to shutdown asyncExecutor after %d ms" +
+            Sys.p("force to shutdown tinyExecutor after {} ms",
                     TimeUnit.MILLISECONDS.convert(duration, TimeUnit.SECONDS));
-            asyncExecutor.shutdownNow();
+            tinyExecutor.shutdownNow();
         } else {
-            Sys.p("easy shutdown asyncExecutor");
+            Sys.p("tinyExecutor shutdown finished!");
         }
     }
 
     public void submit() {
-        Future future = asyncExecutor.submit(new ThyRunnable());
+        Future future = tinyExecutor.submit(new ThyRunnable());
         try {
             Object result = future.get(timeout, TimeUnit.SECONDS);
             Sys.p(result);
@@ -73,6 +85,11 @@ public class ThyExecutorService {
         }
 
     }
+
+    public ExecutorService getTinyExecutor() {
+        return tinyExecutor;
+    }
+
 
 
 }
