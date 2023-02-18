@@ -47,7 +47,8 @@ class ThyEncrypt {
     }
 
     /**
-     * PrivateKey:  generate with linux command: ssh-keygen
+     * PrivateKey path:
+     * generate with linux command: ssh-keygen
      * or command openssl:
      * openssl genrsa -out rsa_private_key.pem 1024
      * openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -out rsa_private_key_01.pem -nocrypt
@@ -55,17 +56,18 @@ class ThyEncrypt {
      * <p>
      * example:  id_rsa
      */
-    private static String PRIVATE_KEY_FILENAME = null;
+    private static String idRsa = null;
 
     /**
-     * PublicKey:  generate with linux command: ssh-keygen
+     * PublicKey path:
+     * generate with linux command: ssh-keygen
      * or command openssl:
      * openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
      * cat rsa_public_key.pem
      * <p>
      * example:  id_rsa.pub
      */
-    private static String PUBLIC_KEY_FILENAME = null;
+    private static String idRsaPub = null;
 
     private static final String PARAM = "thy$p*r^#a>s!m#.x@";
     private static final String DES_KEY = "thy$k*e^#>y!#.x@";
@@ -73,20 +75,12 @@ class ThyEncrypt {
 
     private static Cipher cipher;
     private static RSA rsa;
-    private static ThyEncrypt instance;
     private static IvParameterSpec iv = new IvParameterSpec(PARAM.getBytes(StandardCharsets.UTF_8));
 
 
-    public static ThyEncrypt getInstance() {
-        if (Objects.isNull(instance)) {
-            return new ThyEncrypt();
-        }
-        return instance;
-    }
-
     public static void initKey(String privateKeyFilename, String publicKeyFilename) {
-        PRIVATE_KEY_FILENAME = privateKeyFilename;
-        PUBLIC_KEY_FILENAME = publicKeyFilename;
+        idRsa = privateKeyFilename;
+        idRsaPub = publicKeyFilename;
     }
 
     public static String md5(String source) {
@@ -155,7 +149,7 @@ class ThyEncrypt {
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
             SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
-            return byte2hex(
+            return byteTohex(
                     cipher.doFinal(source.getBytes(StandardCharsets.UTF_8))).toUpperCase();
         } catch (GeneralSecurityException e) {
             Sys.p(e.getMessage());
@@ -165,7 +159,7 @@ class ThyEncrypt {
 
     public static String desDecrypt(String source) {
         try {
-            byte[] src = hex2byte(source.getBytes());
+            byte[] src = hexTobyte(source.getBytes());
             DESKeySpec desKeySpec = getDesKeySpec(source);
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
             SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
@@ -195,15 +189,15 @@ class ThyEncrypt {
      */
     private static RSA init() {
         String keysDir = Sys.getResourceRootPath();
-        String privateKeyPath = Objects.isNull(PRIVATE_KEY_FILENAME) ? keysDir + "/id_rsa" : PRIVATE_KEY_FILENAME;
-        String publicKeyPath = Objects.isNull(PUBLIC_KEY_FILENAME) ? keysDir + "/id_rsa.pub" : PUBLIC_KEY_FILENAME;
+        String privateKeyPath = Objects.isNull(idRsa) ? keysDir + "/id_rsa" : idRsa;
+        String publicKeyPath = Objects.isNull(idRsaPub) ? keysDir + "/id_rsa.pub" : idRsaPub;
         String privateKey = Sys.readPrivateKeyFile(privateKeyPath);
         String publicKey = Sys.readPublicKeyFile(publicKeyPath);
         rsa = new RSA(privateKey, publicKey);
         return rsa;
     }
 
-    public static RSA getRSA() {
+    private static RSA getRSA() {
         if (Objects.isNull(rsa)) {
             return init();
         }
@@ -218,7 +212,7 @@ class ThyEncrypt {
         return new DESKeySpec(DES_KEY.getBytes(StandardCharsets.UTF_8));
     }
 
-    private static String byte2hex(byte[] inStr) {
+    private static String byteTohex(byte[] inStr) {
         String tmp;
         StringBuilder out = new StringBuilder(inStr.length * 2);
         for (byte b : inStr) {
@@ -232,7 +226,7 @@ class ThyEncrypt {
         return out.toString();
     }
 
-    private static byte[] hex2byte(byte[] b) {
+    private static byte[] hexTobyte(byte[] b) {
         int size = 2;
         if ((b.length % size) != 0) {
             throw new IllegalArgumentException("size error");
@@ -244,4 +238,5 @@ class ThyEncrypt {
         }
         return b2;
     }
+
 }
