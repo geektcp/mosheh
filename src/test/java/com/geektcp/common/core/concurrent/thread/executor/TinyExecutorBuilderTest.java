@@ -13,7 +13,7 @@ public class TinyExecutorBuilderTest {
 
     @Test
     public void test3() {
-        TinyExecutorBuilder.newStaticThreadPool(TinyExecutorBuilder.newSingleThreadExecutor());
+        TinyExecutorBuilder.newTinyThreadPool(TinyExecutorBuilder.newSingleThreadExecutor());
         Assert.assertTrue(true);
     }
 
