@@ -31,22 +31,43 @@ public class ThyStringTest {
     public void test3() {
         String keyword = "123";
         String src = "1234";
-        Sys.p(src.contains(keyword));
+        Sys.p(Sys.contains(keyword));
         Assert.assertTrue(true);
     }
 
     @Test
     public void test4() {
         Sys.p(Pattern.matches(".*som.*", "this is something! something"));
+        Sys.p(Sys.matches("ChatGPT", ".*GPT.*"));
         Assert.assertTrue(true);
     }
 
     public static void main(String[] args) {
-        Sys.p(ThyString.contains(true,"this is something! something", "so", "is", "eth"));
-        Sys.p(ThyString.contains(false,"this is something! something", "so", "is", "eth"));
+        String src = "ChatGPT is a new type of artificial intelligence robot, which has far-reaching influence.";
+        String[] keywords = new String[]{"GPt", "ne", "far"};
+        Sys.p(ThyString.contains(true, true, src, keywords));
+        Sys.p(ThyString.contains(true, false, src, keywords));
+        Sys.p(ThyString.contains(false, true, src, keywords));
+        Sys.p(ThyString.contains(false, false, src, keywords));
+        Sys.p("------");
+        String[] keywords2 = new String[]{"far", "ne", "GPt"};
+        Sys.p(ThyString.contains(true, true, src, keywords2));
+        Sys.p(ThyString.contains(true, false, src, keywords2));
+        Sys.p(ThyString.contains(false, true, src, keywords2));
+        Sys.p(ThyString.contains(false, false, src, keywords2));
+        Assert.assertTrue(true);
+    }
 
-        Sys.p(ThyString.contains(true,"this is something! something", "is", "th", "eth"));
-        Sys.p(ThyString.contains(false,"this is something! something", "is", "th", "eth"));
+
+    @Test
+    public void test5() {
+        String src = "ChatGPT |is| a| new type |of artificial intelligence |robot, which has |far-reaching influence.";
+        String[] keywords = new String[]{"pe", "GPt",  "far"};
+        Sys.setStringSeparator("\\|");
+        Sys.p(Sys.contains(true, true, src, keywords));
+        Sys.p(Sys.contains(true, false, src, keywords));
+        Sys.p(Sys.contains(false, true, src, keywords));
+        Sys.p(Sys.contains(false, false, src, keywords));
         Assert.assertTrue(true);
     }
 }

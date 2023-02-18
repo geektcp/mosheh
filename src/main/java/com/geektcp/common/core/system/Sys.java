@@ -400,6 +400,10 @@ public class Sys {
     }
 
     ////////////// ThyString ////////////////
+    public static void setStringSeparator(String separator){
+         ThyString.setStringSeparator(separator);
+    }
+
     public static boolean contains(String src, String keyword) {
         return ThyString.contains(src, keyword);
     }

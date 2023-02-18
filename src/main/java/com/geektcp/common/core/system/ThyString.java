@@ -29,6 +29,10 @@ public class ThyString {
     private ThyString() {
     }
 
+    public static void setStringSeparator(String separator){
+        SEPARATOR = separator;
+    }
+
     /**
      * @param src     source String
      * @param keyword the keyword
@@ -46,7 +50,7 @@ public class ThyString {
         return contains(orderly, false, src, keywords);
     }
 
-    public static boolean contains(boolean orderly, boolean isIgnoreCase, String src, String[] keywords) {
+    public static boolean contains(boolean orderly, boolean isIgnoreCase, String src, String... keywords) {
         if (Objects.isNull(src) || Objects.isNull(keywords)) {
             return false;
         }
@@ -84,6 +88,9 @@ public class ThyString {
         List<Boolean> resultList = new ArrayList<>();
         int keywordListSize = keywordList.size();
         for (String word : wordList) {
+            if(keywordList.isEmpty()){
+                break;
+            }
             if (word.contains(keywordList.get(0))) {
                 resultList.add(true);
                 keywordList.remove(0);
@@ -93,13 +100,16 @@ public class ThyString {
     }
 
     public static boolean containWithoutOrder(List<String> wordList, List<String> keywordList) {
+        if (wordList.isEmpty() || keywordList.isEmpty()) {
+            return false;
+        }
         List<Boolean> resultList = new ArrayList<>();
         for (int j = 0; j < keywordList.size(); j++) {
             String keyword = keywordList.get(j);
             boolean isContain = false;
             for (int i = 0; i < wordList.size(); i++) {
                 String word = wordList.get(i);
-                if (matches(word, keyword)) {
+                if (word.contains(keyword)) {
                     isContain = true;
                     break;
                 }
