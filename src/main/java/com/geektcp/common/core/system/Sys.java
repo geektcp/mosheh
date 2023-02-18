@@ -1,3 +1,20 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.geektcp.common.core.system;
 
 
@@ -18,9 +35,6 @@ public class Sys {
 
 
     ////////////// PrintStream ////////////////
-    public static void print(Object str) {
-        ThyStream.println(str);
-    }
 
     public static void p(Object str) {
         ThyStream.p(str);
@@ -30,15 +44,19 @@ public class Sys {
         ThyStream.p(messagePattern, args);
     }
 
-    public static void println(Object str) {
-        ThyStream.print(str);
-    }
-
     public static void p(String str) {
         ThyStream.println(str);
     }
 
+    public static void println(Object str) {
+        ThyStream.print(str);
+    }
+
     public static void println(String str) {
+        ThyStream.println(str);
+    }
+
+    public static void print(Object str) {
         ThyStream.println(str);
     }
 
@@ -60,29 +78,16 @@ public class Sys {
         return ThyRuntime.availableProcessors();
     }
 
-    /**
-     * return used max memory in Java virtual machine
-     */
     public static long maxMemory() {
         return ThyRuntime.maxMemory();
     }
 
-    /**
-     * return total memory in Java virtual machine
-     */
     public static long totalMemory() {
         return ThyRuntime.totalMemory();
     }
 
-    /**
-     * return free memory in Java virtual machine
-     */
     public static long freeMemory() {
         return ThyRuntime.freeMemory();
-    }
-
-    public static Process exec(String cmd) {
-        return ThyRuntime.exec(cmd);
     }
 
     public static void gc() {
@@ -312,10 +317,38 @@ public class Sys {
 
 
     ////////////// command execute ////////////////
+    /**
+     * example:
+     *      Process process = Sys.getCommandBuilder()
+     *                 .runDir("/tmp")
+     *                 .program("netstat")
+     *                 .arg("-a")
+     *                 .arg("-n")
+     *                 .arg("-t")
+     *                 .arg("-p")
+     *                 .start();
+     *         Sys.printCommandResult(process);
+     * @return ThyCommand instance
+     */
     public static ThyCommand getCommandBuilder() {
         return ThyCommand.getInstance();
     }
 
+    /**
+     * example:
+     *      Process process = Sys.exec("ls -l");
+     *      Sys.printCommandResult(process);
+     * @param cmd shell or bat command
+     * @return the stream which contain result
+     */
+    public static Process exec(String cmd) {
+        return ThyRuntime.exec(cmd);
+    }
+
+    /**
+     * @see #getCommandBuilder()
+     * @param process steam which contain the result of command
+     */
     public static void printCommandResult(Process process) {
         ThyCommand.printCommandResult(process);
     }

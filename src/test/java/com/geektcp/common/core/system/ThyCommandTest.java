@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ShellTest {
+public class ThyCommandTest {
 
     @Test
     public void testPrint() throws Exception {
