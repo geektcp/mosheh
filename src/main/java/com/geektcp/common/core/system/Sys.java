@@ -213,7 +213,7 @@ public class Sys {
         return ThyFileReader.readObject(fileName, cls);
     }
 
-    public static Map<String, Object> readXmlFile(String fileName){
+    public static Map<String, Object> readXmlFile(String fileName) {
         return ThyFileReader.readXmlFile(fileName);
     }
 
@@ -317,17 +317,19 @@ public class Sys {
 
 
     ////////////// command execute ////////////////
+
     /**
      * example:
-     *      Process process = Sys.getCommandBuilder()
-     *                 .runDir("/tmp")
-     *                 .program("netstat")
-     *                 .arg("-a")
-     *                 .arg("-n")
-     *                 .arg("-t")
-     *                 .arg("-p")
-     *                 .start();
-     *         Sys.printCommandResult(process);
+     * Process process = Sys.getCommandBuilder()
+     * .runDir("/tmp")
+     * .program("netstat")
+     * .arg("-a")
+     * .arg("-n")
+     * .arg("-t")
+     * .arg("-p")
+     * .start();
+     * Sys.printCommandResult(process);
+     *
      * @return ThyCommand instance
      */
     public static ThyCommand getCommandBuilder() {
@@ -336,8 +338,9 @@ public class Sys {
 
     /**
      * example:
-     *      Process process = Sys.exec("ls -l");
-     *      Sys.printCommandResult(process);
+     * Process process = Sys.exec("ls -l");
+     * Sys.printCommandResult(process);
+     *
      * @param cmd shell or bat command
      * @return the stream which contain result
      */
@@ -346,8 +349,8 @@ public class Sys {
     }
 
     /**
-     * @see #getCommandBuilder()
      * @param process steam which contain the result of command
+     * @see #getCommandBuilder()
      */
     public static void printCommandResult(Process process) {
         ThyCommand.printCommandResult(process);
@@ -372,6 +375,10 @@ public class Sys {
     }
 
     ////////////// ThyEncrypt ////////////////
+    public static void initKey(String privateKeyFilename, String publicKeyFilename) {
+        ThyEncrypt.initKey(privateKeyFilename, publicKeyFilename);
+    }
+
     public static String encrypt(String str) {
         return ThyEncrypt.encrypt(str);
     }
@@ -391,4 +398,43 @@ public class Sys {
     public static String desDecrypt(String source) {
         return ThyEncrypt.desDecrypt(source);
     }
+
+    ////////////// ThyString ////////////////
+    public static boolean contains(String src, String keyword) {
+        return ThyString.contains(src, keyword);
+    }
+
+    public static boolean contains(String src, String... keywords) {
+        return ThyString.contains(false, false, src, keywords);
+    }
+
+    public static boolean contains(boolean orderly, String src, String... keywords) {
+        return ThyString.contains(orderly, false, src, keywords);
+    }
+
+    public static boolean contains(boolean orderly, boolean isIgnoreCase, String src, String[] keywords) {
+        return ThyString.contains(orderly, isIgnoreCase, src, keywords);
+    }
+
+    public static List<String> arrayToList(String[] stringArray, boolean isIgnoreCase) {
+        return ThyString.arrayToList(stringArray, isIgnoreCase);
+    }
+
+    public static boolean containWithOrder(List<String> wordList, List<String> keywordList) {
+        return ThyString.containWithOrder(wordList, keywordList);
+    }
+
+    public static boolean containWithoutOrder(List<String> wordList, List<String> keywordList) {
+        return ThyString.containWithoutOrder(wordList, keywordList);
+    }
+
+    public static boolean find(String src, String regex) {
+        return ThyString.find(src, regex);
+    }
+
+    public static boolean matches(String src, String regex) {
+        return ThyString.matches(src, regex);
+    }
+
+
 }
