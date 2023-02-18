@@ -133,6 +133,9 @@ public class ThyString {
     }
 
     public static boolean matches(String src, String regex) {
+        if (Objects.isNull(src) || Objects.isNull(regex)) {
+            return false;
+        }
         return Pattern.matches(regex, src);
     }
 

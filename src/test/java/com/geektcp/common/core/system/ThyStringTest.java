@@ -62,7 +62,7 @@ public class ThyStringTest {
     @Test
     public void test5() {
         String src = "ChatGPT |is| a| new type |of artificial intelligence |robot, which has |far-reaching influence.";
-        String[] keywords = new String[]{"pe", "GPt",  "far"};
+        String[] keywords = new String[]{"pe", "GPt", "far"};
         Sys.setStringSeparator("\\|");
         Sys.p(Sys.contains(true, true, src, keywords));
         Sys.p(Sys.contains(true, false, src, keywords));
@@ -70,4 +70,38 @@ public class ThyStringTest {
         Sys.p(Sys.contains(false, false, src, keywords));
         Assert.assertTrue(true);
     }
+
+    @Test
+    public void test6() {
+        String src = "create table student(id int, name string); drop database mydatabase; " +
+                "alter table tb drop partition(dt='2022-05-30');drop table if exists employee;";
+        String[] keywords = new String[]{"drop", "database"};
+        Sys.p(Sys.contains(true, true, src, keywords));
+        Sys.p(Sys.contains(true, false, src, keywords));
+        Sys.p(Sys.contains(false, true, src, keywords));
+        Sys.p(Sys.contains(false, false, src, keywords));
+
+        Sys.p(Sys.matches( src, ".*drop\\s*database.*"));
+    }
+
+    @Test
+    public void test7() {
+        String src = "create table student(id int, name string);drop table if exists employee; show database xxx; " +
+                "alter table tb drop partition(dt='2022-05-30');";
+        String[] keywords = new String[]{"drop", "database"};
+        Sys.p(Sys.contains(true, true, src, keywords));
+        Sys.p(Sys.contains(true, false, src, keywords));
+        Sys.p(Sys.contains(false, true, src, keywords));
+        Sys.p(Sys.contains(false, false, src, keywords));
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void test8() {
+        String src = "create table student(id int, name string);drop table if exists employee; show database xxx; " +
+                "alter table tb drop partition(dt='2022-05-30');";
+        Sys.p(Sys.matches( src.toLowerCase(), ".*drop\\s*database.*"));
+        Assert.assertTrue(true);
+    }
+
 }
