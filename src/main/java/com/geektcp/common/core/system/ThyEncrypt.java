@@ -186,7 +186,12 @@ class ThyEncrypt {
     //////////////////// private function ///////////////////////////
 
     /**
-     * @return
+     * @see #initKey(String, String)
+     * @return RSA
+     *
+     * example:
+     *      initKey("xxx/xxx/id_rsa", "xxx/xxx/id_rsa.pub");
+     *      RSA rsa = getRSA();
      */
     private static RSA init() {
         String keysDir = Sys.getResourceRootPath();
