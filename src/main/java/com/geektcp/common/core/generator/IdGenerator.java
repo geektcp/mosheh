@@ -13,7 +13,7 @@ import java.util.Objects;
 public class IdGenerator {
 
     /**
-     * this START_TIME is 2023-2.19 0:23:11
+     * this START_TIME is 2023.2.19 0:23:11
      */
     private static final long START_TIME = 1676737322658L;
     private static final long WORKER_ID_BITS = 5L;
