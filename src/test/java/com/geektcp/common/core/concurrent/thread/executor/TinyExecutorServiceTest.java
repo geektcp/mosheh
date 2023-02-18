@@ -19,7 +19,7 @@ public class TinyExecutorServiceTest {
     @Test
     public void test() {
         TinyExecutorService tinyExecutorService = TinyExecutorService.getInstance();
-        Future<String> future = tinyExecutorService.getTinyExecutor().submit(() -> (
+        Future<String> future = tinyExecutorService.submit(() -> (
                 Sys.getResourceClassPath(TinyExecutorServiceTest.class)));
         try {
             String result = future.get(5, TimeUnit.SECONDS);
@@ -36,7 +36,7 @@ public class TinyExecutorServiceTest {
         TinyExecutorService tinyExecutorService = new TinyExecutorService(15);
         List<Future<Long>> result = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            Future<Long> future = tinyExecutorService.getTinyExecutor().submit(() -> (
+            Future<Long> future = tinyExecutorService.submit(() -> (
                     getId()
             ));
             result.add(future);
@@ -60,7 +60,7 @@ public class TinyExecutorServiceTest {
     @Test
     public void test3() {
         TinyExecutorService tinyExecutorService = TinyExecutorService.getInstance();
-        tinyExecutorService.getTinyExecutor().submit(() -> (
+        tinyExecutorService.submit(() -> (
                 Sys.getResourceClassPath(TinyExecutorServiceTest.class)
         ));
 

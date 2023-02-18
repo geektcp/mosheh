@@ -1,13 +1,9 @@
 package com.geektcp.common.core.concurrent.thread.executor;
 
-import com.geektcp.common.core.concurrent.thread.able.ThyRunnable;
 import com.geektcp.common.core.system.Sys;
 
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author geektcp on 2023/2/6 22:47.
@@ -42,19 +38,24 @@ public class TinyExecutorService {
         this(poolSizeDefault, timeoutDefault, durationDefault);
     }
 
-    public static TinyExecutorService getInstance(){
-        if(Objects.isNull(instance)) {
+    public void init() {
+        tinyExecutor = TinyExecutorBuilder.newFixedThreadPool(poolSize);
+    }
+
+    public static TinyExecutorService getInstance() {
+        if (Objects.isNull(instance)) {
             return new TinyExecutorService();
         }
-
         return instance;
     }
 
-
-    public void init() {
-        tinyExecutor = Executors.newFixedThreadPool(poolSize);
+    public ExecutorService getTinyExecutor() {
+        return tinyExecutor;
     }
 
+    /**
+     * shutdown tinyExecutor
+     */
     public void cleanup() {
         tinyExecutor.shutdown();
         boolean termination = false;
@@ -75,21 +76,27 @@ public class TinyExecutorService {
         }
     }
 
-    public void submit() {
-        Future future = tinyExecutor.submit(new ThyRunnable());
-        try {
-            Object result = future.get(timeout, TimeUnit.SECONDS);
-            Sys.p(result);
-        } catch (Exception e) {
-            Sys.p(e.getMessage());
+    /**
+     *
+     * @param task a dest method which have a return value
+     * @return execute the dest method in a thread pool
+     *
+     * example:
+     *     List<Future<Long>> result = new ArrayList<>();
+     *         for (int i = 0; i < 100; i++) {
+     *             Future<Long> future = tinyExecutorService.submit(() -> (
+     *                     getId()
+     *             ));
+     *             result.add(future);
+     *         }
+     */
+    public <T> Future<T> submit(Callable<T> task) {
+        if (task == null) {
+            throw new NullPointerException();
         }
-
+        RunnableFuture<T> futureTask = new FutureTask<>(task);
+        tinyExecutor.execute(futureTask);
+        return futureTask;
     }
-
-    public ExecutorService getTinyExecutor() {
-        return tinyExecutor;
-    }
-
-
 
 }
