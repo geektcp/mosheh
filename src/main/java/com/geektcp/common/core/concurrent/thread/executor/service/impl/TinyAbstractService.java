@@ -15,18 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.service.impl;
+package com.geektcp.common.core.concurrent.thread.executor.service.impl;
 
 
-
-import com.geektcp.common.core.concurrent.thread.service.TinyExecutorCompletionService;
-import com.geektcp.common.core.concurrent.thread.service.TinyExecutorService;
+import com.geektcp.common.core.concurrent.thread.executor.service.TinyCompletionService;
+import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutorService;
+import com.geektcp.common.core.system.Sys;
 
 import java.util.*;
 import java.util.concurrent.*;
 
-
-public abstract class TinyAbstractExecutorService implements TinyExecutorService {
+/**
+ * @author geektcp on 2023/2/6 22:47.
+ */
+public abstract class TinyAbstractService implements TinyExecutorService {
 
 
     public <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
@@ -40,17 +42,17 @@ public abstract class TinyAbstractExecutorService implements TinyExecutorService
 
     public Future<?> submit(Runnable task) {
         if (task == null) throw new NullPointerException();
-        RunnableFuture<Void> ftask = newTaskFor(task, null);
-        execute(ftask);
-        return ftask;
+        RunnableFuture<Void> futureTask = newTaskFor(task, null);
+        execute(futureTask);
+        return futureTask;
     }
 
 
     public <T> Future<T> submit(Runnable task, T result) {
         if (task == null) throw new NullPointerException();
-        RunnableFuture<T> ftask = newTaskFor(task, result);
-        execute(ftask);
-        return ftask;
+        RunnableFuture<T> futureTask = newTaskFor(task, result);
+        execute(futureTask);
+        return futureTask;
     }
 
 
@@ -72,7 +74,7 @@ public abstract class TinyAbstractExecutorService implements TinyExecutorService
         if (ntasks == 0)
             throw new IllegalArgumentException();
         ArrayList<Future<T>> futures = new ArrayList<Future<T>>(ntasks);
-        TinyExecutorCompletionService<T> ecs = new TinyExecutorCompletionService<T>(this);
+        TinyCompletionService<T> ecs = new TinyCompletionService<T>(this);
 
         try {
             ExecutionException ee = null;
@@ -158,8 +160,7 @@ public abstract class TinyAbstractExecutorService implements TinyExecutorService
                 if (!f.isDone()) {
                     try {
                         f.get();
-                    } catch (CancellationException ignore) {
-                    } catch (ExecutionException ignore) {
+                    } catch (CancellationException|ExecutionException ignore) {
                     }
                 }
             }
@@ -201,8 +202,8 @@ public abstract class TinyAbstractExecutorService implements TinyExecutorService
                         return futures;
                     try {
                         f.get(nanos, TimeUnit.NANOSECONDS);
-                    } catch (CancellationException ignore) {
-                    } catch (ExecutionException ignore) {
+                    } catch (CancellationException |ExecutionException e) {
+                        Sys.p(e.getMessage());
                     } catch (TimeoutException toe) {
                         return futures;
                     }

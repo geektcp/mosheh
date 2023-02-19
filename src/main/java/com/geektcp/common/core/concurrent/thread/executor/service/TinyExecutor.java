@@ -15,10 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.service;
+package com.geektcp.common.core.concurrent.thread.executor.service;
 
 import java.util.concurrent.RejectedExecutionException;
 
+/**
+ * @author geektcp on 2023/2/6 22:47.
+ */
 public interface TinyExecutor {
 
     /**

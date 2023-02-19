@@ -15,16 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.service.impl.extend;
+package com.geektcp.common.core.concurrent.thread.executor.service.impl.extend;
 
 import java.util.concurrent.ExecutorService;
 
-public class TinyFinalizableDelegatedExecutor extends TinyPoolExecutor {
+/**
+ * @author geektcp on 2023/2/6 22:47.
+ */
+public class TinyFinalizeExecutor extends TinyDelegatedExecutor {
 
-    public TinyFinalizableDelegatedExecutor(ExecutorService executor) {
+    public TinyFinalizeExecutor(ExecutorService executor) {
         super(executor);
     }
+
     protected void finalize() {
         super.shutdown();
     }
+
 }

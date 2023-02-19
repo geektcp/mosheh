@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.service.impl.extend;
+package com.geektcp.common.core.concurrent.thread.executor.service.impl.extend;
 
-import com.geektcp.common.core.concurrent.thread.service.impl.TinyAbstractExecutorService;
+import com.geektcp.common.core.concurrent.thread.executor.service.impl.TinyAbstractService;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,11 +27,11 @@ import java.util.concurrent.*;
  * @author geektcp on 2023/2/18 23:18.
  * DelegatedExecutorService
  */
-public class TinyPoolExecutor extends TinyAbstractExecutorService {
+public class TinyDelegatedExecutor extends TinyAbstractService {
 
     private final ExecutorService e;
 
-    public TinyPoolExecutor(ExecutorService executor) {
+    public TinyDelegatedExecutor(ExecutorService executor) {
         e = executor;
     }
 

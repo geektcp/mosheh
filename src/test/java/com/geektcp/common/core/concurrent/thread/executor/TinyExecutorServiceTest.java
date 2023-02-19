@@ -1,6 +1,5 @@
 package com.geektcp.common.core.concurrent.thread.executor;
 
-import com.geektcp.common.core.concurrent.thread.service.TinyExecutorService;
 import com.geektcp.common.core.generator.IdGenerator;
 import com.geektcp.common.core.system.Sys;
 import org.junit.Assert;
@@ -14,14 +13,14 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author geektcp on 2023/2/18 22:05.
  */
-public class TinyPoolExecutorServiceTest {
+public class TinyExecutorServiceTest {
 
 
     @Test
     public void test() {
         ThyExecutor thyExecutor = ThyExecutor.getInstance();
         Future<String> future = thyExecutor.submit(() -> (
-                Sys.getResourceClassPath(TinyPoolExecutorServiceTest.class)));
+                Sys.getResourceClassPath(TinyExecutorServiceTest.class)));
         try {
             String result = future.get(5, TimeUnit.SECONDS);
             Sys.p(result);
@@ -62,7 +61,7 @@ public class TinyPoolExecutorServiceTest {
     public void test3() {
         ThyExecutor thyExecutor = ThyExecutor.getInstance();
         thyExecutor.submit(() -> (
-                Sys.getResourceClassPath(TinyPoolExecutorServiceTest.class)
+                Sys.getResourceClassPath(TinyExecutorServiceTest.class)
         ));
 
 //        tinyExecutorService.cleanup();

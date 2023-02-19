@@ -15,15 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.service;
+package com.geektcp.common.core.concurrent.thread.executor.service;
 
-import com.geektcp.common.core.concurrent.thread.service.impl.TinyAbstractExecutorService;
+import com.geektcp.common.core.concurrent.thread.executor.service.impl.TinyAbstractService;
 
 import java.util.concurrent.*;
 
-public class TinyExecutorCompletionService<V> implements CompletionService<V> {
+/**
+ * @author geektcp on 2023/2/6 22:47.
+ */
+public class TinyCompletionService<V> implements CompletionService<V> {
     private final TinyExecutor executor;
-    private final TinyAbstractExecutorService aes;
+    private final TinyAbstractService aes;
     private final BlockingQueue<Future<V>> completionQueue;
 
     /**
@@ -53,24 +56,24 @@ public class TinyExecutorCompletionService<V> implements CompletionService<V> {
     }
 
     /**
-     * Creates an TinyExecutorCompletionService using the supplied
+     * Creates an TinyCompletionService using the supplied
      * executor for base task execution and a
      * {@link LinkedBlockingQueue} as a completion queue.
      *
      * @param executor the executor to use
      * @throws NullPointerException if executor is {@code null}
      */
-    public TinyExecutorCompletionService(TinyExecutor executor) {
+    public TinyCompletionService(TinyExecutor executor) {
         if (executor == null)
             throw new NullPointerException();
         this.executor = executor;
-        this.aes = (executor instanceof TinyAbstractExecutorService) ?
-                (TinyAbstractExecutorService) executor : null;
+        this.aes = (executor instanceof TinyAbstractService) ?
+                (TinyAbstractService) executor : null;
         this.completionQueue = new LinkedBlockingQueue<Future<V>>();
     }
 
     /**
-     * Creates an TinyExecutorCompletionService using the supplied
+     * Creates an TinyCompletionService using the supplied
      * executor for base task execution and the supplied queue as its
      * completion queue.
      *
@@ -82,13 +85,13 @@ public class TinyExecutorCompletionService<V> implements CompletionService<V> {
      *        them not to be retrievable.
      * @throws NullPointerException if executor or completionQueue are {@code null}
      */
-    public TinyExecutorCompletionService(TinyExecutor executor,
-                                         BlockingQueue<Future<V>> completionQueue) {
+    public TinyCompletionService(TinyExecutor executor,
+                                 BlockingQueue<Future<V>> completionQueue) {
         if (executor == null || completionQueue == null)
             throw new NullPointerException();
         this.executor = executor;
         this.aes = (executor instanceof AbstractExecutorService) ?
-                (TinyAbstractExecutorService) executor : null;
+                (TinyAbstractService) executor : null;
         this.completionQueue = completionQueue;
     }
 

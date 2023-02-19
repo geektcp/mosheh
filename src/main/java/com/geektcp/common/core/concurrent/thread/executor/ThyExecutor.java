@@ -22,6 +22,9 @@ import com.geektcp.common.core.system.Sys;
 import java.util.Objects;
 import java.util.concurrent.*;
 
+/**
+ * @author geektcp on 2023/2/6 22:47.
+ */
 public class ThyExecutor {
 
     private ExecutorService tinyExecutor;
