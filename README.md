@@ -1,6 +1,17 @@
+thy-core
+==========
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/net.bytebuddy/byte-buddy-parent)
+
+[api doc](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
+
 ### describe
 ```
-common libray for Java
+thy-core is a common library for Java, which release in maven repository:
+https://mvnrepository.com/artifact/com.geektcp.common/thy-core
+
+this is a tiny project. we can use it to develop big project.
+
+Furthermore, thy-core offers a convenient API for build many cache, collection, executor.
 ```
 
 
@@ -10,7 +21,7 @@ common libray for Java
 <dependency>
     <groupId>com.geektcp.common</groupId>
     <artifactId>thy-core</artifactId>
-    <version>1.0.2.RELEASE</version>
+    <version>1.0.3.RELEASE</version>
 </dependency>
 ```
 
