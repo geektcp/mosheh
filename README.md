@@ -1,9 +1,9 @@
 thy-core
 ==========
-[![Actions Status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://github.com/geektcp/thy-core/actions)
+[![Actions Status](https://github.com/geektcp/thy-core/actions/workflows/maven.yml/badge.svg)](https://github.com/geektcp/thy-core/actions)
 [![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/thy-core/badge.svg)](https://snyk.io/test/github/geektcp/thy-core)
 [![Coverage Status](https://img.shields.io/coveralls/geektcp/thy-core/master.svg)](https://coveralls.io/r/geektcp/thy-core?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://bestpractices.coreinfrastructure.org/projects/6251)
 [![Java Doc](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
 
@@ -16,7 +16,6 @@ this is a tiny project. we can use it to develop big project.
 
 Furthermore, thy-core offers a convenient API for build many cache, collection, executor.
 ```
-
 
 ### maven dependency
 ```
