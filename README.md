@@ -1,6 +1,6 @@
 thy-core
 ==========
-[![Actions Status](https://github.com/geektcp/thy-core/workflows/CI/badge.svg)](https://github.com/geektcp/thy-core/actions)
+[![Actions Status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://github.com/geektcp/thy-core/actions)
 [![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/thy-core/badge.svg)](https://snyk.io/test/github/geektcp/thy-core)
 [![Coverage Status](https://img.shields.io/coveralls/geektcp/thy-core/master.svg)](https://coveralls.io/r/geektcp/thy-core?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent)
