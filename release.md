@@ -1,4 +1,4 @@
-Thy-core release notes
+Thy-core Release Notes
 ------------------------
 
 ### 2023.2.19: version 1.0.3.RELEASE
