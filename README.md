@@ -1,8 +1,12 @@
 thy-core
 ==========
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/net.bytebuddy/byte-buddy-parent)
+[![Actions Status](https://github.com/geektcp/thy-core/workflows/CI/badge.svg)](https://github.com/geektcp/thy-core/actions)
+[![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/thy-core/badge.svg)](https://snyk.io/test/github/geektcp/thy-core)
+[![Coverage Status](https://img.shields.io/coveralls/geektcp/thy-core/master.svg)](https://coveralls.io/r/geektcp/thy-core?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core-parent)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://bestpractices.coreinfrastructure.org/projects/6251)
 
-[api doc](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
+[javadoc api](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
 
 ### describe
 ```
