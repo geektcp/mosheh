@@ -72,19 +72,6 @@ public class TinyCompletionService<V> implements CompletionService<V> {
         this.completionQueue = new LinkedBlockingQueue<Future<V>>();
     }
 
-    /**
-     * Creates an TinyCompletionService using the supplied
-     * executor for base task execution and the supplied queue as its
-     * completion queue.
-     *
-     * @param executor the executor to use
-     * @param completionQueue the queue to use as the completion queue
-     *        normally one dedicated for use by this service. This
-     *        queue is treated as unbounded -- failed attempted
-     *        {@code Queue.add} operations for completed tasks cause
-     *        them not to be retrievable.
-     * @throws NullPointerException if executor or completionQueue are {@code null}
-     */
     public TinyCompletionService(TinyExecutor executor,
                                  BlockingQueue<Future<V>> completionQueue) {
         if (executor == null || completionQueue == null)

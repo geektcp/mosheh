@@ -15,16 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.executor.service.impl.extend;
+package com.geektcp.common.core.concurrent.thread.executor.service.impl.delegated;
 
-import java.util.concurrent.ExecutorService;
+import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutorService;
 
 /**
  * @author geektcp on 2023/2/6 22:47.
  */
 public class TinyFinalizeExecutor extends TinyDelegatedExecutor {
 
-    public TinyFinalizeExecutor(ExecutorService executor) {
+    public TinyFinalizeExecutor(TinyExecutorService executor) {
         super(executor);
     }
 

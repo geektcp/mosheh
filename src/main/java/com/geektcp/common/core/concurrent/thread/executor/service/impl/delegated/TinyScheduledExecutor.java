@@ -15,17 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.executor.service.impl.extend;
+package com.geektcp.common.core.concurrent.thread.executor.service.impl.delegated;
 
 import com.geektcp.common.core.concurrent.thread.executor.service.TinyScheduledService;
 
 import java.util.concurrent.*;
 
+/**
+ * DelegatedScheduledExecutorService
+ */
 public class TinyScheduledExecutor extends TinyDelegatedExecutor implements TinyScheduledService {
 
-    private final ScheduledExecutorService e;
+    private final TinyScheduledService e;
 
-    public TinyScheduledExecutor(ScheduledExecutorService executor) {
+    public TinyScheduledExecutor(TinyScheduledService executor) {
         super(executor);
         e = executor;
     }

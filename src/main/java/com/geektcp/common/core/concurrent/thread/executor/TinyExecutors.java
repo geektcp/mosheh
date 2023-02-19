@@ -18,12 +18,14 @@
 package com.geektcp.common.core.concurrent.thread.executor;
 
 import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutorService;
-import com.geektcp.common.core.concurrent.thread.executor.service.impl.extend.TinyScheduledExecutor;
-import com.geektcp.common.core.concurrent.thread.executor.service.impl.extend.TinyFinalizeExecutor;
-import com.geektcp.common.core.concurrent.thread.executor.service.impl.extend.TinyDelegatedExecutor;
-import com.geektcp.common.core.concurrent.thread.executor.service.impl.extend.TinyThreadPoolExecutor;
+import com.geektcp.common.core.concurrent.thread.executor.service.impl.extend.*;
+import com.geektcp.common.core.concurrent.thread.executor.service.impl.delegated.TinyDelegatedExecutor;
+import com.geektcp.common.core.concurrent.thread.executor.service.impl.delegated.TinyFinalizeExecutor;
+import com.geektcp.common.core.concurrent.thread.executor.service.impl.delegated.TinyScheduledExecutor;
 
 import java.util.concurrent.*;
+
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 /**
  * @author geektcp on 2023/2/6 22:44.
@@ -34,12 +36,14 @@ public class TinyExecutors {
 
     }
 
-    public static ExecutorService newFixedThreadPool(int nThreads) {
-        return Executors.newFixedThreadPool(nThreads);
+    public static TinyExecutorService newFixedThreadPool(int nThreads) {
+        return new TinyThreadPoolExecutor(nThreads, nThreads,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
     }
 
-    public static ExecutorService newFixedThreadPool(int nThreads, ThreadFactory threadFactory) {
-         return new ThreadPoolExecutor(nThreads, nThreads,
+    public static TinyExecutorService newFixedThreadPool(int nThreads, ThreadFactory threadFactory) {
+         return new TinyThreadPoolExecutor(nThreads, nThreads,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>(),
                 threadFactory);
@@ -60,25 +64,27 @@ public class TinyExecutors {
                         null, true);
     }
 
-    public static ExecutorService newCachedThreadPool() {
-        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+    public static TinyExecutorService newCachedThreadPool() {
+        return new TinyThreadPoolExecutor(0, Integer.MAX_VALUE,
                 60L, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>());
     }
 
-    public static ExecutorService newCachedThreadPool(ThreadFactory threadFactory) {
-        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+    public static TinyExecutorService newCachedThreadPool(ThreadFactory threadFactory) {
+        return new TinyThreadPoolExecutor(0, Integer.MAX_VALUE,
                 60L, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>(),
                 threadFactory);
     }
 
-    public static ExecutorService newScheduledThreadPool(int corePoolSize) {
-        return new ScheduledThreadPoolExecutor(corePoolSize);
+    public static TinyExecutorService newScheduledThreadPool(int corePoolSize) {
+        return new TinyThreadPoolExecutor(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,
+                new TinyDelayedWorkQueue());
     }
 
-    public static ExecutorService newScheduledThreadPool(int corePoolSize, ThreadFactory threadFactory) {
-        return new ScheduledThreadPoolExecutor(corePoolSize, threadFactory);
+    public static TinyExecutorService newScheduledThreadPool(int corePoolSize, ThreadFactory threadFactory) {
+        return new TinyThreadPoolExecutor(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,
+                new TinyDelayedWorkQueue(), threadFactory);
     }
 
 
@@ -88,12 +94,13 @@ public class TinyExecutors {
      */
     public static TinyExecutorService newSingleThreadScheduledExecutor() {
         return new TinyScheduledExecutor
-                (new ScheduledThreadPoolExecutor(1));
+                (new TinyScheduledThreadPoolExecutor(1));
+
     }
 
     public static TinyExecutorService newSingleThreadScheduledExecutor(ThreadFactory threadFactory) {
         return new TinyScheduledExecutor
-                (new ScheduledThreadPoolExecutor(1, threadFactory));
+                (new TinyScheduledThreadPoolExecutor(1, threadFactory));
     }
 
     public static TinyExecutorService newSingleThreadExecutor() {
@@ -105,13 +112,13 @@ public class TinyExecutors {
 
     public static TinyExecutorService newSingleThreadExecutor(ThreadFactory threadFactory) {
         return new TinyFinalizeExecutor
-                (new ThreadPoolExecutor(1, 1,
+                (new TinyThreadPoolExecutor(1, 1,
                         0L, TimeUnit.MILLISECONDS,
                         new LinkedBlockingQueue<Runnable>(),
                         threadFactory));
     }
 
-    public static TinyExecutorService newTinyExecutor(ExecutorService executor) {
+    public static TinyExecutorService newTinyExecutor(TinyExecutorService executor) {
         if (executor == null) {
             throw new NullPointerException();
         }

@@ -15,8 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.concurrent.thread.executor.service.impl.extend;
+package com.geektcp.common.core.concurrent.thread.executor.service.impl.delegated;
 
+import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutorService;
 import com.geektcp.common.core.concurrent.thread.executor.service.impl.TinyAbstractService;
 
 import java.util.Collection;
@@ -29,9 +30,9 @@ import java.util.concurrent.*;
  */
 public class TinyDelegatedExecutor extends TinyAbstractService {
 
-    private final ExecutorService e;
+    private final TinyExecutorService e;
 
-    public TinyDelegatedExecutor(ExecutorService executor) {
+    public TinyDelegatedExecutor(TinyExecutorService executor) {
         e = executor;
     }
 
@@ -77,8 +78,7 @@ public class TinyDelegatedExecutor extends TinyAbstractService {
         return e.invokeAll(tasks);
     }
 
-    public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks,
-                                         long timeout, TimeUnit unit)
+    public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
             throws InterruptedException {
         return e.invokeAll(tasks, timeout, unit);
     }
@@ -88,9 +88,9 @@ public class TinyDelegatedExecutor extends TinyAbstractService {
         return e.invokeAny(tasks);
     }
 
-    public <T> T invokeAny(Collection<? extends Callable<T>> tasks,
-                           long timeout, TimeUnit unit)
+    public <T> T invokeAny(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
             throws InterruptedException, ExecutionException, TimeoutException {
         return e.invokeAny(tasks, timeout, unit);
     }
+
 }

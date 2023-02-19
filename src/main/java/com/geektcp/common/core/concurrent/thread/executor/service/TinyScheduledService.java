@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author geektcp on 2023/2/6 22:47.
  */
-public interface TinyScheduledService extends TinyExecutor {
+public interface TinyScheduledService extends TinyExecutorService {
 
     ScheduledFuture<?> schedule(Runnable command,
                                 long delay, TimeUnit unit);

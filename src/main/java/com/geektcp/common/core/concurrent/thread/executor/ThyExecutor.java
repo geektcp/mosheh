@@ -17,6 +17,7 @@
  */
 package com.geektcp.common.core.concurrent.thread.executor;
 
+import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutorService;
 import com.geektcp.common.core.system.Sys;
 
 import java.util.Objects;
@@ -27,7 +28,7 @@ import java.util.concurrent.*;
  */
 public class ThyExecutor {
 
-    private ExecutorService tinyExecutor;
+    private TinyExecutorService tinyExecutor;
 
     private Integer poolSize;
     private Integer timeout;
@@ -66,7 +67,7 @@ public class ThyExecutor {
         return instance;
     }
 
-    public ExecutorService getTinyExecutor() {
+    public TinyExecutorService getTinyExecutor() {
         return tinyExecutor;
     }
 
