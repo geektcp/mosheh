@@ -29,10 +29,6 @@ class ThyEnv {
 
     private static Map<String, String> env = System.getenv();
 
-    /**
-     * only get evv , can not set env
-     * because env init when java process start
-     * */
     public static String getEnv(String name) {
         return env.getOrDefault(name, "");
     }

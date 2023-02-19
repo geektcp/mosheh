@@ -56,10 +56,6 @@ class ThyStream {
         out.println(str);
     }
 
-    /**
-     * @author geektcp
-     * @param str any string which will be print
-     */
     public static void p(Object str) {
         println(str);
     }

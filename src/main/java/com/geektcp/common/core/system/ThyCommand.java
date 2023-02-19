@@ -88,10 +88,6 @@ class ThyCommand {
         return process;
     }
 
-    /**
-     * print the result of execute command
-     * @param process Stream
-     */
     public static void printCommandResult(Process process)  {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line = "";

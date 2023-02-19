@@ -35,7 +35,10 @@ public class Sys {
 
 
     ////////////// PrintStream ////////////////
-
+    /**
+     * @author geektcp
+     * @param str any string which will be print
+     */
     public static void p(Object str) {
         ThyStream.p(str);
     }
@@ -74,18 +77,31 @@ public class Sys {
 
 
     ////////////// Runtime JDK ////////////////
+    /**
+     * @author geektcp
+     * @return number of CPUs of the machine
+     */
     public static int availableProcessors() {
         return ThyRuntime.availableProcessors();
     }
 
+    /**
+     * @return used max memory in Java virtual machine
+     */
     public static long maxMemory() {
         return ThyRuntime.maxMemory();
     }
 
+    /**
+     * @return total memory in Java virtual machine
+     */
     public static long totalMemory() {
         return ThyRuntime.totalMemory();
     }
 
+    /**
+     * @return free memory in Java virtual machine
+     */
     public static long freeMemory() {
         return ThyRuntime.freeMemory();
     }
@@ -106,14 +122,26 @@ public class Sys {
         return path;
     }
 
+    /**
+     * @author geektcp
+     * @return the absolute path of resource dir
+     */
     public static String getResourceRootPath() {
         return filterPath(ThyResource.getResourceRootPath());
     }
 
+    /**
+     * @since 1.0.3.RELEASE
+     * @return the absolute path of resource dir
+     */
     public static String getResourcePath() {
         return filterPath(ThyResource.getResourcePath());
     }
 
+    /**
+     * @param name resource file name
+     * @return the absolute path of resource dir
+     */
     public static String getResourcePath(String name) {
         return filterPath(ThyResource.getResourcePath(name));
     }
@@ -136,6 +164,12 @@ public class Sys {
 
 
     ////////////// FileSystem ////////////////
+    /**
+     * remove file from src to dst
+     * @param src source file path
+     * @param dst destination file path
+     * @return execute result:true or false
+     */
     public static boolean mv(String src, String dst) {
         return ThyFileSystem.mv(src, dst);
     }
@@ -219,14 +253,26 @@ public class Sys {
 
 
     ////////////// Class ////////////////
+    /**
+     * @param className class, example: "com.xxx.system.Sys"
+     * @return Class
+     */
     public static Class<?> getClass(String className) {
         return ThyClass.getClass(className);
     }
 
+    /**
+     * @param className class, example: "com.xxx.system.Sys"
+     * @return the path of class
+     */
     public static String getClassPath(String className) {
         return filterPath(ThyClass.getClassPath(className));
     }
 
+    /**
+     * @param cls Class, example: Sys.class
+     * @return the path of class
+     */
     public static String getClassPath(Class<?> cls) {
         return ThyClass.getClassPath(cls);
     }
@@ -234,83 +280,87 @@ public class Sys {
 
     ////////////// System Properties ////////////////
     public static Properties getProperties() {
-        return ThySystemProperties.getProperties();
+        return ThyProperties.getProperties();
     }
 
     public static String getUserHome() {
-        return ThySystemProperties.getUserHome();
+        return ThyProperties.getUserHome();
     }
 
     public static String getUserDir() {
-        return ThySystemProperties.getUserDir();
+        return ThyProperties.getUserDir();
     }
 
     public static String getUserName() {
-        return ThySystemProperties.getUserName();
+        return ThyProperties.getUserName();
     }
 
     public static String getTmpdir() {
-        return ThySystemProperties.getTmpdir();
+        return ThyProperties.getTmpdir();
     }
 
     public static String getUserLanguage() {
-        return ThySystemProperties.getUserLanguage();
+        return ThyProperties.getUserLanguage();
     }
 
     public static String getUserTimezone() {
-        return ThySystemProperties.getUserTimezone();
+        return ThyProperties.getUserTimezone();
     }
 
     public static String getOsName() {
-        return ThySystemProperties.getOsName();
+        return ThyProperties.getOsName();
     }
 
     public static String getOsVersion() {
-        return ThySystemProperties.getOsName();
+        return ThyProperties.getOsName();
     }
 
     public static String getJdkVersion() {
-        return ThySystemProperties.getJdkVersion();
+        return ThyProperties.getJdkVersion();
     }
 
     public static String getFileEncoding() {
-        return ThySystemProperties.getFileEncoding();
+        return ThyProperties.getFileEncoding();
     }
 
     public static String getOsArch() {
-        return ThySystemProperties.getOsArch();
+        return ThyProperties.getOsArch();
     }
 
     public static String getJdkArch() {
-        return ThySystemProperties.getJdkArch();
+        return ThyProperties.getJdkArch();
     }
 
     public static int getOsBit() {
-        return ThySystemProperties.getOsBit();
+        return ThyProperties.getOsBit();
     }
 
     public static int getJdkBit() {
-        return ThySystemProperties.getJdkBit();
+        return ThyProperties.getJdkBit();
     }
 
     public static String getJavaClassPath() {
-        return ThySystemProperties.getJavaClassPath();
+        return ThyProperties.getJavaClassPath();
     }
 
     public static String getFileSeparator() {
-        return ThySystemProperties.getFileSeparator();
+        return ThyProperties.getFileSeparator();
     }
 
     public static boolean isWindows() {
-        return ThySystemProperties.isWindows();
+        return ThyProperties.isWindows();
     }
 
     public static boolean isLinux() {
-        return ThySystemProperties.isLinux();
+        return ThyProperties.isLinux();
     }
 
 
     ////////////// Env Properties ////////////////
+    /**
+     * only get evv , can not set env
+     * because env init when java process start
+     * */
     public static String getEnv(String envName) {
         return ThyEnv.getEnv(envName);
     }
@@ -349,6 +399,7 @@ public class Sys {
     }
 
     /**
+     * print the result of execute command
      * @param process steam which contain the result of command
      * @see #getCommandBuilder()
      */
@@ -379,10 +430,28 @@ public class Sys {
         ThyEncrypt.initKey(privateKeyFilename, publicKeyFilename);
     }
 
+    /**
+     * @param str destination string which will be encrypt with RSA
+     * @return the result string which encrypted
+     * @see #initKey(String, String)
+     * <p>
+     * example:
+     *      Sys.initKey(id_rsa,id_rsa.pub);
+     *      Sys.encrypt("some");
+     */
     public static String encrypt(String str) {
         return ThyEncrypt.encrypt(str);
     }
 
+    /**
+     * @param str destination string which encrypted with RSA
+     * @return the result string which encrypted
+     * @see #initKey(String, String)
+     * <p>
+     * example:
+     *      Sys.initKey(id_rsa,id_rsa.pub);
+     *      Sys.decrypt("some");
+     */
     public static String decrypt(String str) {
         return ThyEncrypt.decrypt(str);
     }
@@ -404,6 +473,11 @@ public class Sys {
         ThyString.setStringSeparator(separator);
     }
 
+    /**
+     * @param src     source String
+     * @param keyword the keyword
+     * @return if contain keyword,return true,or false
+     */
     public static boolean contains(String src, String keyword) {
         return ThyString.contains(src, keyword);
     }

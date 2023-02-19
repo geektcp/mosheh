@@ -33,11 +33,6 @@ class ThyString {
         SEPARATOR = separator;
     }
 
-    /**
-     * @param src     source String
-     * @param keyword the keyword
-     * @return if contain keyword,return true,or false
-     */
     public static boolean contains(String src, String keyword) {
         return src.contains(keyword);
     }

@@ -28,10 +28,6 @@ class ThyResource {
     private ThyResource() {
     }
 
-    /**
-     * @author geektcp
-     * @return the absolute path of resource dir
-     */
     public static String getResourceRootPath() {
         return getResourceClassPath("/", ThyFileSystem.class);
     }
@@ -59,18 +55,10 @@ class ThyResource {
         return url.getPath();
     }
 
-    /**
-     * @since 1.0.3.RELEASE
-     * @return the absolute path of resource dir
-     */
     public static String getResourcePath() {
         return getResourcePath("");
     }
 
-    /**
-     * @param name resource file name
-     * @return the absolute path of resource dir
-     */
     public static String getResourcePath(String name) {
         String rootPath = getResourceRootPath();
         if (Objects.isNull(name)) {

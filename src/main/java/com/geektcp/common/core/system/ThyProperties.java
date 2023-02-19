@@ -22,9 +22,9 @@ import java.util.Properties;
 /**
  * @author geektcp on 2023/2/5 0:08.
  */
-class ThySystemProperties {
+class ThyProperties {
 
-    private ThySystemProperties() {
+    private ThyProperties() {
     }
 
     private static Properties prop = System.getProperties();

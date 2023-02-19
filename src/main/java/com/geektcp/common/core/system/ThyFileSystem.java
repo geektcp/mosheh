@@ -33,12 +33,6 @@ class ThyFileSystem {
     private ThyFileSystem() {
     }
 
-    /**
-     * remove file from src to dst
-     * @param src source file path
-     * @param dst destination file path
-     * @return execute result
-     */
     public static boolean mv(String src, String dst) {
         File srcFile = new File(src);
         File dstFile = new File(dst);

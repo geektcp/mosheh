@@ -106,30 +106,12 @@ class ThyEncrypt {
         return result;
     }
 
-    /**
-     * @param str destination string which will be encrypt with RSA
-     * @return the result string which encrypted
-     * @see #initKey(String, String)
-     * <p>
-     * example:
-     *      Sys.initKey(id_rsa,id_rsa.pub);
-     *      Sys.encrypt("some");
-     */
     public static String encrypt(String str) {
         RSA rsa = ThyEncrypt.getRSA();
         byte[] encrypt1 = rsa.encrypt(StrUtil.bytes(str, CharsetUtil.CHARSET_UTF_8), KeyType.PublicKey);
         return HexUtil.encodeHexStr(encrypt1);
     }
 
-    /**
-     * @param str destination string which encrypted with RSA
-     * @return the result string which encrypted
-     * @see #initKey(String, String)
-     * <p>
-     * example:
-     *      Sys.initKey(id_rsa,id_rsa.pub);
-     *      Sys.decrypt("some");
-     */
     public static String decrypt(String str) {
         if (StringUtils.isEmpty(str)) {
             return null;

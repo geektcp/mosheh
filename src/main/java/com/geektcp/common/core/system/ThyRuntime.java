@@ -27,31 +27,18 @@ class ThyRuntime {
     private ThyRuntime() {
     }
 
-    /**
-     * return used max memory in Java virtual machine
-     */
     public static long maxMemory() {
         return Runtime.getRuntime().maxMemory();
     }
 
-    /**
-     * return total memory in Java virtual machine
-     */
     public static long totalMemory() {
         return Runtime.getRuntime().totalMemory();
     }
 
-    /**
-     * return free memory in Java virtual machine
-     */
     public static long freeMemory() {
         return Runtime.getRuntime().freeMemory();
     }
 
-    /**
-     * @author geektcp
-     * @return number of CPUs of the machine
-     */
     public static int availableProcessors() {
         return Runtime.getRuntime().availableProcessors();
     }

@@ -1,7 +1,10 @@
 package com.geektcp.common.core.concurrent.thread.executor;
 
+
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
@@ -12,6 +15,10 @@ public class TinyExecutor extends AbstractExecutorService {
     private final ExecutorService e;
 
     TinyExecutor(ExecutorService executor) {
+        if (Objects.isNull(executor)) {
+            e = TinyExecutorBuilder.newSingleThreadExecutor();
+            return;
+        }
         e = executor;
     }
 
@@ -63,7 +70,7 @@ public class TinyExecutor extends AbstractExecutorService {
         return e.invokeAll(tasks, timeout, unit);
     }
 
-    public <T> T invokeAny(Collection<? extends Callable<T>> tasks)
+    public <T> T invokeAny( Collection<? extends Callable<T>> tasks)
             throws InterruptedException, ExecutionException {
         return e.invokeAny(tasks);
     }

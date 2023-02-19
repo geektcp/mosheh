@@ -27,10 +27,6 @@ class ThyClass {
     private ThyClass() {
     }
 
-    /**
-     * @param className class, example: "com.xxx.system.Sys"
-     * @return Class
-     */
     public static Class<?> getClass(String className) {
         if (className == null) {
             return null;
@@ -44,19 +40,11 @@ class ThyClass {
         return cls;
     }
 
-    /**
-     * @param className class, example: "com.xxx.system.Sys"
-     * @return the path of class
-     */
     public static String getClassPath(String className) {
         Class<?> cls = getClass(className);
         return getClassPath(cls);
     }
 
-    /**
-     * @param cls Class, example: Sys.class
-     * @return the path of class
-     */
     public static String getClassPath(Class<?> cls) {
         if(Objects.isNull(cls)) {
             return null;
