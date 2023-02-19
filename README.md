@@ -3,7 +3,7 @@ thy-core
 [![Actions Status](https://github.com/geektcp/thy-core/actions/workflows/maven.yml/badge.svg)](https://github.com/geektcp/thy-core/actions)
 [![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/thy-core/badge.svg)](https://snyk.io/test/github/geektcp/thy-core)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core/badge.svg#)](https://mvnrepository.com/artifact/com.geektcp.common/thy-core)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/zh-CN/projects/7038/badge)](https://bestpractices.coreinfrastructure.org/zh-CN/projects/7038)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/badge_static/25)](https://bestpractices.coreinfrastructure.org/zh-CN/projects/7038)
 [![Java Doc](https://img.shields.io/badge/javadoc-6.0.5-brightgreen.svg)](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
 
 ### describe
