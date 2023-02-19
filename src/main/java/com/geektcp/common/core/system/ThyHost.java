@@ -28,7 +28,7 @@ import java.util.Objects;
 /**
  * @author geektcp on 2018/7/4.
  */
-public class ThyHost {
+class ThyHost {
 
     private ThyHost(){
     }

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class ThyString {
+class ThyString {
 
     private static String SEPARATOR = " ";
 
