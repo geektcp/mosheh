@@ -9,7 +9,7 @@ Thy-core release notes
 ### 2023.2.18: version 1.0.3.RELEASE
 - add utils, use shell, 
 - add host,string,resource file reader util
-- test case: com.geektcp.common.core.system.*
+- add test case: com.geektcp.common.core.system.*
 
 ### 2023/2/5: version 1.0.2.RELEASE
 - add Thy* utils, include manager file ,print log, 
