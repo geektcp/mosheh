@@ -5,7 +5,7 @@ thy-core
 [![Coverage Status](https://img.shields.io/coveralls/geektcp/thy-core/master.svg)](https://coveralls.io/r/geektcp/thy-core?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://bestpractices.coreinfrastructure.org/projects/6251)
-[![Java Doc](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
+[![Java Doc](https://img.shields.io/badge/javadoc-6.0.5-brightgreen.svg)](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
 
 ### describe
 ```
