@@ -1,11 +1,11 @@
 thy-core
 ==========
-[![Actions Status](https://github.com/geektcp/thy-core/actions/workflows/maven.yml/badge.svg)](https://github.com/geektcp/thy-core/actions)
-[![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/thy-core/badge.svg)](https://snyk.io/test/github/geektcp/thy-core)
-[![Coverage Status](https://img.shields.io/coveralls/geektcp/thy-core/master.svg)](https://coveralls.io/r/geektcp/thy-core?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://bestpractices.coreinfrastructure.org/projects/6251)
-[![Java Doc](https://img.shields.io/badge/javadoc-6.0.5-brightgreen.svg)](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html)
+[![Actions Status](https://github.com/geektcp/thy-core/actions/workflows/maven.yml/badge.svg)](https://github.com/geektcp/thy-core/actions){:target="_blank"}
+[![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/thy-core/badge.svg)](https://snyk.io/test/github/geektcp/thy-core){:target="_blank"}
+[![Coverage Status](https://img.shields.io/coveralls/geektcp/thy-core/master.svg)](https://coveralls.io/r/geektcp/thy-core?branch=master){:target="_blank"}
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core/badge.svg#)](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/thy-core){:target="_blank"}
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6251/badge)](https://bestpractices.coreinfrastructure.org/projects/6251){:target="_blank"}
+[![Java Doc](https://img.shields.io/badge/javadoc-6.0.5-brightgreen.svg)](https://javadoc.io/doc/com.geektcp.common/thy-core/latest/index.html){:target="_blank"}
 
 ### describe
 ```
