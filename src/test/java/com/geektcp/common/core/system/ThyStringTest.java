@@ -45,16 +45,16 @@ public class ThyStringTest {
     public static void main(String[] args) {
         String src = "ChatGPT is a new type of artificial intelligence robot, which has far-reaching influence.";
         String[] keywords = new String[]{"GPt", "ne", "far"};
-        Sys.p(ThyString.contains(true, true, src, keywords));
-        Sys.p(ThyString.contains(true, false, src, keywords));
-        Sys.p(ThyString.contains(false, true, src, keywords));
-        Sys.p(ThyString.contains(false, false, src, keywords));
+        Sys.p(ThyString.contains(true, false,true, src, keywords));
+        Sys.p(ThyString.contains(true, false,false, src, keywords));
+        Sys.p(ThyString.contains(false, false,true, src, keywords));
+        Sys.p(ThyString.contains(false, false,false, src, keywords));
         Sys.p("------");
         String[] keywords2 = new String[]{"far", "ne", "GPt"};
-        Sys.p(ThyString.contains(true, true, src, keywords2));
-        Sys.p(ThyString.contains(true, false, src, keywords2));
-        Sys.p(ThyString.contains(false, true, src, keywords2));
-        Sys.p(ThyString.contains(false, false, src, keywords2));
+        Sys.p(ThyString.contains(true, false,true, src, keywords2));
+        Sys.p(ThyString.contains(true, false,false, src, keywords2));
+        Sys.p(ThyString.contains(false, false,true, src, keywords2));
+        Sys.p(ThyString.contains(false, false,false, src, keywords2));
         Assert.assertTrue(true);
     }
 
@@ -106,11 +106,22 @@ public class ThyStringTest {
 
     @Test
     public void test9() {
-        String src = "select * \nfrom  tse;\n \ndrop database test_db";
+        String src = "select * \nfrom  tse;\n  \ndrop\tdatabase test_db";
+        Sys.p(src.replace("\n",""));
         Sys.p(src.toLowerCase());
         String regex = "[\\s\\S]*drop\\s*database[\\s\\S]*";
+        Sys.p(Pattern.matches(regex, src.replace("\n","")));
+
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void test10() {
+        String src = "\t\t\t\t";
+        String regex = "[\\s]*";
         Sys.p(Pattern.matches(regex, src));
 
         Assert.assertTrue(true);
     }
+
 }
