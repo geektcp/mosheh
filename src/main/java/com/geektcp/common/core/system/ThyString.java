@@ -17,9 +17,7 @@
  */
 package com.geektcp.common.core.system;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 class ThyString {
@@ -29,7 +27,7 @@ class ThyString {
     private ThyString() {
     }
 
-    public static void setStringSeparator(String separator){
+    public static void setStringSeparator(String separator) {
         SEPARATOR = separator;
     }
 
@@ -38,14 +36,14 @@ class ThyString {
     }
 
     public static boolean contains(String src, String... keywords) {
-        return contains(false, false, src, keywords);
+        return contains(false, false, false, src, keywords);
     }
 
     public static boolean contains(boolean orderly, String src, String... keywords) {
-        return contains(orderly, false, src, keywords);
+        return contains(orderly, false, false, src, keywords);
     }
 
-    public static boolean contains(boolean orderly, boolean isIgnoreCase, String src, String... keywords) {
+    public static boolean contains(boolean orderly, boolean isContinuous, boolean isIgnoreCase, String src, String... keywords) {
         if (Objects.isNull(src) || Objects.isNull(keywords)) {
             return false;
         }
@@ -53,7 +51,7 @@ class ThyString {
         List<String> wordList = arrayToList(wordArray, isIgnoreCase);
         List<String> keywordList = arrayToList(keywords, isIgnoreCase);
         if (orderly) {
-            return containWithOrder(wordList, keywordList);
+            return containWithOrder(isContinuous, wordList, keywordList);
         }
         return containWithoutOrder(wordList, keywordList);
     }
@@ -77,21 +75,45 @@ class ThyString {
     }
 
     public static boolean containWithOrder(List<String> wordList, List<String> keywordList) {
+        return containWithOrder(false, wordList, keywordList);
+    }
+
+    public static boolean containWithOrder(boolean isContinuous, List<String> wordList, List<String> keywordList) {
         if (wordList.isEmpty() || keywordList.isEmpty()) {
             return false;
         }
         List<Boolean> resultList = new ArrayList<>();
         int keywordListSize = keywordList.size();
-        for (String word : wordList) {
-            if(keywordList.isEmpty()){
+        List<Integer> continuousList = new ArrayList<>();
+        for (int i = 0; i < wordList.size(); i++) {
+            String word = wordList.get(i);
+            if (keywordList.isEmpty()) {
                 break;
             }
-            if (word.contains(keywordList.get(0))) {
+            String keyword = keywordList.get(0);
+            if (word.contains(keyword)) {
                 resultList.add(true);
                 keywordList.remove(0);
+                continuousList.add(i);
+            }
+        }
+        if (isContinuous) {
+            if (!checkContinuous(continuousList)) {
+                return false;
             }
         }
         return resultList.size() == keywordListSize;
+    }
+
+    private static boolean checkContinuous(List<Integer> continuousList) {
+        for (int i = 0; i < continuousList.size(); i++) {
+            int ele = continuousList.get(i);
+            int nextEle = continuousList.get(i + 1);
+            if (nextEle - ele != 1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static boolean containWithoutOrder(List<String> wordList, List<String> keywordList) {

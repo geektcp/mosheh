@@ -104,4 +104,13 @@ public class ThyStringTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void test9() {
+        String src = "select * \nfrom  tse;\n \ndrop database test_db";
+        Sys.p(src.toLowerCase());
+        String regex = "[\\s\\S]*drop\\s*database[\\s\\S]*";
+        Sys.p(Pattern.matches(regex, src));
+
+        Assert.assertTrue(true);
+    }
 }

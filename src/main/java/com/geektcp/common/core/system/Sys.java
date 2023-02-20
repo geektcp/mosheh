@@ -35,9 +35,10 @@ public class Sys {
 
 
     ////////////// PrintStream ////////////////
+
     /**
-     * @author geektcp
      * @param str any string which will be print
+     * @author geektcp
      */
     public static void p(Object str) {
         ThyStream.p(str);
@@ -77,9 +78,10 @@ public class Sys {
 
 
     ////////////// Runtime JDK ////////////////
+
     /**
-     * @author geektcp
      * @return number of CPUs of the machine
+     * @author geektcp
      */
     public static int availableProcessors() {
         return ThyRuntime.availableProcessors();
@@ -123,16 +125,16 @@ public class Sys {
     }
 
     /**
-     * @author geektcp
      * @return the absolute path of resource dir
+     * @author geektcp
      */
     public static String getResourceRootPath() {
         return filterPath(ThyResource.getResourceRootPath());
     }
 
     /**
-     * @since 1.0.3.RELEASE
      * @return the absolute path of resource dir
+     * @since 1.0.3.RELEASE
      */
     public static String getResourcePath() {
         return filterPath(ThyResource.getResourcePath());
@@ -164,8 +166,10 @@ public class Sys {
 
 
     ////////////// FileSystem ////////////////
+
     /**
      * remove file from src to dst
+     *
      * @param src source file path
      * @param dst destination file path
      * @return execute result:true or false
@@ -253,6 +257,7 @@ public class Sys {
 
 
     ////////////// Class ////////////////
+
     /**
      * @param className class, example: "com.xxx.system.Sys"
      * @return Class
@@ -357,10 +362,11 @@ public class Sys {
 
 
     ////////////// Env Properties ////////////////
+
     /**
      * only get evv , can not set env
      * because env init when java process start
-     * */
+     */
     public static String getEnv(String envName) {
         return ThyEnv.getEnv(envName);
     }
@@ -400,6 +406,7 @@ public class Sys {
 
     /**
      * print the result of execute command
+     *
      * @param process steam which contain the result of command
      * @see #getCommandBuilder()
      */
@@ -436,8 +443,8 @@ public class Sys {
      * @see #initKey(String, String)
      * <p>
      * example:
-     *      Sys.initKey(id_rsa,id_rsa.pub);
-     *      Sys.encrypt("some");
+     * Sys.initKey(id_rsa,id_rsa.pub);
+     * Sys.encrypt("some");
      */
     public static String encrypt(String str) {
         return ThyEncrypt.encrypt(str);
@@ -449,8 +456,8 @@ public class Sys {
      * @see #initKey(String, String)
      * <p>
      * example:
-     *      Sys.initKey(id_rsa,id_rsa.pub);
-     *      Sys.decrypt("some");
+     * Sys.initKey(id_rsa,id_rsa.pub);
+     * Sys.decrypt("some");
      */
     public static String decrypt(String str) {
         return ThyEncrypt.decrypt(str);
@@ -483,15 +490,27 @@ public class Sys {
     }
 
     public static boolean contains(String src, String... keywords) {
-        return ThyString.contains(false, false, src, keywords);
+        return ThyString.contains(false, false, false, src, keywords);
     }
 
     public static boolean contains(boolean orderly, String src, String... keywords) {
-        return ThyString.contains(orderly, false, src, keywords);
+        return ThyString.contains(orderly, false, false, src, keywords);
     }
 
     public static boolean contains(boolean orderly, boolean isIgnoreCase, String src, String[] keywords) {
-        return ThyString.contains(orderly, isIgnoreCase, src, keywords);
+        return ThyString.contains(orderly, false, isIgnoreCase, src, keywords);
+    }
+
+    /**
+     * @param orderly  is or not orderly match
+     * @param isContinuous is or not continuous, for example: the sequence is 3,4,5,6, or 21,22,23
+     * @param isIgnoreCase is or not ignore case
+     * @param src the destination string
+     * @param keywords the keyword
+     * @return bool: true or false
+     */
+    public static boolean contains(boolean orderly, boolean isContinuous, boolean isIgnoreCase, String src, String[] keywords) {
+        return ThyString.contains(orderly, false, isIgnoreCase, src, keywords);
     }
 
     public static List<String> arrayToList(String[] stringArray, boolean isIgnoreCase) {
