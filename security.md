@@ -3,7 +3,7 @@ Security Policy
 
 ## Supported Versions
 
-Only the latest version is guaranteed to be secure. For this purpose, Byte Buddy maintains backwards compatibility. 
+the latest version is guaranteed to be secure. For this purpose, thy-core maintains backwards compatibility. 
 Please note the [readme of the project](https://github.com/geektcp/thy-core/blob/main/README.md) for further information.
 
 
