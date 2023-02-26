@@ -1,4 +1,6 @@
-package com.geektcp.common.core.cache;
+package com.geektcp.common.core.cache.other;
+
+import com.geektcp.common.core.cache.ThyCache;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -6,7 +8,7 @@ import java.util.Iterator;
 /**
  * @author geektcp on 2019/9/26.
  */
-public class LruCache<K, V> implements Iterable<K>,Cache {
+public class LruCache<K, V> implements Iterable<K>, ThyCache {
 
     private Node head;
     private Node tail;

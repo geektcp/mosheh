@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cache;
+package com.geektcp.common.core.cache.other;
 
 import java.util.HashMap;
 import java.util.Iterator;

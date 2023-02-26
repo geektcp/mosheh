@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cache;
+package com.geektcp.common.core.cache.guava;
 
 import com.geektcp.common.core.system.Sys;
 import com.google.common.cache.CacheBuilder;
@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author haiyang.tang on 11.27 027 18:27:09.
  */
-public class GuavaCache implements Cache {
+public class GuavaCache  {
 
     private GuavaCache() {
     }
@@ -68,23 +68,5 @@ public class GuavaCache implements Cache {
         return list;
     }
 
-    @Override
-    public void clean() {
 
-    }
-
-    @Override
-    public void refresh(String key) {
-
-    }
-
-    @Override
-    public void put(String key, Object value) {
-
-    }
-
-    @Override
-    public void delete(String key) {
-
-    }
 }
