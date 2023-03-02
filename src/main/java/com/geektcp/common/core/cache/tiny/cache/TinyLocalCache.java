@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cache.tiny;
+package com.geektcp.common.core.cache.tiny.cache;
 
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;

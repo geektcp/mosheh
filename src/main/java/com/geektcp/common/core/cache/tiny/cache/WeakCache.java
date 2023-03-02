@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cache.tiny;
+package com.geektcp.common.core.cache.tiny.cache;
 
 import java.util.Map;
 import java.util.WeakHashMap;

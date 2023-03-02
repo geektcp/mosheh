@@ -1,6 +1,8 @@
-package com.geektcp.common.core.cache.tiny;
+package com.geektcp.common.core.cache.tiny.cache;
 
 
+import com.geektcp.common.core.cache.tiny.TinyCacheBuilder;
+import com.geektcp.common.core.cache.tiny.loader.TinyCacheLoader;
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;
 import org.checkerframework.checker.nullness.qual.Nullable;

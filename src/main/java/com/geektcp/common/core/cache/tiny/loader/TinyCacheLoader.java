@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cache.tiny;
+package com.geektcp.common.core.cache.tiny.loader;
 
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.base.Function;

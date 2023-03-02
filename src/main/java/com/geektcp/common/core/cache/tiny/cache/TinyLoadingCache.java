@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cache.tiny;
+package com.geektcp.common.core.cache.tiny.cache;
 
 import com.google.common.base.Function;
 import com.google.common.cache.Cache;
@@ -8,18 +8,15 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @author geektcp on 2023/2/26 17:26.
+ * @author geektcp on 2023/2/26 17:29.
  */
-public interface LoadingCache<K, V> extends Cache<K, V>, Function<K, V> {
-    V get(K var1) throws ExecutionException;
+public interface TinyLoadingCache<K, V> extends Cache<K, V>, Function<K, V> {
+
+    V get(K var1);
 
     V getUnchecked(K var1);
 
     Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException;
-
-    /** @deprecated */
-    @Deprecated
-    V apply(K var1);
 
     void refresh(K var1);
 
