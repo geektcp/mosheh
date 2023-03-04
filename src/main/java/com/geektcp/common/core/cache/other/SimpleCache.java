@@ -24,15 +24,17 @@ import java.util.Map;
 /**
  * @author geektcp on 2019/9/26.
  */
-public class SimpleCache {
+public class SimpleCache<K, V> {
 
-    private static Map<String, Object> cacheMap = new HashMap<>();
-    private static Map<String, Long> expireTimeMap = new HashMap<>();
+    private Map<K, V> cacheMap = new HashMap<>();
+    private Map<K, Long> expireTimeMap = new HashMap<>();
 
-    private SimpleCache() {
+    public SimpleCache() {
+        // do noting
+
     }
 
-    public static Object get(String key) {
+    public  Object get(String key) {
         if (!cacheMap.containsKey(key)) {
             return null;
         }
@@ -42,19 +44,19 @@ public class SimpleCache {
         return cacheMap.get(key);
     }
 
-    public static void put(String key, Object value) {
+    public void put(K key, V value) {
         cacheMap.put(key, value);
     }
 
-    public static void put(final String key, Object value, int millSeconds) {
+    public  void put(final K key, V value, int millSeconds) {
         final long expireTime = System.currentTimeMillis() + millSeconds;
         cacheMap.put(key, value);
         expireTimeMap.put(key, expireTime);
         if (cacheMap.size() > 2) {
             new Thread(()-> {
-                    Iterator<Map.Entry<String, Object>> iterator = cacheMap.entrySet().iterator();
+                    Iterator<Map.Entry<K, V>> iterator = cacheMap.entrySet().iterator();
                     while (iterator.hasNext()) {
-                        Map.Entry<String, Object> entry = iterator.next();
+                        Map.Entry<K, V> entry = iterator.next();
                         if (expireTimeMap.containsKey(entry.getKey())) {
                             long expireTimeTmp = expireTimeMap.get(key);
                             if (System.currentTimeMillis() > expireTimeTmp) {
@@ -68,7 +70,7 @@ public class SimpleCache {
         }
     }
 
-    public static boolean isExist(String key) {
+    public boolean isExist(String key) {
         return cacheMap.containsKey(key);
     }
 

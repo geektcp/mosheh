@@ -19,12 +19,14 @@
 package com.geektcp.common.core.cache.tiny.cache;
 
 
+import com.geektcp.common.core.cache.other.SimpleCache;
 import com.geektcp.common.core.cache.tiny.TinyCacheBuilder;
 import com.geektcp.common.core.cache.tiny.loader.TinyCacheLoader;
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
@@ -36,9 +38,12 @@ import java.util.concurrent.ExecutionException;
 public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
     private static final long serialVersionUID = 1L;
 
-    private final TinyLocalCache<K, V> localCache = new TinyLocalCache();
+    private SimpleCache localCache = new SimpleCache();
     private TinyCacheBuilder builder;
     private TinyCacheLoader cacheLoader;
+
+    private Map<K, V> cacheMap = new HashMap<>();
+    private Map<K, Long> expireTimeMap = new HashMap<>();
 
     public TinyLocalLoadingCache() {
 
@@ -49,9 +54,8 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
         this.cacheLoader = loader;
     }
 
-    public V get(K key) {
-//        return this.localCache.getOrLoad(key);
-        return null;
+    public V get(K k) {
+        return  cacheMap.get(k);
     }
 
     public V getUnchecked(K key) {
@@ -63,23 +67,9 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
     }
 
     public Map<K, V> getAll(Iterable<? extends K> keys) {
-//        return this.localCache.getAll(keys);
         return null;
     }
 
-    public void refresh(K key) {
-        this.localCache.refresh(key);
-    }
-
-    public final V apply(K key) {
-        return this.getUnchecked(key);
-    }
-
-
-    @Override
-    public ConcurrentMap<K, V> asMap() {
-        return null;
-    }
 
     @Nullable
     @Override
@@ -88,7 +78,7 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
     }
 
     @Override
-    public V get(K k, Callable<? extends V> callable) throws ExecutionException {
+    public V get(K k, Callable<? extends V> callable) {
         return null;
     }
 
@@ -99,7 +89,7 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
 
     @Override
     public void put(K k, V v) {
-
+        cacheMap.put(k,v);
     }
 
     @Override
@@ -136,4 +126,18 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
     public void cleanUp() {
 
     }
+
+    public void refresh(K key) {
+    }
+
+    public final V apply(K key) {
+        return this.getUnchecked(key);
+    }
+
+
+    @Override
+    public ConcurrentMap<K, V> asMap() {
+        return null;
+    }
+
 }
