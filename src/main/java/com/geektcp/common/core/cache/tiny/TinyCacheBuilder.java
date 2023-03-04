@@ -1,3 +1,21 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.geektcp.common.core.cache.tiny;
 
 import com.geektcp.common.core.cache.tiny.cache.TinyLoadingCache;
@@ -13,25 +31,24 @@ import java.util.concurrent.TimeUnit;
  */
 public class TinyCacheBuilder<K, V>  {
 
-    int initialCapacity = -1;
-    int concurrencyLevel = -1;
-    long maximumSize = -1L;
-    long maximumWeight = -1L;
-    long expireAfterWriteNanos = -1L;
-    long expireAfterAccessNanos = -1L;
-    long refreshNanos = -1L;
+    private int initialCapacity = -1;
+    private int concurrencyLevel = -1;
+    private long maximumSize = -1L;
+    private long maximumWeight = -1L;
+    private long expireAfterWriteNanos = -1L;
+    private long expireAfterAccessNanos = -1L;
+    private long refreshNanos = -1L;
     private static final int TIME_OUT_MINUTES = 10;
 
 
-    TinyListener<? super K, ? super V> removalListener;
-
+    private TinyListener<? extends K, ? extends V> removalListener;
 
     private TinyCacheBuilder() {
 
     }
 
     public static TinyCacheBuilder<Object, Object> newBuilder() {
-        return new TinyCacheBuilder();
+        return new TinyCacheBuilder<>();
     }
 
     public TinyCacheBuilder<K, V> maximumSize(long maximumSize) {
@@ -52,19 +69,14 @@ public class TinyCacheBuilder<K, V>  {
 
     public <K1 extends K, V1 extends V> TinyLoadingCache<K1, V1> build(TinyCacheLoader<? super K1, V1> loader) {
         this.checkWeightWithWeigher();
-        return new TinyLocalLoadingCache();
+        return new TinyLocalLoadingCache<>();
     }
 
     private void checkWeightWithWeigher() {
-        if (this.maximumSize == 1) {
-            Preconditions.checkState(this.maximumWeight == -1L, "maximumWeight requires weigher");
+        if (this.maximumSize != 1) {
+            return;
         }
-// else if (this.strictParsing) {
-//            Preconditions.checkState(this.maximumWeight != -1L, "weigher requires maximumWeight");
-//        } else if (this.maximumWeight == -1L) {
-//            logger.log(Level.WARNING, "ignoring weigher specified without maximumWeight");
-//        }
-
+        Preconditions.checkState(this.maximumWeight == -1L, "maximumWeight requires weigher");
     }
 
     int getConcurrencyLevel() {
@@ -72,9 +84,9 @@ public class TinyCacheBuilder<K, V>  {
     }
 
 
-    public <K1 extends K, V1 extends V> TinyCacheBuilder<K, V> removalListener(TinyListener<? super K1, ? super V1> listener) {
+    public TinyCacheBuilder<K, V> removalListener(TinyListener<? extends K, ? extends V> listener) {
         Preconditions.checkState(this.removalListener == null);
-        this.removalListener = (TinyListener)Preconditions.checkNotNull(listener);
+        this.removalListener = Preconditions.checkNotNull(listener);
         return this;
     }
 
