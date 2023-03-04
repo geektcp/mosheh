@@ -22,15 +22,12 @@ package com.geektcp.common.core.cache.tiny.cache;
 import com.geektcp.common.core.cache.other.SimpleCache;
 import com.geektcp.common.core.cache.tiny.TinyCacheBuilder;
 import com.geektcp.common.core.cache.tiny.loader.TinyCacheLoader;
-import com.google.common.cache.CacheStats;
-import com.google.common.collect.ImmutableMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author geektcp on 2023/2/26 18:28.
@@ -82,10 +79,6 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
         return null;
     }
 
-    @Override
-    public ImmutableMap<K, V> getAllPresent(Iterable<?> iterable) {
-        return null;
-    }
 
     @Override
     public void put(K k, V v) {
@@ -115,11 +108,6 @@ public class TinyLocalLoadingCache<K, V>  implements TinyLoadingCache<K, V> {
     @Override
     public long size() {
         return 0;
-    }
-
-    @Override
-    public CacheStats stats() {
-        return null;
     }
 
     @Override

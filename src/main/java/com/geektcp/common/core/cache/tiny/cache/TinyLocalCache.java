@@ -18,9 +18,6 @@
 
 package com.geektcp.common.core.cache.tiny.cache;
 
-import com.google.common.cache.CacheStats;
-import com.google.common.collect.ImmutableMap;
-
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
@@ -52,11 +49,6 @@ public class TinyLocalCache<K, V> implements TinyCache<K, V> {
     }
 
     @Override
-    public ImmutableMap<K, V> getAllPresent(Iterable<?> var1) {
-        return null;
-    }
-
-    @Override
     public void put(K var1, V var2) {
 
     }
@@ -84,11 +76,6 @@ public class TinyLocalCache<K, V> implements TinyCache<K, V> {
     @Override
     public long size() {
         return 0;
-    }
-
-    @Override
-    public CacheStats stats() {
-        return null;
     }
 
     @Override

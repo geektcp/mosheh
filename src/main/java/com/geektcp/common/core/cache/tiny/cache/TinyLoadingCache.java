@@ -18,8 +18,6 @@
 
 package com.geektcp.common.core.cache.tiny.cache;
 
-import com.google.common.base.Function;
-import com.google.common.cache.Cache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -28,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author geektcp on 2023/2/26 17:29.
  */
-public interface TinyLoadingCache<K, V> extends Cache<K, V>, Function<K, V> {
+public interface TinyLoadingCache<K, V> extends TinyCache<K, V> {
 
     V get(K var1);
 
