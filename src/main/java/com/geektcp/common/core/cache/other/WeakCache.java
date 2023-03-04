@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.cache;
+package com.geektcp.common.core.cache.other;
 
 import java.util.Map;
 import java.util.WeakHashMap;
