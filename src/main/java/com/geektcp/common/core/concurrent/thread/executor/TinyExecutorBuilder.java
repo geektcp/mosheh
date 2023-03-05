@@ -30,9 +30,9 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 /**
  * @author geektcp on 2023/2/6 22:44.
  */
-public class TinyExecutors {
+public class TinyExecutorBuilder {
 
-    private TinyExecutors() {
+    private TinyExecutorBuilder() {
 
     }
 

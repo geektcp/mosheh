@@ -19,10 +19,10 @@
 package com.geektcp.common.core.cache.loading.implement;
 
 
+import com.geektcp.common.core.cache.builder.loader.TinyLoader;
 import com.geektcp.common.core.cache.local.implement.SimpleCache;
 import com.geektcp.common.core.cache.builder.TinyCacheBuilder;
 import com.geektcp.common.core.cache.loading.InvalidateLoadingCache;
-import com.geektcp.common.core.cache.builder.loader.implement.TinyCacheLoader;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.HashMap;
@@ -33,21 +33,21 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author geektcp on 2023/2/26 18:28.
  */
-public class InvalidateLocalLoadingCache<K, V>  implements InvalidateLoadingCache<K, V> {
+public class InvalidateCache<K, V>  implements InvalidateLoadingCache<K, V> {
     private static final long serialVersionUID = 1L;
 
     private SimpleCache localCache = new SimpleCache();
     private TinyCacheBuilder builder;
-    private TinyCacheLoader cacheLoader;
+    private TinyLoader cacheLoader;
 
     private Map<Object, Object> cacheMap = new HashMap<>();
     private Map<Object, Long> expireTimeMap = new HashMap<>();
 
-    public InvalidateLocalLoadingCache() {
+    public InvalidateCache() {
 
     }
 
-    InvalidateLocalLoadingCache(TinyCacheBuilder<? super K, ? super V> builder, TinyCacheLoader<? super K, V> loader) {
+    InvalidateCache(TinyCacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
         this.builder = builder;
         this.cacheLoader = loader;
     }
@@ -67,7 +67,6 @@ public class InvalidateLocalLoadingCache<K, V>  implements InvalidateLoadingCach
     public Map<K, V> getAll(Iterable<? extends K> keys) {
         return null;
     }
-
 
     @Nullable
     @Override
@@ -105,11 +104,6 @@ public class InvalidateLocalLoadingCache<K, V>  implements InvalidateLoadingCach
     @Override
     public long size() {
         return 0;
-    }
-
-    @Override
-    public void cleanUp() {
-
     }
 
     @Override

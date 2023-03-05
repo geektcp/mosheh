@@ -18,17 +18,17 @@
 
 package com.geektcp.common.core.cache.local.implement;
 
+import com.geektcp.common.core.cache.local.AbstractCache;
 import com.geektcp.common.core.cache.local.InvalidateCache;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 /**
  * @author geektcp on 2023/2/26 17:50.
  */
-public class TinyCache<K, V> implements InvalidateCache<K, V> {
+public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCache<K, V> {
 
 
     public V putIfAbsent(K key, V value){
@@ -50,24 +50,27 @@ public class TinyCache<K, V> implements InvalidateCache<K, V> {
         return null;
     }
 
-
     @Override
     public void putAll(Map<? extends K, ? extends V> var1) {
+        // do noting
 
     }
 
     @Override
     public void invalidate(Object var1) {
+        // do noting
 
     }
 
     @Override
     public void invalidateAll(Iterable<?> var1) {
+        // do noting
 
     }
 
     @Override
     public void invalidateAll() {
+        // do noting
 
     }
 
@@ -77,32 +80,26 @@ public class TinyCache<K, V> implements InvalidateCache<K, V> {
     }
 
     @Override
-    public ConcurrentMap<K, V> asMap() {
-        return null;
-    }
-
-    @Override
-    public void cleanUp() {
-
-    }
-
-    @Override
     public boolean clear() {
         return false;
     }
 
+    @Override
     public boolean refresh(K key) {
         return false;
     }
 
+    @Override
     public V get(K key) {
         return null;
     }
 
+    @Override
     public boolean put(Object key, Object value) {
         return false;
     }
 
+    @Override
     public boolean delete(Object key) {
 
         return false;

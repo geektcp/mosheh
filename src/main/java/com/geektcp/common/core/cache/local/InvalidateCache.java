@@ -20,7 +20,6 @@ package com.geektcp.common.core.cache.local;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -42,7 +41,4 @@ public interface InvalidateCache<K, V> extends Cache<K, V> {
 
     long size();
 
-    ConcurrentMap<K, V> asMap();
-
-    void cleanUp();
 }

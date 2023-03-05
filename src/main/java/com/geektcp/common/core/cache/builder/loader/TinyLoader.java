@@ -16,35 +16,60 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.builder.loader.implement;
+package com.geektcp.common.core.cache.builder.loader;
 
-import com.geektcp.common.core.cache.builder.loader.CacheLoader;
+import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutor;
 import com.geektcp.common.core.exception.BaseException;
 import com.geektcp.common.core.util.Preconditions;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFutureTask;
+
 import java.util.Map;
-import java.util.concurrent.Executor;
+
 
 /**
  * @author geektcp on 2023/2/26 17:30.
  */
-public abstract class TinyCacheLoader<K, V> implements CacheLoader {
+public abstract class TinyLoader<K, V> implements CacheLoader {
 
-    protected TinyCacheLoader() {
+    protected TinyLoader() {
     }
 
-    public abstract V load(K var1);
+    /**
+     * generate value
+     *
+     * @param k key
+     * @return value
+     */
+    public abstract V load(K k);
 
     public Map<K, V> loadAll(Iterable<? extends K> keys) {
         throw new BaseException();
     }
 
-    public static <K, V> TinyCacheLoader<K, V> asyncReloading(final TinyCacheLoader<K, V> loader, final Executor executor) {
+    public ListenableFuture<V> reload(K key, V oldValue) {
+        Preconditions.checkNotNull(key);
+        Preconditions.checkNotNull(oldValue);
+        return Futures.immediateFuture(load(key));
+    }
+
+    public static <K, V> TinyLoader<K, V> asyncReloading(
+            final TinyLoader<K, V> loader, final TinyExecutor executor) {
         Preconditions.checkNotNull(loader);
         Preconditions.checkNotNull(executor);
-        return new TinyCacheLoader<K, V>() {
+        return new TinyLoader<K, V>() {
             @Override
             public V load(K key) {
                 return loader.load(key);
+            }
+
+            @Override
+            public ListenableFuture<V> reload(final K key, final V oldValue) {
+                ListenableFutureTask<V> task =
+                        ListenableFutureTask.create(() -> loader.reload(key, oldValue).get());
+                executor.execute(task);
+                return task;
             }
 
             @Override
@@ -53,17 +78,5 @@ public abstract class TinyCacheLoader<K, V> implements CacheLoader {
             }
         };
     }
-
-    public static final class InvalidCacheLoadException extends RuntimeException {
-        public InvalidCacheLoadException(String message) {
-            super(message);
-        }
-    }
-
-    public static final class UnsupportedLoadingOperationException extends UnsupportedOperationException {
-        UnsupportedLoadingOperationException() {
-        }
-    }
-
 
 }

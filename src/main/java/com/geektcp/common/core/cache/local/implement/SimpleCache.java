@@ -36,7 +36,7 @@ public class SimpleCache<K, V> implements Cache<K, V> {
 
     }
 
-    public  Object get(String key) {
+    public  V get(K key) {
         if (!cacheMap.containsKey(key)) {
             return null;
         }
@@ -89,10 +89,6 @@ public class SimpleCache<K, V> implements Cache<K, V> {
         return false;
     }
 
-    @Override
-    public V get(K key) {
-        return   cacheMap.getOrDefault(key, null);
-    }
 
     @Override
     public boolean delete(K key) {
