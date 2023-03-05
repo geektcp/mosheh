@@ -23,6 +23,7 @@ import com.geektcp.common.core.cache.builder.TinyCacheBuilder;
 import com.geektcp.common.core.cache.builder.loader.TinyLoader;
 import com.geektcp.common.core.cache.loading.InvalidateCache;
 import com.geektcp.common.core.cache.local.implement.SimpleCache;
+import com.geektcp.common.core.exception.BaseException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.HashMap;
@@ -34,14 +35,15 @@ import java.util.concurrent.ConcurrentMap;
  * @author geektcp on 2023/2/26 18:28.
  */
 public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
+
     private static final long serialVersionUID = 1L;
 
     private SimpleCache localCache = new SimpleCache();
     private TinyCacheBuilder builder;
     private TinyLoader cacheLoader;
 
-    private Map<Object, Object> cacheMap = new HashMap<>();
-    private Map<Object, Long> expireTimeMap = new HashMap<>();
+    private Map<K, V> cacheMap = new HashMap<>();
+    private Map<K, Long> expireTimeMap = new HashMap<>();
 
     public TinyLoadingCache() {
 
@@ -56,8 +58,8 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
         this.cacheLoader = loader;
     }
 
-    public Object get(Object k) {
-        return  cacheMap.get(k);
+    public V get(Object k) {
+        return cacheMap.get(k);
     }
 
     @Override
@@ -92,11 +94,11 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
         return false;
     }
 
-    public Object getUnchecked(Object key) {
+    public V getUnchecked(Object key) {
         try {
             return this.get(key);
-        } catch (Exception var3) {
-            throw new RuntimeException(var3.getCause());
+        } catch (Exception e) {
+            throw new BaseException(e);
         }
     }
 
@@ -115,25 +117,27 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
         return null;
     }
 
-
-
     @Override
     public void putAll(Map<? extends K, ? extends V> map) {
+        // do noting
 
     }
 
     @Override
     public void invalidate(Object o) {
+        // do noting
 
     }
 
     @Override
     public void invalidateAll(Iterable<?> iterable) {
+        // do noting
 
     }
 
     @Override
     public void invalidateAll() {
+        // do noting
 
     }
 
