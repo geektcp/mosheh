@@ -15,7 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.cache.other;
+package com.geektcp.common.core.cache.local.implement;
+
+import com.geektcp.common.core.cache.local.Cache;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,7 +26,7 @@ import java.util.Map;
 /**
  * @author geektcp on 2019/9/26.
  */
-public class SimpleCache<K, V> {
+public class SimpleCache<K, V> implements Cache<K, V> {
 
     private Map<K, V> cacheMap = new HashMap<>();
     private Map<K, Long> expireTimeMap = new HashMap<>();
@@ -44,8 +46,9 @@ public class SimpleCache<K, V> {
         return cacheMap.get(key);
     }
 
-    public void put(K key, V value) {
+    public boolean put(K key, V value) {
         cacheMap.put(key, value);
+        return true;
     }
 
     public  void put(final K key, V value, int millSeconds) {
@@ -74,4 +77,26 @@ public class SimpleCache<K, V> {
         return cacheMap.containsKey(key);
     }
 
+
+    @Override
+    public boolean clear() {
+        cacheMap.clear();
+        return false;
+    }
+
+    @Override
+    public boolean refresh(K key) {
+        return false;
+    }
+
+    @Override
+    public V get(K key) {
+        return   cacheMap.getOrDefault(key, null);
+    }
+
+    @Override
+    public boolean delete(K key) {
+        cacheMap.remove(key);
+        return true;
+    }
 }

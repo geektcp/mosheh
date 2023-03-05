@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.other;
+package com.geektcp.common.core.cache.local.implement;
 
-import com.geektcp.common.core.cache.ThyCache;
+import com.geektcp.common.core.cache.local.Cache;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,7 +26,7 @@ import java.util.Iterator;
 /**
  * @author geektcp on 2019/9/26.
  */
-public class LruCache<K, V> implements Iterable<K>, ThyCache {
+public class LruCache<K, V> implements Iterable<K>, Cache<K, V> {
 
     private Node head;
     private Node tail;
@@ -45,7 +45,6 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
         }
     }
 
-
     public LruCache(int maxSize) {
         this.maxSize = maxSize;
         this.map = new HashMap<>(maxSize * 4 / 3);
@@ -56,7 +55,6 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
         head.next = tail;
         tail.pre = head;
     }
-
 
     public V get(K key) {
         if (!map.containsKey(key)) {
@@ -70,7 +68,7 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
         return node.v;
     }
 
-    public void put(K key, V value) {
+    public boolean put(K key, V value) {
 
         if (map.containsKey(key)) {
             Node node = map.get(key);
@@ -85,6 +83,8 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
             Node toRemove = removeTail();
             map.remove(toRemove.k);
         }
+
+        return true;
     }
 
 
@@ -140,27 +140,17 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
     }
 
     @Override
-    public void clean() {
-
+    public boolean clear() {
+        return false;
     }
 
     @Override
-    public void refresh(String key) {
-
+    public boolean refresh(K key) {
+        return false;
     }
 
     @Override
-    public void put(String key, Object value) {
-
-    }
-
-    @Override
-    public Object get(String key) {
-        return null;
-    }
-
-    @Override
-    public void delete(String key) {
-
+    public boolean delete(K key) {
+        return false;
     }
 }

@@ -16,8 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.cache;
+package com.geektcp.common.core.cache.loading;
 
+
+import com.geektcp.common.core.cache.local.InvalidateCache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -26,15 +28,12 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author geektcp on 2023/2/26 17:29.
  */
-public interface TinyLoadingCache<K, V> extends TinyCache<K, V> {
-
-    V get(K var1);
+public interface InvalidateLoadingCache<K, V> extends InvalidateCache<K, V> {
 
     V getUnchecked(K var1);
 
     Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException;
 
-    void refresh(K var1);
 
     ConcurrentMap<K, V> asMap();
 }

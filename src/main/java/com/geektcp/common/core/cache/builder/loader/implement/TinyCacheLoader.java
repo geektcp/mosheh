@@ -16,8 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.loader;
+package com.geektcp.common.core.cache.builder.loader.implement;
 
+import com.geektcp.common.core.cache.builder.loader.CacheLoader;
+import com.geektcp.common.core.exception.BaseException;
 import com.geektcp.common.core.util.Preconditions;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -25,26 +27,28 @@ import java.util.concurrent.Executor;
 /**
  * @author geektcp on 2023/2/26 17:30.
  */
-public abstract class TinyCacheLoader<K, V> {
+public abstract class TinyCacheLoader<K, V> implements CacheLoader {
 
     protected TinyCacheLoader() {
     }
 
-    public abstract V load(K var1) throws Exception;
+    public abstract V load(K var1);
 
-    public Map<K, V> loadAll(Iterable<? extends K> keys) throws Exception {
-        throw new RuntimeException();
+    public Map<K, V> loadAll(Iterable<? extends K> keys) {
+        throw new BaseException();
     }
 
     public static <K, V> TinyCacheLoader<K, V> asyncReloading(final TinyCacheLoader<K, V> loader, final Executor executor) {
         Preconditions.checkNotNull(loader);
         Preconditions.checkNotNull(executor);
         return new TinyCacheLoader<K, V>() {
-            public V load(K key) throws Exception {
+            @Override
+            public V load(K key) {
                 return loader.load(key);
             }
 
-            public Map<K, V> loadAll(Iterable<? extends K> keys) throws Exception {
+            @Override
+            public Map<K, V> loadAll(Iterable<? extends K> keys) {
                 return loader.loadAll(keys);
             }
         };

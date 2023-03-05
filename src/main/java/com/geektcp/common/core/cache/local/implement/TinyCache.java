@@ -16,7 +16,9 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.cache;
+package com.geektcp.common.core.cache.local.implement;
+
+import com.geektcp.common.core.cache.local.InvalidateCache;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -26,14 +28,14 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author geektcp on 2023/2/26 17:50.
  */
-public class TinyLocalCache<K, V> implements TinyCache<K, V> {
+public class TinyCache<K, V> implements InvalidateCache<K, V> {
 
 
     public V putIfAbsent(K key, V value){
         return null;
     }
 
-    protected TinyLocalCache() {
+    protected TinyCache() {
         super();
     }
 
@@ -48,10 +50,6 @@ public class TinyLocalCache<K, V> implements TinyCache<K, V> {
         return null;
     }
 
-    @Override
-    public void put(K var1, V var2) {
-
-    }
 
     @Override
     public void putAll(Map<? extends K, ? extends V> var1) {
@@ -88,8 +86,25 @@ public class TinyLocalCache<K, V> implements TinyCache<K, V> {
 
     }
 
+    @Override
+    public boolean clear() {
+        return false;
+    }
 
-    public void refresh(K key) {
+    public boolean refresh(K key) {
+        return false;
+    }
 
+    public V get(K key) {
+        return null;
+    }
+
+    public boolean put(Object key, Object value) {
+        return false;
+    }
+
+    public boolean delete(Object key) {
+
+        return false;
     }
 }

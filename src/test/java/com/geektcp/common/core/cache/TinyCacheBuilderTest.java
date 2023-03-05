@@ -1,11 +1,11 @@
 package com.geektcp.common.core.cache;
 
-import com.geektcp.common.core.cache.tiny.*;
-import com.geektcp.common.core.cache.tiny.cache.TinyLoadingCache;
-import com.geektcp.common.core.cache.tiny.listener.TinyListener;
-import com.geektcp.common.core.cache.tiny.listener.TinyRemovalCause;
-import com.geektcp.common.core.cache.tiny.listener.TinyRemovalNotification;
-import com.geektcp.common.core.cache.tiny.loader.TinyCacheLoader;
+import com.geektcp.common.core.cache.builder.*;
+import com.geektcp.common.core.cache.loading.InvalidateLoadingCache;
+import com.geektcp.common.core.cache.builder.listener.TinyListener;
+import com.geektcp.common.core.cache.builder.listener.TinyRemovalCause;
+import com.geektcp.common.core.cache.builder.listener.TinyRemovalNotification;
+import com.geektcp.common.core.cache.builder.loader.implement.TinyCacheLoader;
 import com.geektcp.common.core.system.Sys;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class TinyCacheBuilderTest {
 
     @Test
     public void test() {
-        TinyLoadingCache<String, Integer> tinyLoadingCache = TinyCacheBuilder.newBuilder()
+        InvalidateLoadingCache<String, Integer> tinyLoadingCache = TinyCacheBuilder.newBuilder()
                 .refreshAfterWrite(7, TimeUnit.SECONDS)
                 .expireAfterWrite(5, TimeUnit.SECONDS)
                 .removalListener(localListener)

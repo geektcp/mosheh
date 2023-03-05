@@ -16,7 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.other;
+package com.geektcp.common.core.cache.local.implement;
+
+import com.geektcp.common.core.cache.local.AbstractCache;
+import com.geektcp.common.core.cache.local.Cache;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -25,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author geektcp on 2019/9/10.
  */
-public final class WeakCache<K, V> {
+public final class WeakCache<K, V> extends AbstractCache<K, V> implements Cache<K, V> {
 
     private final int size;
 
@@ -39,6 +42,7 @@ public final class WeakCache<K, V> {
         this.longTerm = new WeakHashMap<>(size);
     }
 
+    @Override
     public V get(K k) {
         V v = this.eden.get(k);
         if (v == null) {
@@ -49,12 +53,29 @@ public final class WeakCache<K, V> {
         return v;
     }
 
-    public void put(K k, V v) {
+    public boolean put(K k, V v) {
         if (this.eden.size() >= size) {
             this.longTerm.putAll(this.eden);
             this.eden.clear();
         }
         this.eden.put(k, v);
+        return true;
+    }
+
+    @Override
+    public boolean clear() {
+        return false;
+    }
+
+    @Override
+    public boolean refresh(K key) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(Object key) {
+
+        return false;
     }
 
 }

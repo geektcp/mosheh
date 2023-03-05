@@ -16,22 +16,43 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache;
-
+package com.geektcp.common.core.cache.builder.listener;
 
 /**
- * @author geektcp on 2019/11/30 0:59.
+ * @author geektcp on 2023/2/26 17:18.
  */
-public interface ThyCache {
+public enum TinyRemovalCause {
 
-    void clean();
+    EXPLICIT {
+        boolean wasEvicted() {
+            return false;
+        }
+    },
+    REPLACED {
+        boolean wasEvicted() {
+            return false;
+        }
+    },
+    COLLECTED {
+        boolean wasEvicted() {
+            return true;
+        }
+    },
+    EXPIRED {
+        boolean wasEvicted() {
+            return true;
+        }
+    },
+    SIZE {
+        boolean wasEvicted() {
+            return true;
+        }
+    };
 
-    void refresh(String key);
+    private TinyRemovalCause() {
+    }
 
-    void put(String key, Object value);
+    abstract boolean wasEvicted();
 
-    Object get(String key);
-
-    void delete(String key);
 
 }

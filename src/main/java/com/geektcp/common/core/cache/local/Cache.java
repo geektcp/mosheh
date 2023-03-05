@@ -16,43 +16,22 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.listener;
+package com.geektcp.common.core.cache.local;
+
 
 /**
- * @author geektcp on 2023/2/26 17:18.
+ * @author geektcp on 2019/11/30 0:59.
  */
-public enum TinyRemovalCause {
+public interface Cache<K, V> {
 
-    EXPLICIT {
-        boolean wasEvicted() {
-            return false;
-        }
-    },
-    REPLACED {
-        boolean wasEvicted() {
-            return false;
-        }
-    },
-    COLLECTED {
-        boolean wasEvicted() {
-            return true;
-        }
-    },
-    EXPIRED {
-        boolean wasEvicted() {
-            return true;
-        }
-    },
-    SIZE {
-        boolean wasEvicted() {
-            return true;
-        }
-    };
+    boolean clear();
 
-    private TinyRemovalCause() {
-    }
+    boolean refresh(K key);
 
-    abstract boolean wasEvicted();
+    V get(K key);
 
+    boolean delete(K key);
+
+    boolean put(K k, V v);
 
 }

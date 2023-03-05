@@ -16,12 +16,12 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny;
+package com.geektcp.common.core.cache.builder;
 
-import com.geektcp.common.core.cache.tiny.cache.TinyLoadingCache;
-import com.geektcp.common.core.cache.tiny.cache.TinyLocalLoadingCache;
-import com.geektcp.common.core.cache.tiny.listener.TinyListener;
-import com.geektcp.common.core.cache.tiny.loader.TinyCacheLoader;
+import com.geektcp.common.core.cache.loading.InvalidateLoadingCache;
+import com.geektcp.common.core.cache.loading.implement.InvalidateLocalLoadingCache;
+import com.geektcp.common.core.cache.builder.listener.TinyListener;
+import com.geektcp.common.core.cache.builder.loader.implement.TinyCacheLoader;
 import com.geektcp.common.core.util.Preconditions;
 
 import java.util.concurrent.TimeUnit;
@@ -67,9 +67,9 @@ public class TinyCacheBuilder<K, V>  {
         return this;
     }
 
-    public <K1 extends K, V1 extends V> TinyLoadingCache<K1, V1> build(TinyCacheLoader<? super K1, V1> loader) {
+    public <K1 extends K, V1 extends V> InvalidateLoadingCache<K1, V1> build(TinyCacheLoader<? super K1, V1> loader) {
         this.checkWeightWithWeigher();
-        return new TinyLocalLoadingCache<>();
+        return new InvalidateLocalLoadingCache<>();
     }
 
     private void checkWeightWithWeigher() {
