@@ -16,7 +16,8 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.local;
+package com.geektcp.common.core.cache.loading;
+
 
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -25,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author geektcp  on 2021/5/6 16:59.
  */
-public interface InvalidateCache<K, V> extends Cache<K, V> {
+public interface InvalidateCache<K, V> extends LoadingCache<K, V> {
 
     V getIfPresent( Object var1);
 

@@ -19,10 +19,10 @@
 package com.geektcp.common.core.cache.loading.implement;
 
 
-import com.geektcp.common.core.cache.builder.loader.TinyLoader;
-import com.geektcp.common.core.cache.local.implement.SimpleCache;
 import com.geektcp.common.core.cache.builder.TinyCacheBuilder;
-import com.geektcp.common.core.cache.loading.InvalidateLoadingCache;
+import com.geektcp.common.core.cache.builder.loader.TinyLoader;
+import com.geektcp.common.core.cache.loading.InvalidateCache;
+import com.geektcp.common.core.cache.local.implement.SimpleCache;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.HashMap;
@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author geektcp on 2023/2/26 18:28.
  */
-public class InvalidateCache<K, V>  implements InvalidateLoadingCache<K, V> {
+public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
     private static final long serialVersionUID = 1L;
 
     private SimpleCache localCache = new SimpleCache();
@@ -43,17 +43,53 @@ public class InvalidateCache<K, V>  implements InvalidateLoadingCache<K, V> {
     private Map<Object, Object> cacheMap = new HashMap<>();
     private Map<Object, Long> expireTimeMap = new HashMap<>();
 
-    public InvalidateCache() {
+    public TinyLoadingCache() {
 
     }
 
-    InvalidateCache(TinyCacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
+    public TinyLoadingCache(TinyLoader<? super K, V> loader) {
+        this.cacheLoader = loader;
+    }
+
+    public TinyLoadingCache(TinyCacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
         this.builder = builder;
         this.cacheLoader = loader;
     }
 
     public Object get(Object k) {
         return  cacheMap.get(k);
+    }
+
+    @Override
+    public boolean put(K k, V v) {
+        cacheMap.put(k,v);
+        return true;
+    }
+
+    @Override
+    public long size() {
+        return 0;
+    }
+
+    @Override
+    public ConcurrentMap<K, V> asMap() {
+        return null;
+    }
+
+    @Override
+    public boolean clear() {
+        return false;
+    }
+
+    @Override
+    public boolean refresh(Object key) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(Object key) {
+
+        return false;
     }
 
     public Object getUnchecked(Object key) {
@@ -101,36 +137,6 @@ public class InvalidateCache<K, V>  implements InvalidateLoadingCache<K, V> {
 
     }
 
-    @Override
-    public long size() {
-        return 0;
-    }
-
-    @Override
-    public ConcurrentMap<K, V> asMap() {
-        return null;
-    }
-
-    @Override
-    public boolean clear() {
-        return false;
-    }
-
-    @Override
-    public boolean refresh(Object key) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Object key) {
-
-        return false;
-    }
 
 
-    @Override
-    public boolean put(K k, V v) {
-        cacheMap.put(k,v);
-        return true;
-    }
 }

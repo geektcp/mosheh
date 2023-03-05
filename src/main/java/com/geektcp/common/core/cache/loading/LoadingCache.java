@@ -16,8 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.local;
+package com.geektcp.common.core.cache.loading;
 
+
+import com.geektcp.common.core.cache.local.Cache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -26,7 +28,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author geektcp on 2023/2/26 17:26.
  */
-public interface LoadingCache<K, V> extends InvalidateCache<K, V> {
+public interface LoadingCache<K, V> extends Cache<K, V> {
 
     V getUnchecked(K var1);
 

@@ -18,11 +18,12 @@
 
 package com.geektcp.common.core.cache.local.implement;
 
+import com.geektcp.common.core.cache.loading.InvalidateCache;
 import com.geektcp.common.core.cache.local.AbstractCache;
-import com.geektcp.common.core.cache.local.InvalidateCache;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -72,6 +73,21 @@ public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCa
     public void invalidateAll() {
         // do noting
 
+    }
+
+    @Override
+    public V getUnchecked(K var1) {
+        return null;
+    }
+
+    @Override
+    public Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException {
+        return null;
+    }
+
+    @Override
+    public ConcurrentMap<K, V> asMap() {
+        return null;
     }
 
     @Override
