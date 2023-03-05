@@ -22,7 +22,7 @@ package com.geektcp.common.core.cache.loading.implement;
 import com.geektcp.common.core.cache.builder.TinyCacheBuilder;
 import com.geektcp.common.core.cache.builder.loader.TinyLoader;
 import com.geektcp.common.core.cache.loading.InvalidateCache;
-import com.geektcp.common.core.cache.local.implement.SimpleCache;
+import com.geektcp.common.core.cache.local.implement.TinyCache;
 import com.geektcp.common.core.exception.BaseException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -36,35 +36,33 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
 
-    private static final long serialVersionUID = 1L;
-
-    private SimpleCache localCache = new SimpleCache();
     private TinyCacheBuilder builder;
-    private TinyLoader cacheLoader;
+    private TinyLoader<K, V> loader;
 
-    private Map<K, V> cacheMap = new HashMap<>();
+    private TinyCache<K, V> tinyCache = new TinyCache<>();
     private Map<K, Long> expireTimeMap = new HashMap<>();
+
 
     public TinyLoadingCache() {
 
     }
 
-    public TinyLoadingCache(TinyLoader<? super K, V> loader) {
-        this.cacheLoader = loader;
+    public TinyLoadingCache(TinyLoader<K, V> loader) {
+        this.loader = loader;
     }
 
-    public TinyLoadingCache(TinyCacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
+    public TinyLoadingCache(TinyCacheBuilder<? super K, ? super V> builder, TinyLoader<K, V> loader) {
         this.builder = builder;
-        this.cacheLoader = loader;
+        this.loader = loader;
     }
 
-    public V get(Object k) {
-        return cacheMap.get(k);
+    public V get(K k) {
+        return tinyCache.get(k);
     }
 
     @Override
     public boolean put(K k, V v) {
-        cacheMap.put(k,v);
+        tinyCache.put(k,v);
         return true;
     }
 
@@ -84,17 +82,16 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
     }
 
     @Override
-    public boolean refresh(Object key) {
+    public boolean refresh(K k) {
         return false;
     }
 
     @Override
-    public boolean delete(Object key) {
-
+    public boolean delete(K k) {
         return false;
     }
 
-    public V getUnchecked(Object key) {
+    public V getUnchecked(K key) {
         try {
             return this.get(key);
         } catch (Exception e) {

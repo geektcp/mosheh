@@ -36,7 +36,7 @@ public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCa
         return null;
     }
 
-    protected TinyCache() {
+    public TinyCache() {
         super();
     }
 
