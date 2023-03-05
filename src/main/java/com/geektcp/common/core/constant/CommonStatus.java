@@ -42,7 +42,7 @@ public enum CommonStatus implements Status {
     JWT_PARSE_TOKEN_FAIL(4005, "pare token failed"),
     JWT_USER_INVALID(4006, "user invalid"),
     JWT_USER_ENABLED(4007, "user is forbid ！"),
-    JWT_OFFLINE(4008, "login at other env！"),
+    JWT_OFFLINE(4008, "login at local env！"),
     UPLOAD_FILE_TYPE_ERROR(4009, "file type error"),
     UPLOAD_FILE_ERROR(4010, "save file error"),
 

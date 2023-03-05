@@ -16,22 +16,64 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.other;
+package com.geektcp.common.core.cache.local.implement;
 
-import com.geektcp.common.core.cache.ThyCache;
+import com.geektcp.common.core.cache.local.Cache;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * @author geektcp on 2019/9/26.
  */
-public class LruCache<K, V> implements Iterable<K>, ThyCache {
+public class LruCache<K, V> implements Cache<K, V> {
 
     private Node head;
     private Node tail;
     private HashMap<K, Node> map;
     private int maxSize;
+
+    public LruCache(){
+        head = new Node();
+    }
+
+    public Iterator<K> iterator() {
+        return new Iterator<K>() {
+            private Node cur = head.next;
+
+            public boolean hasNext() {
+                return cur != tail;
+            }
+
+            public K next() {
+                Node node = cur;
+                if(Objects.isNull(node)){
+                    throw new NoSuchElementException();
+                }
+                cur = cur.next;
+                return node.k;
+            }
+        };
+    }
+
+    @Override
+    public boolean clear() {
+
+        return false;
+    }
+
+    @Override
+    public boolean refresh(K key) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(K key) {
+        return false;
+    }
+
 
     private class Node {
         Node pre;
@@ -43,8 +85,10 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
             this.k = k;
             this.v = v;
         }
-    }
 
+        public Node() {
+        }
+    }
 
     public LruCache(int maxSize) {
         this.maxSize = maxSize;
@@ -56,7 +100,6 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
         head.next = tail;
         tail.pre = head;
     }
-
 
     public V get(K key) {
         if (!map.containsKey(key)) {
@@ -70,7 +113,7 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
         return node.v;
     }
 
-    public void put(K key, V value) {
+    public boolean put(K key, V value) {
 
         if (map.containsKey(key)) {
             Node node = map.get(key);
@@ -85,6 +128,8 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
             Node toRemove = removeTail();
             map.remove(toRemove.k);
         }
+
+        return true;
     }
 
 
@@ -120,47 +165,4 @@ public class LruCache<K, V> implements Iterable<K>, ThyCache {
         return node;
     }
 
-    @Override
-    public Iterator<K> iterator() {
-        return new Iterator<K>() {
-            private Node cur = head.next;
-
-            @Override
-            public boolean hasNext() {
-                return cur != tail;
-            }
-
-            @Override
-            public K next() {
-                Node node = cur;
-                cur = cur.next;
-                return node.k;
-            }
-        };
-    }
-
-    @Override
-    public void clean() {
-
-    }
-
-    @Override
-    public void refresh(String key) {
-
-    }
-
-    @Override
-    public void put(String key, Object value) {
-
-    }
-
-    @Override
-    public Object get(String key) {
-        return null;
-    }
-
-    @Override
-    public void delete(String key) {
-
-    }
 }

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.listener;
+package com.geektcp.common.core.cache.builder.listener;
 
 import com.geektcp.common.core.util.Preconditions;
 import org.checkerframework.checker.nullness.qual.Nullable;

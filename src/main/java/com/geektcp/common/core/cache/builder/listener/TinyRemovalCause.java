@@ -16,27 +16,43 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.cache;
-
-import com.google.common.base.Function;
-import com.google.common.cache.Cache;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
+package com.geektcp.common.core.cache.builder.listener;
 
 /**
- * @author geektcp on 2023/2/26 17:29.
+ * @author geektcp on 2023/2/26 17:18.
  */
-public interface TinyLoadingCache<K, V> extends Cache<K, V>, Function<K, V> {
+public enum TinyRemovalCause {
 
-    V get(K var1);
+    EXPLICIT {
+        boolean wasEvicted() {
+            return false;
+        }
+    },
+    REPLACED {
+        boolean wasEvicted() {
+            return false;
+        }
+    },
+    COLLECTED {
+        boolean wasEvicted() {
+            return true;
+        }
+    },
+    EXPIRED {
+        boolean wasEvicted() {
+            return true;
+        }
+    },
+    SIZE {
+        boolean wasEvicted() {
+            return true;
+        }
+    };
 
-    V getUnchecked(K var1);
+    private TinyRemovalCause() {
+    }
 
-    Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException;
+    abstract boolean wasEvicted();
 
-    void refresh(K var1);
 
-    ConcurrentMap<K, V> asMap();
 }

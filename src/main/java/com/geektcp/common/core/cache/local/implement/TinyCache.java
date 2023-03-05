@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.tiny.cache;
+package com.geektcp.common.core.cache.local.implement;
 
-import com.google.common.cache.CacheStats;
-import com.google.common.collect.ImmutableMap;
+import com.geektcp.common.core.cache.loading.InvalidateCache;
+import com.geektcp.common.core.cache.local.AbstractCache;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -29,14 +29,14 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author geektcp on 2023/2/26 17:50.
  */
-public class TinyLocalCache<K, V> implements TinyCache<K, V> {
+public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCache<K, V> {
 
 
     public V putIfAbsent(K key, V value){
         return null;
     }
 
-    protected TinyLocalCache() {
+    public TinyCache() {
         super();
     }
 
@@ -52,42 +52,36 @@ public class TinyLocalCache<K, V> implements TinyCache<K, V> {
     }
 
     @Override
-    public ImmutableMap<K, V> getAllPresent(Iterable<?> var1) {
-        return null;
-    }
-
-    @Override
-    public void put(K var1, V var2) {
-
-    }
-
-    @Override
     public void putAll(Map<? extends K, ? extends V> var1) {
+        // do noting
 
     }
 
     @Override
     public void invalidate(Object var1) {
+        // do noting
 
     }
 
     @Override
     public void invalidateAll(Iterable<?> var1) {
+        // do noting
 
     }
 
     @Override
     public void invalidateAll() {
+        // do noting
 
     }
 
     @Override
-    public long size() {
-        return 0;
+    public V getUnchecked(K var1) {
+        return null;
     }
 
     @Override
-    public CacheStats stats() {
+    public Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException {
         return null;
     }
 
@@ -97,12 +91,33 @@ public class TinyLocalCache<K, V> implements TinyCache<K, V> {
     }
 
     @Override
-    public void cleanUp() {
-
+    public long size() {
+        return 0;
     }
 
+    @Override
+    public boolean clear() {
+        return false;
+    }
 
-    public void refresh(K key) {
+    @Override
+    public boolean refresh(K key) {
+        return false;
+    }
 
+    @Override
+    public V get(K key) {
+        return null;
+    }
+
+    @Override
+    public boolean put(Object key, Object value) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(Object key) {
+
+        return false;
     }
 }

@@ -18,7 +18,6 @@
 package com.geektcp.common.core.system;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;

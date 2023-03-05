@@ -16,22 +16,30 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache;
+package com.geektcp.common.core.cache.loading;
 
+
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 /**
- * @author geektcp on 2019/11/30 0:59.
+ * @author geektcp  on 2021/5/6 16:59.
  */
-public interface ThyCache {
+public interface InvalidateCache<K, V> extends LoadingCache<K, V> {
 
-    void clean();
+    V getIfPresent( Object var1);
 
-    void refresh(String key);
+    V get(K var1, Callable<? extends V> var2) throws ExecutionException;
 
-    void put(String key, Object value);
+    void putAll(Map<? extends K, ? extends V> var1);
 
-    Object get(String key);
+    void invalidate(Object var1);
 
-    void delete(String key);
+    void invalidateAll(Iterable<?> var1);
+
+    void invalidateAll();
+
+    long size();
 
 }

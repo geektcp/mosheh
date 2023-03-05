@@ -57,7 +57,7 @@ public class ThyExecutor {
     }
 
     public void init() {
-        tinyExecutor = TinyExecutors.newFixedThreadPool(poolSize);
+        tinyExecutor = TinyExecutorBuilder.newFixedThreadPool(poolSize);
     }
 
     public static ThyExecutor getInstance() {
