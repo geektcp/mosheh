@@ -16,14 +16,30 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.builder.listener;
+package com.geektcp.common.core.cache.tiny.loading;
 
+
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 /**
- * @author geektcp on 2023/2/26 16:51.
+ * @author geektcp  on 2021/5/6 16:59.
  */
-public interface TinyListener<K, V> {
+public interface InvalidateCache<K, V> extends LoadingCache<K, V> {
 
-    void onRemoval(TinyRemovalNotification<K, V> var1);
+    V getIfPresent( Object var1);
+
+    V get(K var1, Callable<? extends V> var2) throws ExecutionException;
+
+    void putAll(Map<? extends K, ? extends V> var1);
+
+    void invalidate(Object var1);
+
+    void invalidateAll(Iterable<?> var1);
+
+    void invalidateAll();
+
+    long size();
 
 }

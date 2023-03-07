@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.core.cache.local.implement;
+package com.geektcp.common.core.cache.common;
 
-import com.geektcp.common.core.cache.local.Cache;
+import com.geektcp.common.core.cache.Cache;
 
 import java.util.HashMap;
 import java.util.Iterator;
