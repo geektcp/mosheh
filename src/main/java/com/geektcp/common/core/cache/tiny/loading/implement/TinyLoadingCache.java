@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.loading.implement;
+package com.geektcp.common.core.cache.tiny.loading.implement;
 
 
-import com.geektcp.common.core.cache.builder.TinyCacheBuilder;
-import com.geektcp.common.core.cache.builder.loader.TinyLoader;
-import com.geektcp.common.core.cache.loading.InvalidateCache;
-import com.geektcp.common.core.cache.local.implement.TinyCache;
+import com.geektcp.common.core.cache.tiny.CacheBuilder;
+import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
+import com.geektcp.common.core.cache.tiny.loading.InvalidateCache;
+import com.geektcp.common.core.cache.tiny.local.TinyCache;
 import com.geektcp.common.core.exception.BaseException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
 
-    private TinyCacheBuilder builder;
+    private CacheBuilder builder;
     private TinyLoader<K, V> loader;
 
     private TinyCache<K, V> tinyCache = new TinyCache<>();
@@ -51,7 +51,7 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
         this.loader = loader;
     }
 
-    public TinyLoadingCache(TinyCacheBuilder<? super K, ? super V> builder, TinyLoader<K, V> loader) {
+    public TinyLoadingCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<K, V> loader) {
         this.builder = builder;
         this.loader = loader;
     }
@@ -62,8 +62,7 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
 
     @Override
     public boolean put(K k, V v) {
-        tinyCache.put(k,v);
-        return true;
+        return tinyCache.put(k,v);
     }
 
     @Override

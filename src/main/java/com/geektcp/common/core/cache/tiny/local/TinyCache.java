@@ -16,12 +16,14 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.local.implement;
+package com.geektcp.common.core.cache.tiny.local;
 
-import com.geektcp.common.core.cache.loading.InvalidateCache;
-import com.geektcp.common.core.cache.local.AbstractCache;
+import com.geektcp.common.core.cache.tiny.loading.InvalidateCache;
+import com.geektcp.common.core.cache.AbstractCache;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
@@ -31,15 +33,16 @@ import java.util.concurrent.ExecutionException;
  */
 public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCache<K, V> {
 
+    private Map<K, V> innerCache = new HashMap<>();
 
     public V putIfAbsent(K key, V value){
         return null;
     }
 
+
     public TinyCache() {
         super();
     }
-
 
     @Override
     public V getIfPresent(Object var1) {
@@ -92,32 +95,34 @@ public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCa
 
     @Override
     public long size() {
-        return 0;
+        return innerCache.size();
     }
 
     @Override
     public boolean clear() {
+        innerCache.clear();
+        return true;
+    }
+
+    @Override
+    public boolean refresh(K k) {
         return false;
     }
 
     @Override
-    public boolean refresh(K key) {
-        return false;
+    public V get(K k) {
+        return innerCache.get(k);
     }
 
     @Override
-    public V get(K key) {
-        return null;
+    public boolean put(K k, V v) {
+         innerCache.put(k, v);
+         return true;
     }
 
     @Override
-    public boolean put(Object key, Object value) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Object key) {
-
+    public boolean delete(K k) {
+        innerCache.remove(k);
         return false;
     }
 }

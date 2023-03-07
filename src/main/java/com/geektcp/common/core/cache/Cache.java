@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.local;
+package com.geektcp.common.core.cache;
 
 
 /**

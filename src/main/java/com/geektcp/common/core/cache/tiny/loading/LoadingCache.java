@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.loading;
+package com.geektcp.common.core.cache.tiny.loading;
 
 
-import com.geektcp.common.core.cache.local.Cache;
+import com.geektcp.common.core.cache.Cache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;

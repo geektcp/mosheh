@@ -1,4 +1,6 @@
-package com.geektcp.common.core.cache.local;
+package com.geektcp.common.core.cache;
+
+import com.geektcp.common.core.cache.Cache;
 
 /**
  * @author geektcp on 2023/3/5 15:13.

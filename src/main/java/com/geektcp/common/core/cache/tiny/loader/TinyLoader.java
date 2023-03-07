@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.builder.loader;
+package com.geektcp.common.core.cache.tiny.loader;
 
 import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutor;
 import com.geektcp.common.core.exception.BaseException;

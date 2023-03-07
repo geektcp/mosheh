@@ -1,11 +1,11 @@
 package com.geektcp.common.core.cache;
 
-import com.geektcp.common.core.cache.builder.*;
-import com.geektcp.common.core.cache.builder.loader.TinyLoader;
-import com.geektcp.common.core.cache.loading.InvalidateLoadingCache;
-import com.geektcp.common.core.cache.builder.listener.TinyListener;
-import com.geektcp.common.core.cache.builder.listener.TinyRemovalCause;
-import com.geektcp.common.core.cache.builder.listener.TinyRemovalNotification;
+import com.geektcp.common.core.cache.tiny.CacheBuilder;
+import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
+import com.geektcp.common.core.cache.tiny.listener.TinyListener;
+import com.geektcp.common.core.cache.tiny.listener.TinyRemovalCause;
+import com.geektcp.common.core.cache.tiny.listener.TinyRemovalNotification;
+import com.geektcp.common.core.cache.tiny.loading.LoadingCache;
 import com.geektcp.common.core.concurrent.thread.executor.TinyExecutorBuilder;
 import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutor;
 import com.geektcp.common.core.generator.IdGenerator;
@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author geektcp on 2023/2/26 16:27.
  */
-public class TinyCacheBuilderTest {
+public class CacheBuilderTest {
 
     private static TinyListener<String, Long> localListener = new TinyListener<String, Long>() {
         @Override
@@ -45,7 +45,7 @@ public class TinyCacheBuilderTest {
 
     @Test
     public void test() {
-        InvalidateLoadingCache<String, Long> tinyLoadingCache = TinyCacheBuilder.newBuilder()
+        LoadingCache<String, Long> loadingCache = CacheBuilder.newBuilder()
                 .refreshAfterWrite(7, TimeUnit.SECONDS)
                 .expireAfterWrite(5, TimeUnit.SECONDS)
                 .removalListener(localListener)
@@ -56,8 +56,9 @@ public class TinyCacheBuilderTest {
                     }
                 });
 
-        tinyLoadingCache.put("a", 1L);
-        Sys.p(tinyLoadingCache.get("a"));
+        loadingCache.put("a", 1L);
+        Long v = loadingCache.get("a");
+        Sys.p(v);
 
 
         Assert.assertTrue(true);

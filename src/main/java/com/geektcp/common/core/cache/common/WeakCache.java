@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.local.implement;
+package com.geektcp.common.core.cache.common;
 
-import com.geektcp.common.core.cache.local.AbstractCache;
-import com.geektcp.common.core.cache.local.Cache;
+import com.geektcp.common.core.cache.AbstractCache;
+import com.geektcp.common.core.cache.Cache;
 
 import java.util.Map;
 import java.util.WeakHashMap;

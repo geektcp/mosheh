@@ -16,30 +16,43 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.core.cache.loading;
-
-
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
+package com.geektcp.common.core.cache.tiny.listener;
 
 /**
- * @author geektcp  on 2021/5/6 16:59.
+ * @author geektcp on 2023/2/26 17:18.
  */
-public interface InvalidateCache<K, V> extends LoadingCache<K, V> {
+public enum TinyRemovalCause {
 
-    V getIfPresent( Object var1);
+    EXPLICIT {
+        boolean wasEvicted() {
+            return false;
+        }
+    },
+    REPLACED {
+        boolean wasEvicted() {
+            return false;
+        }
+    },
+    COLLECTED {
+        boolean wasEvicted() {
+            return true;
+        }
+    },
+    EXPIRED {
+        boolean wasEvicted() {
+            return true;
+        }
+    },
+    SIZE {
+        boolean wasEvicted() {
+            return true;
+        }
+    };
 
-    V get(K var1, Callable<? extends V> var2) throws ExecutionException;
+    private TinyRemovalCause() {
+    }
 
-    void putAll(Map<? extends K, ? extends V> var1);
+    abstract boolean wasEvicted();
 
-    void invalidate(Object var1);
-
-    void invalidateAll(Iterable<?> var1);
-
-    void invalidateAll();
-
-    long size();
 
 }
