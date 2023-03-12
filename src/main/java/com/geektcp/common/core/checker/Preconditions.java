@@ -1,4 +1,4 @@
-package com.geektcp.common.core.cheker;
+package com.geektcp.common.core.checker;
 
 import com.geektcp.common.core.system.Sys;
 import org.checkerframework.checker.nullness.qual.Nullable;

@@ -18,7 +18,7 @@
 
 package com.geektcp.common.core.cache.tiny.listener;
 
-import com.geektcp.common.core.cheker.Preconditions;
+import com.geektcp.common.core.checker.Preconditions;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.AbstractMap;

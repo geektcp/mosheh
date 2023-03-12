@@ -18,9 +18,7 @@
 
 package com.geektcp.common.core.cache.tiny.loader;
 
-import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutor;
 import com.geektcp.common.core.exception.BaseException;
-import com.geektcp.common.core.cheker.Preconditions;
 
 import java.util.Map;
 

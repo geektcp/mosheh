@@ -18,9 +18,12 @@
 
 package com.geektcp.common.core.cache.tiny.local;
 
+import com.geektcp.common.core.cache.Store;
 import com.geektcp.common.core.cache.tiny.CacheBuilder;
 import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.core.cache.AbstractCache;
+import com.geektcp.common.core.cache.tiny.storage.CacheTree;
+import com.geektcp.common.core.cache.tiny.storage.NodeKey;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +33,7 @@ import java.util.Map;
  */
 public class TinyCache<K, V> extends AbstractCache<K, V> {
 
-    private Map<K, V> innerCache = new HashMap<>();
+    private Store<NodeKey, V> cacheTree;
 
     private Map<K, Long> expireTimeMap = new HashMap<>();
 
@@ -49,9 +52,14 @@ public class TinyCache<K, V> extends AbstractCache<K, V> {
 
     }
 
+
+    private void init() {
+        cacheTree = new CacheTree<>();
+    }
+
     @Override
     public boolean clear() {
-        innerCache.clear();
+        cacheTree.clear();
         return true;
     }
 
@@ -62,18 +70,18 @@ public class TinyCache<K, V> extends AbstractCache<K, V> {
 
     @Override
     public V get(K k) {
-        return innerCache.get(k);
+        return cacheTree.fetch(new NodeKey<>(k));
     }
 
     @Override
     public boolean put(K k, V v) {
-        innerCache.put(k, v);
+        cacheTree.put(new NodeKey<>(k), v);
         return true;
     }
 
     @Override
     public boolean delete(K k) {
-        innerCache.remove(k);
+        cacheTree.delete(new NodeKey<>(k));
         return false;
     }
 }

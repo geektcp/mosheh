@@ -56,12 +56,12 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
 
     /**
-     *
-     * //      node                                       x
-     * //     /    \              left                  /    \
-     * //    T1     x           --------->            node    T3
-     * //         /   \                              /    \
-     * //       T2     T3                           T1    T2
+     *  look at x
+     *       node                                       x
+     *      /    \              left                  /    \
+     *     T1     x           --------->            node    T3
+     *          /   \                              /    \
+     *        T2     T3                           T1    T2
      *
      * @param node
      * @return
@@ -79,12 +79,12 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
 
     /**
-     *
-     * //      node                                       x
-     * //     /    \              right                 /    \
-     * //    x     T2           --------->             y     node
-     * //  /  \                                             /    \
-     * // y   T1                                           T1    T2
+     *  look at x
+     *       node                                       x
+     *      /    \              right                 /    \
+     *     x     T2           --------->             y     node
+     *   /  \                                             /    \
+     *  y   T1                                           T1    T2
      *
      * @param node
      * @return node
