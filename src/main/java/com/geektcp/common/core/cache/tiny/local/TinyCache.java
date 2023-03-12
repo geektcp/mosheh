@@ -18,84 +18,35 @@
 
 package com.geektcp.common.core.cache.tiny.local;
 
-import com.geektcp.common.core.cache.tiny.loading.InvalidateCache;
+import com.geektcp.common.core.cache.tiny.CacheBuilder;
+import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.core.cache.AbstractCache;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author geektcp on 2023/2/26 17:50.
  */
-public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCache<K, V> {
+public class TinyCache<K, V> extends AbstractCache<K, V> {
 
     private Map<K, V> innerCache = new HashMap<>();
 
-    public V putIfAbsent(K key, V value){
+    private Map<K, Long> expireTimeMap = new HashMap<>();
+
+    public V putIfAbsent(K key, V value) {
         return null;
     }
 
 
     public TinyCache() {
-        super();
-    }
-
-    @Override
-    public V getIfPresent(Object var1) {
-        return null;
-    }
-
-    @Override
-    public V get(K var1, Callable<? extends V> var2) throws ExecutionException {
-        return null;
-    }
-
-    @Override
-    public void putAll(Map<? extends K, ? extends V> var1) {
-        // do noting
+        // build complex cache
 
     }
 
-    @Override
-    public void invalidate(Object var1) {
-        // do noting
+    public TinyCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
 
-    }
 
-    @Override
-    public void invalidateAll(Iterable<?> var1) {
-        // do noting
-
-    }
-
-    @Override
-    public void invalidateAll() {
-        // do noting
-
-    }
-
-    @Override
-    public V getUnchecked(K var1) {
-        return null;
-    }
-
-    @Override
-    public Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException {
-        return null;
-    }
-
-    @Override
-    public ConcurrentMap<K, V> asMap() {
-        return null;
-    }
-
-    @Override
-    public long size() {
-        return innerCache.size();
     }
 
     @Override
@@ -116,8 +67,8 @@ public class TinyCache<K, V> extends AbstractCache<K, V> implements InvalidateCa
 
     @Override
     public boolean put(K k, V v) {
-         innerCache.put(k, v);
-         return true;
+        innerCache.put(k, v);
+        return true;
     }
 
     @Override

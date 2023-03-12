@@ -21,58 +21,44 @@ package com.geektcp.common.core.cache.tiny.loading.implement;
 
 import com.geektcp.common.core.cache.tiny.CacheBuilder;
 import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
-import com.geektcp.common.core.cache.tiny.loading.InvalidateCache;
+import com.geektcp.common.core.cache.tiny.loading.LoadingCache;
 import com.geektcp.common.core.cache.tiny.local.TinyCache;
-import com.geektcp.common.core.exception.BaseException;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author geektcp on 2023/2/26 18:28.
  */
-public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
+public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable {
+
+    private TinyCache<K, V> tinyCache;
 
     private CacheBuilder builder;
-    private TinyLoader<K, V> loader;
+    private TinyLoader<? super K, V> loader;
 
-    private TinyCache<K, V> tinyCache = new TinyCache<>();
     private Map<K, Long> expireTimeMap = new HashMap<>();
 
+    public TinyLoadingCache(TinyCache<K, V> tinyCache) {
+        this.tinyCache = tinyCache;
+    }
 
-    public TinyLoadingCache() {
-
+    public TinyLoadingCache(TinyCache<K, V> tinyCache, TinyLoader<K, V> loader) {
+        this.tinyCache = tinyCache;
+        this.loader = loader;
     }
 
     public TinyLoadingCache(TinyLoader<K, V> loader) {
         this.loader = loader;
+        this.tinyCache = new TinyCache<>();
     }
 
-    public TinyLoadingCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<K, V> loader) {
+    public TinyLoadingCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
         this.builder = builder;
         this.loader = loader;
-    }
-
-    public V get(K k) {
-        return tinyCache.get(k);
-    }
-
-    @Override
-    public boolean put(K k, V v) {
-        return tinyCache.put(k,v);
-    }
-
-    @Override
-    public long size() {
-        return 0;
-    }
-
-    @Override
-    public ConcurrentMap<K, V> asMap() {
-        return null;
+        this.tinyCache = new TinyCache<>();
     }
 
     @Override
@@ -81,62 +67,38 @@ public class TinyLoadingCache<K, V>  implements InvalidateCache<K, V> {
     }
 
     @Override
-    public boolean refresh(K k) {
-        return false;
-    }
-
-    @Override
     public boolean delete(K k) {
+        return tinyCache.delete(k);
+    }
+
+    @Override
+    public V get(K k) {
+        return tinyCache.get(k);
+    }
+
+    @Override
+    public boolean put(K k, V v) {
+        return tinyCache.put(k, v);
+    }
+
+    @Override
+    public V getUnchecked(K k) {
+        return null;
+    }
+
+    @Override
+    public Map<K, V> getAll(Iterable<? extends K> var1) {
+        return null;
+    }
+
+    @Override
+    public ConcurrentMap<K, V> asMap() {
+        return null;
+    }
+
+    @Override
+    public boolean refresh(K key) {
         return false;
     }
-
-    public V getUnchecked(K key) {
-        try {
-            return this.get(key);
-        } catch (Exception e) {
-            throw new BaseException(e);
-        }
-    }
-
-    public Map<K, V> getAll(Iterable<? extends K> keys) {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public V getIfPresent(Object o) {
-        return null;
-    }
-
-    @Override
-    public V get(K k, Callable<? extends V> callable) {
-        return null;
-    }
-
-    @Override
-    public void putAll(Map<? extends K, ? extends V> map) {
-        // do noting
-
-    }
-
-    @Override
-    public void invalidate(Object o) {
-        // do noting
-
-    }
-
-    @Override
-    public void invalidateAll(Iterable<?> iterable) {
-        // do noting
-
-    }
-
-    @Override
-    public void invalidateAll() {
-        // do noting
-
-    }
-
-
 
 }

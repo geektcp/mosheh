@@ -2,7 +2,6 @@ package com.geektcp.common.core.tree;
 
 
 import com.geektcp.common.core.system.Sys;
-import com.google.common.base.Joiner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -296,7 +295,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
         for(List<Node> nodePair: nodes){
             sb.append("[");
-            sb.append(Joiner.on(",").join(getStringPair(nodePair)));
+//            sb.append(Joiner.on(",").join(getStringPair(nodePair)));
             sb.append("]");
             nodePair.forEach(nodeChild -> {
                 List<Node> children = getChild(nodeChild);

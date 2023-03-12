@@ -1,8 +1,6 @@
-package com.geektcp.common.core.util;
+package com.geektcp.common.core.cheker;
 
 import com.geektcp.common.core.system.Sys;
-import com.google.common.base.Strings;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 
@@ -82,139 +80,139 @@ public class Preconditions {
 
     public static void checkArgument(boolean expression, @Nullable String errorMessageTemplate, @Nullable Object... errorMessageArgs) {
         if (!expression) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, errorMessageArgs));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, char p1) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, int p1) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, long p1) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, char p1, char p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, char p1, int p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, char p1, long p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, char p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, int p1, char p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, int p1, int p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, int p1, long p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, int p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, long p1, char p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, long p1, int p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, long p1, long p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, long p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, char p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, int p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, long p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3}));
         }
     }
 
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3, @Nullable Object p4) {
         if (!b) {
-            throw new IllegalArgumentException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3, p4}));
+            throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3, p4}));
         }
     }
 
@@ -232,143 +230,142 @@ public class Preconditions {
 
     public static void checkState(boolean expression, @Nullable String errorMessageTemplate, @Nullable Object... errorMessageArgs) {
         if (!expression) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, errorMessageArgs));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, char p1) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, int p1) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, long p1) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, char p1, char p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, char p1, int p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, char p1, long p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, char p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, int p1, char p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, int p1, int p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, int p1, long p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, int p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, long p1, char p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, long p1, int p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, long p1, long p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, long p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, char p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, int p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, long p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3}));
         }
     }
 
     public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3, @Nullable Object p4) {
         if (!b) {
-            throw new IllegalStateException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3, p4}));
+            throw new IllegalStateException(lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3, p4}));
         }
     }
 
-    @CanIgnoreReturnValue
     public static <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();
@@ -377,7 +374,7 @@ public class Preconditions {
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T reference, @Nullable Object errorMessage) {
         if (reference == null) {
             throw new NullPointerException(String.valueOf(errorMessage));
@@ -386,219 +383,219 @@ public class Preconditions {
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T reference, @Nullable String errorMessageTemplate, @Nullable Object... errorMessageArgs) {
         if (reference == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, errorMessageArgs));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         } else {
             return reference;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, new Object[]{p1}));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, char p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, int p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, long p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, @Nullable Object p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, char p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, int p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, long p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, @Nullable Object p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, char p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, int p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, long p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, @Nullable Object p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, char p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, int p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, long p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3}));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static <T> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3, @Nullable Object p4) {
         if (obj == null) {
-            throw new NullPointerException(Strings.lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3, p4}));
+            throw new NullPointerException(lenientFormat(errorMessageTemplate, new Object[]{p1, p2, p3, p4}));
         } else {
             return obj;
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static int checkElementIndex(int index, int size) {
         return checkElementIndex(index, size, "index");
     }
 
-    @CanIgnoreReturnValue
+
     public static int checkElementIndex(int index, int size, @Nullable String desc) {
         if (index >= 0 && index < size) {
             return index;
@@ -609,20 +606,20 @@ public class Preconditions {
 
     private static String badElementIndex(int index, int size, @Nullable String desc) {
         if (index < 0) {
-            return Strings.lenientFormat("%s (%s) must not be negative", new Object[]{desc, index});
+            return lenientFormat("%s (%s) must not be negative", new Object[]{desc, index});
         } else if (size < 0) {
             throw new IllegalArgumentException((new StringBuilder(26)).append("negative size: ").append(size).toString());
         } else {
-            return Strings.lenientFormat("%s (%s) must be less than size (%s)", new Object[]{desc, index, size});
+            return lenientFormat("%s (%s) must be less than size (%s)", new Object[]{desc, index, size});
         }
     }
 
-    @CanIgnoreReturnValue
+
     public static int checkPositionIndex(int index, int size) {
         return checkPositionIndex(index, size, "index");
     }
 
-    @CanIgnoreReturnValue
+
     public static int checkPositionIndex(int index, int size, @Nullable String desc) {
         if (index >= 0 && index <= size) {
             return index;
@@ -633,11 +630,11 @@ public class Preconditions {
 
     private static String badPositionIndex(int index, int size, @Nullable String desc) {
         if (index < 0) {
-            return Strings.lenientFormat("%s (%s) must not be negative", new Object[]{desc, index});
+            return lenientFormat("%s (%s) must not be negative", new Object[]{desc, index});
         } else if (size < 0) {
             throw new IllegalArgumentException((new StringBuilder(26)).append("negative size: ").append(size).toString());
         } else {
-            return Strings.lenientFormat("%s (%s) must not be greater than size (%s)", new Object[]{desc, index, size});
+            return lenientFormat("%s (%s) must not be greater than size (%s)", new Object[]{desc, index, size});
         }
     }
 
@@ -649,7 +646,7 @@ public class Preconditions {
 
     private static String badPositionIndexes(int start, int end, int size) {
         if (start >= 0 && start <= size) {
-            return end >= 0 && end <= size ? Strings.lenientFormat("end index (%s) must not be less than start index (%s)", new Object[]{end, start}) : badPositionIndex(end, size, "end index");
+            return end >= 0 && end <= size ? lenientFormat("end index (%s) must not be less than start index (%s)", new Object[]{end, start}) : badPositionIndex(end, size, "end index");
         } else {
             return badPositionIndex(start, size, "start index");
         }
