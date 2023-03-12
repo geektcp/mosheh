@@ -60,7 +60,6 @@ public class CacheBuilderTest {
         Long v = loadingCache.get("a");
         Sys.p(v);
 
-
         Assert.assertTrue(true);
     }
 

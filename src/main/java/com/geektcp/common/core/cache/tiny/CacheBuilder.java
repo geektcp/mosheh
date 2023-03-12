@@ -20,6 +20,7 @@ package com.geektcp.common.core.cache.tiny;
 
 import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.core.cache.tiny.listener.TinyListener;
+import com.geektcp.common.core.cache.tiny.loading.LoadingCache;
 import com.geektcp.common.core.cache.tiny.loading.implement.TinyLoadingCache;
 import com.geektcp.common.core.util.Preconditions;
 
@@ -66,9 +67,9 @@ public class CacheBuilder<K, V>  {
         return this;
     }
 
-    public <K, V> TinyLoadingCache<K, V> build(TinyLoader<K, V> loader) {
+    public  <K1 extends K, V1 extends V> LoadingCache<K1, V1> build(TinyLoader<? super K1, V1> loader) {
         this.checkWeightWithWeigher();
-        return new TinyLoadingCache<>(loader);
+        return new TinyLoadingCache<>(this, loader);
     }
 
     private void checkWeightWithWeigher() {
