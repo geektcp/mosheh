@@ -1,5 +1,8 @@
 Thy-core Release Notes
 ------------------------
+### 2023.3.12: version 1.0.4
+- add simple local cache, thread safely cache
+- add test case: com.geektcp.common.core.cache.*
 
 ### 2023.2.18: version 1.0.3.RELEASE
 - add utils, use shell, 
