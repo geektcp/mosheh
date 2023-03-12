@@ -20,10 +20,7 @@ package com.geektcp.common.core.cache.tiny.loader;
 
 import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutor;
 import com.geektcp.common.core.exception.BaseException;
-import com.geektcp.common.core.util.Preconditions;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListenableFutureTask;
+import com.geektcp.common.core.cheker.Preconditions;
 
 import java.util.Map;
 
@@ -48,6 +45,7 @@ public abstract class TinyLoader<K, V> implements CacheLoader {
         throw new BaseException();
     }
 
+    /*
     public ListenableFuture<V> reload(K key, V oldValue) {
         Preconditions.checkNotNull(key);
         Preconditions.checkNotNull(oldValue);
@@ -78,5 +76,6 @@ public abstract class TinyLoader<K, V> implements CacheLoader {
             }
         };
     }
+    */
 
 }

@@ -1,5 +1,5 @@
 package com.geektcp.common.core.cache;
-
+/*
 import com.geektcp.common.core.system.Sys;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.*;
@@ -14,6 +14,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author geektcp on 2019/11/30 0:59.
  */
+
+
+/*
 public class GuavaCacheTest {
 
     private static RemovalListener<String, Integer> localListener = new RemovalListener<String, Integer>() {
@@ -91,4 +94,46 @@ public class GuavaCacheTest {
         }
         return list;
     }
+
+     @Test
+    public void test2(){
+        final AtomicInteger loadCount = new AtomicInteger();
+        final AtomicInteger reloadCount = new AtomicInteger();
+        final AtomicInteger loadAllCount = new AtomicInteger();
+
+
+        TinyLoader<Object, Object> baseLoader =
+                new TinyLoader<Object, Object>() {
+                    @Override
+                    public Object load(Object key) {
+                        loadCount.incrementAndGet();
+                        return new Object();
+                    }
+
+                    @Override
+                    public ListenableFuture<Object> reload(Object key, Object oldValue) {
+                        reloadCount.incrementAndGet();
+                        return Futures.immediateFuture(new Object());
+                    }
+
+                    @Override
+                    public Map<Object, Object> loadAll(Iterable<?> keys) {
+                        loadAllCount.incrementAndGet();
+                        return ImmutableMap.of();
+                    }
+                };
+
+        Object unused1 = baseLoader.load(new Object());
+        TinyExecutor executor = TinyExecutorBuilder.newSingleThreadExecutor();
+        TinyLoader<Object, Object> asyncReloading = TinyLoader.asyncReloading(baseLoader, executor);
+
+        Object unused3 = asyncReloading.load(new Object());
+        Future<?> possiblyIgnoredError1 = asyncReloading.reload(new Object(), new Object());
+        Map<Object, Object> unused4 = asyncReloading.loadAll(ImmutableList.of(new Object()));
+
+        Assert.assertEquals(2, loadCount.get());
+        Assert.assertEquals(1, reloadCount.get());
+        Assert.assertEquals(2, loadAllCount.get());
+
 }
+*/

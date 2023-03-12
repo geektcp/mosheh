@@ -22,7 +22,7 @@ import com.geektcp.common.core.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.core.cache.tiny.listener.TinyListener;
 import com.geektcp.common.core.cache.tiny.loading.LoadingCache;
 import com.geektcp.common.core.cache.tiny.loading.implement.TinyLoadingCache;
-import com.geektcp.common.core.util.Preconditions;
+import com.geektcp.common.core.cheker.Preconditions;
 
 import java.util.concurrent.TimeUnit;
 

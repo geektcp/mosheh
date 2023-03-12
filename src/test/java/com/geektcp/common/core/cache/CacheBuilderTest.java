@@ -6,21 +6,12 @@ import com.geektcp.common.core.cache.tiny.listener.TinyListener;
 import com.geektcp.common.core.cache.tiny.listener.TinyRemovalCause;
 import com.geektcp.common.core.cache.tiny.listener.TinyRemovalNotification;
 import com.geektcp.common.core.cache.tiny.loading.LoadingCache;
-import com.geektcp.common.core.concurrent.thread.executor.TinyExecutorBuilder;
-import com.geektcp.common.core.concurrent.thread.executor.service.TinyExecutor;
 import com.geektcp.common.core.generator.IdGenerator;
 import com.geektcp.common.core.system.Sys;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Map;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author geektcp on 2023/2/26 16:27.
@@ -68,47 +59,4 @@ public class CacheBuilderTest {
        return IdGenerator.getId();
     }
 
-
-    @Test
-    public void test2(){
-        final AtomicInteger loadCount = new AtomicInteger();
-        final AtomicInteger reloadCount = new AtomicInteger();
-        final AtomicInteger loadAllCount = new AtomicInteger();
-
-
-        TinyLoader<Object, Object> baseLoader =
-                new TinyLoader<Object, Object>() {
-                    @Override
-                    public Object load(Object key) {
-                        loadCount.incrementAndGet();
-                        return new Object();
-                    }
-
-                    @Override
-                    public ListenableFuture<Object> reload(Object key, Object oldValue) {
-                        reloadCount.incrementAndGet();
-                        return Futures.immediateFuture(new Object());
-                    }
-
-                    @Override
-                    public Map<Object, Object> loadAll(Iterable<?> keys) {
-                        loadAllCount.incrementAndGet();
-                        return ImmutableMap.of();
-                    }
-                };
-
-        Object unused1 = baseLoader.load(new Object());
-        TinyExecutor executor = TinyExecutorBuilder.newSingleThreadExecutor();
-        TinyLoader<Object, Object> asyncReloading = TinyLoader.asyncReloading(baseLoader, executor);
-
-        Object unused3 = asyncReloading.load(new Object());
-        Future<?> possiblyIgnoredError1 = asyncReloading.reload(new Object(), new Object());
-        Map<Object, Object> unused4 = asyncReloading.loadAll(ImmutableList.of(new Object()));
-
-        Assert.assertEquals(2, loadCount.get());
-        Assert.assertEquals(1, reloadCount.get());
-        Assert.assertEquals(2, loadAllCount.get());
-
-
-    }
 }
