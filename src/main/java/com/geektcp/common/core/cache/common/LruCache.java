@@ -36,7 +36,7 @@ public class LruCache<K, V> implements Cache<K, V> {
     private int maxSize;
 
     public LruCache(){
-        head = new Node();
+        this(1000);
     }
 
     public Iterator<K> iterator() {
