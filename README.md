@@ -22,7 +22,7 @@ Furthermore, mosheh offers a convenient API for build many cache, collection, ex
 <dependency>
     <groupId>com.geektcp.common</groupId>
     <artifactId>mosheh</artifactId>
-    <version>1.0.3.RELEASE</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
