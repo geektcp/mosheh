@@ -1,4 +1,4 @@
-Thy-core Release Notes
+mosheh Release Notes
 ------------------------
 ### 2023/1/28: version 1.0.0.RELEASE
 - init
@@ -24,4 +24,4 @@ Thy-core Release Notes
 - add test case: com.geektcp.common.mosheh.cache.*
 
 ### 2023.3.12: version 1.0.0
-- rename: old name thy-core,new name mosheh
+- rename: old name mosheh,new name mosheh

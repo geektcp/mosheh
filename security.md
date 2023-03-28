@@ -3,8 +3,8 @@ Security Policy
 
 ## Supported Versions
 
-the latest version is guaranteed to be secure. For this purpose, thy-core maintains backwards compatibility. 
-Please note the [readme of the project](https://github.com/geektcp/thy-core/blob/main/README.md) for further information.
+the latest version is guaranteed to be secure. For this purpose, mosheh maintains backwards compatibility. 
+Please note the [readme of the project](https://github.com/geektcp/mosheh/blob/main/README.md) for further information.
 
 
 ## Reporting a Vulnerability
