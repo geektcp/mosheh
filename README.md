@@ -1,7 +1,7 @@
 mosheh
 ==========
 [![Actions Status](https://github.com/geektcp/mosheh/actions/workflows/maven.yml/badge.svg)](https://github.com/geektcp/mosheh/actions)
-[![Security Score](https://snyk-widget.herokuapp.com/badge/mvn/com.geektcp.common/mosheh/badge.svg)](https://snyk.io/test/github/geektcp/mosheh)
+[![Security Score](https://snyk.io/test/github/geektcp/mosheh/badge.svg)](https://snyk.io/test/github/geektcp/mosheh)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.geektcp.common/mosheh/badge.svg#)](https://mvnrepository.com/artifact/com.geektcp.common/mosheh)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7038/badge)](https://bestpractices.coreinfrastructure.org/projects/7038)
 [![Java Doc](https://img.shields.io/badge/javadoc-6.0.5-brightgreen.svg)](https://javadoc.io/doc/com.geektcp.common/mosheh/latest/index.html)
