@@ -10,11 +10,11 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-    <url>https://github.com/geektcp/thy-core</url>
+    <url>https://github.com/geektcp/mosheh</url>
     <scm>
-        <connection>scm:git:https://github.com/geektcp/thy-core</connection>
-        <developerConnection>scm:git:https://github.com/geektcp/thy-core.git</developerConnection>
-        <url>git:https://github.com/geektcp/thy-core.git</url>
+        <connection>scm:git:https://github.com/geektcp/mosheh</connection>
+        <developerConnection>scm:git:https://github.com/geektcp/mosheh.git</developerConnection>
+        <url>git:https://github.com/geektcp/mosheh.git</url>
     </scm>
     <developers>
         <developer>
@@ -23,12 +23,12 @@
             <organization>https://github.com/geektcp</organization>
         </developer>
     </developers>
-    <name>thy-core</name>
+    <name>mosheh</name>
     <description>common library for Java</description>
 
     <groupId>com.geektcp.common</groupId>
-    <artifactId>thy-core</artifactId>
-    <version>1.0.5</version>
+    <artifactId>mosheh</artifactId>
+    <version>1.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
