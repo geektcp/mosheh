@@ -52,6 +52,10 @@ public class Sys {
         ThyStream.println(str);
     }
 
+    public static void println() {
+        ThyStream.println();
+    }
+
     public static void println(Object str) {
         ThyStream.print(str);
     }

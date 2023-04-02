@@ -49,6 +49,10 @@ class ThyStream {
         out.println(str);
     }
 
+    public static void println() {
+        out.println();
+    }
+
     public static void println(Object str) {
         if (isNull(str)) {
             return;
