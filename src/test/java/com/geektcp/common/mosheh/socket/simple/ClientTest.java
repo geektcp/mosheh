@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.geektcp.common.mosheh.socket;
+package com.geektcp.common.mosheh.socket.simple;
 
 import com.geektcp.common.mosheh.system.Sys;
 import org.junit.Assert;
@@ -57,7 +57,7 @@ public class ClientTest {
 
     @Test
     public void connectNIO() throws IOException {
-        Socket socket = new Socket("127.0.0.1", 8888);
+        Socket socket = new Socket("127.0.0.1", 999);
         OutputStream out = socket.getOutputStream();
         String s = "hello world";
         out.write(s.getBytes());

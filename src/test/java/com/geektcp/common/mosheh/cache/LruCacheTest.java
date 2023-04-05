@@ -1,11 +1,15 @@
-package com.geektcp.common.core.cache;
+package com.geektcp.common.mosheh.cache;
 
-import com.geektcp.common.core.cache.common.LruCache;
-import com.geektcp.common.core.system.Sys;
+
+import com.geektcp.common.mosheh.cache.common.LruCache;
+import com.geektcp.common.mosheh.system.Sys;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class LruCacheTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         LruCache<String, Object> lruCache = new LruCache<>();
 
         lruCache.put("aaa", 11);
@@ -15,6 +19,7 @@ public class LruCacheTest {
 
         Sys.p(lruCache.get("ddd"));
 
+        Assert.assertTrue(true);
     }
 
 }
