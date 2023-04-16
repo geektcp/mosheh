@@ -1,4 +1,4 @@
-package com.geektcp.common.mosheh.socket;
+package com.geektcp.common.mosheh.socket.builder;
 
 import com.geektcp.common.mosheh.socket.buffer.DataOutputBuffer;
 import com.geektcp.common.mosheh.socket.text.ConnectionBody;
