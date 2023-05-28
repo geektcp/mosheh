@@ -25,3 +25,6 @@ mosheh Release Notes
 
 ### 2023.3.12: version 1.0.0
 - rename: old name mosheh,new name mosheh
+
+### 2023.5.29: version 1.0.2
+- add telnet and port scan
