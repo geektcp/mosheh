@@ -35,4 +35,6 @@ public interface LoadingCache<K, V> extends Cache<K, V> {
     Map<K, V> getAll(Iterable<? extends K> var1) throws ExecutionException;
 
     ConcurrentMap<K, V> asMap();
+
+    void print();
 }

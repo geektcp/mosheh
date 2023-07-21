@@ -48,6 +48,17 @@ public class CacheBuilderTest {
                 });
 
         loadingCache.put("a", 1L);
+        loadingCache.print();
+        Sys.p("----------------");
+        loadingCache.put("b", 23L);
+        loadingCache.print();
+        Sys.p("----------------");
+        loadingCache.put("c", 35L);
+        loadingCache.print();
+        Sys.p("----------------");
+        loadingCache.put("d", 42L);
+        loadingCache.print();
+
         Long v = loadingCache.get("a");
         Sys.p(v);
 

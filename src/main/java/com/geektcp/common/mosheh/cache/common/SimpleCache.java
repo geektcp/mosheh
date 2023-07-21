@@ -95,4 +95,9 @@ public class SimpleCache<K, V> implements Cache<K, V> {
         cacheMap.remove(key);
         return true;
     }
+
+    @Override
+    public void print(){
+
+    }
 }

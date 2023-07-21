@@ -44,17 +44,12 @@ public class TinyCache<K, V> extends AbstractCache<K, V> {
 
     public TinyCache() {
         // build complex cache
-
+        this.cacheTree = new CacheTree<>();
     }
 
     public TinyCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
 
 
-    }
-
-
-    private void init() {
-        cacheTree = new CacheTree<>();
     }
 
     @Override
@@ -83,5 +78,9 @@ public class TinyCache<K, V> extends AbstractCache<K, V> {
     public boolean delete(K k) {
         cacheTree.delete(new NodeKey<>(k));
         return false;
+    }
+
+    public void print(){
+        cacheTree.print();
     }
 }

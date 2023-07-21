@@ -74,6 +74,10 @@ public class LruCache<K, V> implements Cache<K, V> {
         return false;
     }
 
+    @Override
+    public void print(){
+
+    }
 
     private class Node {
         Node pre;
@@ -164,5 +168,7 @@ public class LruCache<K, V> implements Cache<K, V> {
 
         return node;
     }
+
+
 
 }

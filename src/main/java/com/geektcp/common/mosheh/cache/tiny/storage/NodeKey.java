@@ -1,6 +1,8 @@
 package com.geektcp.common.mosheh.cache.tiny.storage;
 
 
+import com.geektcp.common.mosheh.generator.IdGenerator;
+
 import java.util.Objects;
 
 /**
@@ -13,30 +15,30 @@ public class NodeKey<K> implements Comparable {
     private K currentKey;
 
 
-
     public Long getId() {
         return this.id;
     }
 
 
-    public NodeKey(K k){
+    public NodeKey(K k) {
+        this.id = IdGenerator.getId();
         this.currentKey = k;
     }
 
-    public NodeKey build(K k){
+    public NodeKey build(K k) {
         return new NodeKey<>(k);
     }
 
     @Override
     public int compareTo(Object o) {
-        if(Objects.isNull(o)){
+        if (Objects.isNull(o)) {
             return -1000;
         }
-        NodeKey nodeKey = (NodeKey)o;
-        if( this.id > nodeKey.getId()){
+        NodeKey nodeKey = (NodeKey) o;
+        if (this.id > nodeKey.getId()) {
             return 1;
         }
-        if( this.id < nodeKey.getId()){
+        if (this.id < nodeKey.getId()) {
             return -1;
         }
 
@@ -54,5 +56,13 @@ public class NodeKey<K> implements Comparable {
         return Objects.hash(currentKey);
     }
 
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("id: ").append(id)
+                .append("|")
+                .append("currentKey: ").append(currentKey);
+        return sb.toString();
+    }
 
 }

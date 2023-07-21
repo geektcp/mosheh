@@ -101,4 +101,9 @@ public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable 
         return false;
     }
 
+    @Override
+    public void print(){
+        this.tinyCache.print();
+    }
+
 }

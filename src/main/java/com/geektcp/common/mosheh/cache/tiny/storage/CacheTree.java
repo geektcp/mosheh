@@ -10,6 +10,7 @@ public class CacheTree<K extends Comparable<K>, V> extends RedBlackTree<K, V> im
 
     public CacheTree() {
         // to do
+        this.init();
 
     }
 
@@ -58,5 +59,9 @@ public class CacheTree<K extends Comparable<K>, V> extends RedBlackTree<K, V> im
     @Override
     public V getHeight() {
         return null;
+    }
+
+    public void print(){
+        super.print();
     }
 }

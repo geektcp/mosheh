@@ -1,6 +1,7 @@
 package com.geektcp.common.mosheh.tree;
 
 
+import com.alibaba.fastjson2.JSON;
 import com.geektcp.common.mosheh.system.Sys;
 
 import java.util.ArrayList;
@@ -23,12 +24,29 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         Node right;
         boolean color;
 
+        Node() {
+            // init
+        }
+
         Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.left = null;
             this.right = null;
             this.color = RED;
+        }
+
+        public boolean isEmpty() {
+            return Objects.isNull(key);
+        }
+
+        public void init(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public void print() {
+            Sys.p("key: {} | value: {}", key.toString(), value);
         }
     }
 
@@ -41,11 +59,13 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         size = 0;
     }
 
+    protected void init(){
+        this.root = new Node();
+    }
+
     /**
-     *
-     *
-     * @param node
-     * @return
+     * @param node any node
+     * @return boolean color
      */
     private boolean isRed(Node node) {
         if (Objects.isNull(node)) {
@@ -56,15 +76,15 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
 
     /**
-     *  look at x
-     *       node                                       x
-     *      /    \              left                  /    \
-     *     T1     x           --------->            node    T3
-     *          /   \                              /    \
-     *        T2     T3                           T1    T2
+     * look at x
+     * node                                       x
+     * /    \              left                  /    \
+     * T1     x           --------->            node    T3
+     * /   \                              /    \
+     * T2     T3                           T1    T2
      *
-     * @param node
-     * @return
+     * @param node any node
+     * @return node
      */
     private Node leftRotate(Node node) {
         Node x = node.right;
@@ -79,14 +99,14 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
 
     /**
-     *  look at x
-     *       node                                       x
-     *      /    \              right                 /    \
-     *     x     T2           --------->             y     node
-     *   /  \                                             /    \
-     *  y   T1                                           T1    T2
+     * look at x
+     * node                                       x
+     * /    \              right                 /    \
+     * x     T2           --------->             y     node
+     * /  \                                             /    \
+     * y   T1                                           T1    T2
      *
-     * @param node
+     * @param node any node
      * @return node
      */
     private Node rightRotate(Node node) {
@@ -108,28 +128,54 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
 
+    /**
+     * main add method
+     *
+     * @param key   any Key
+     * @param value any Value
+     */
     public void add(K key, V value) {
-        root = add(root, key, value);
+        add(root, key, value);
         root.color = BLACK;
     }
 
 
     private Node add(Node node, K key, V value) {
-        if (Objects.isNull(node)) {
+        if (Objects.isNull(node) || node.isEmpty()) {
             size++;
-            return new Node(key, value);
+            node.init(key, value);
+            return node;
         }
 
-        int compare = getCompare(node, key);
-        if (compare < 0) {
-            node.left = add(node.left, key, value);
-        } else if (compare > 0) {
-            node.right = add(node.right, key, value);
-        } else {
-            // key.compareTo(node.key) == 0
-            node.value = value;
+//        int compare = getCompare(node, key);
+//        if (compare < 0) {
+//            node.left = add(node.left, key, value);
+//        } else if (compare > 0) {
+//            node.right = add(node.right, key, value);
+//        } else {
+//            // key.compareTo(node.key) == 0
+//            node.value = value;
+//        }
+//        return rotate(node);
+
+        if (Objects.isNull(node.left)) {
+            node.left = new Node();
+            add(node.left, key, value);
+            return node;
         }
-        return rotate(node);
+        if (Objects.isNull(node.right)) {
+            node.right = new Node();
+            add(node.right, key, value);
+            return node;
+        }
+
+        return add(node.left, key, value);
+
+    }
+
+    private boolean addLeftChild(Node node, K key, V value) {
+        add(node.left, key, value);
+        return true;
     }
 
     private Node rotate(Node node) {
@@ -161,9 +207,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
     /**
-     *
-     *
-     * @param node
+     * @param node any node
      */
     private Node minimum(Node node) {
 
@@ -174,8 +218,8 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * @param node
-     * @return
+     * @param node any node
+     * @return min node
      */
     private Node removeMin(Node node) {
         if (Objects.isNull(node.left)) {
@@ -193,8 +237,8 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * @param key
-     * @return
+     * @param key any key
+     * @return value
      */
     public V remove(K key) {
         Node node = getNode(root, key);
@@ -207,7 +251,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * @param node
+     * @param node any key
      * @param key  key
      * @return
      */
@@ -270,52 +314,62 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         return size == 0;
     }
 
-    public void print(){
-        List<List<Node>> nodes = new ArrayList<>();
-        List<Node> nodePair = new ArrayList<>();
-        nodePair.add(root);
-        nodes.add(nodePair);
-        print(nodes);
+    public void print() {
+//        List<List<Node>> nodes = new ArrayList<>();
+//        List<Node> nodePair = new ArrayList<>();
+//        nodePair.add(root);
+//        nodes.add(nodePair);
+//        print(nodes);
+        print(root);
     }
 
-    private List<Node> getChild(Node node){
+    private void print(Node node) {
+        if (Objects.isNull(node)) {
+            return;
+        }
+        node.print();
+        print(node.left);
+        print(node.right);
+    }
+
+    private List<Node> getChild(Node node) {
         List<Node> ret = new ArrayList<>();
-        if(Objects.nonNull(node.left)){
+        if (Objects.nonNull(node.left)) {
             ret.add(node.left);
         }
-        if(Objects.nonNull(node.right)){
+        if (Objects.nonNull(node.right)) {
             ret.add(node.right);
         }
         return ret;
     }
 
-    private void print(List<List<Node>> nodes){
+    private void print(List<List<Node>> nodes) {
         StringBuilder sb = new StringBuilder();
         List<List<Node>> ret = new ArrayList<>();
 
-        for(List<Node> nodePair: nodes){
+        for (List<Node> nodePair : nodes) {
             sb.append("[");
 //            sb.append(Joiner.on(",").join(getStringPair(nodePair)));
             sb.append("]");
             nodePair.forEach(nodeChild -> {
                 List<Node> children = getChild(nodeChild);
-                if(Objects.nonNull(children) && !children.isEmpty()) {
+                if (Objects.nonNull(children) && !children.isEmpty()) {
                     ret.add(children);
                 }
             });
         }
         Sys.p(sb.toString());
-        if( !nodes.isEmpty()) {
+        if (!nodes.isEmpty()) {
             print(ret);
         }
     }
 
-    private List<String> getStringPair( List<Node> nodePair){
+    private List<String> getStringPair(List<Node> nodePair) {
         List<String> printStr = new ArrayList<>();
         nodePair.forEach(node -> {
-            printStr.add(node.key.toString());
-            printStr.add(node.value.toString());
-        }
+                    printStr.add(node.key.toString());
+                    printStr.add(node.value.toString());
+                }
         );
         return printStr;
     }
