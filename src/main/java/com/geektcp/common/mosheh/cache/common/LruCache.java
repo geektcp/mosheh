@@ -79,6 +79,11 @@ public class LruCache<K, V> implements Cache<K, V> {
 
     }
 
+    @Override
+    public void travel(){
+
+    }
+
     private class Node {
         Node pre;
         Node next;

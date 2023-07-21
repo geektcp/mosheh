@@ -8,17 +8,21 @@ import java.util.Objects;
 /**
  * @author geektcp on 2023/3/12 20:18.
  */
-public class NodeKey<K> implements Comparable {
+public class NodeKey<K> extends AbstractKey<K> implements Comparable<K> {
 
     private Long id;
 
     private K currentKey;
 
-
+    @Override
     public Long getId() {
         return this.id;
     }
 
+    @Override
+    public Object getKey() {
+        return this.currentKey;
+    }
 
     public NodeKey(K k) {
         this.id = IdGenerator.getId();
@@ -29,12 +33,13 @@ public class NodeKey<K> implements Comparable {
         return new NodeKey<>(k);
     }
 
+
     @Override
-    public int compareTo(Object o) {
-        if (Objects.isNull(o)) {
+    public int compareTo(K k) {
+        if (Objects.isNull(k)) {
             return -1000;
         }
-        NodeKey nodeKey = (NodeKey) o;
+        NodeKey nodeKey = (NodeKey) k;
         if (this.id > nodeKey.getId()) {
             return 1;
         }

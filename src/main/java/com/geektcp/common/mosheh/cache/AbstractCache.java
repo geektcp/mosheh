@@ -53,4 +53,10 @@ public class AbstractCache<K,V> implements Cache<K,V> {
 
     }
 
+    @Override
+    public void travel(){
+
+    }
+
+
 }

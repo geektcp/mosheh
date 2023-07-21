@@ -22,4 +22,7 @@ public interface Store<K, V> {
     V getHeight();
 
     void print();
+
+    void travel();
+
 }

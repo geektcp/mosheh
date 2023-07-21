@@ -100,4 +100,9 @@ public class SimpleCache<K, V> implements Cache<K, V> {
     public void print(){
 
     }
+
+    @Override
+    public void travel(){
+
+    }
 }

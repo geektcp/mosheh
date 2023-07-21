@@ -35,4 +35,6 @@ public interface Cache<K, V> {
     boolean put(K k, V v);
 
     void print();
+
+    void travel();
 }

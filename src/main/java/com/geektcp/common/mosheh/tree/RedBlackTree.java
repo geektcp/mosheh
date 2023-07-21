@@ -1,22 +1,23 @@
 package com.geektcp.common.mosheh.tree;
 
 
-import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson.JSON;
+import com.geektcp.common.mosheh.cache.tiny.storage.AbstractKey;
 import com.geektcp.common.mosheh.system.Sys;
+import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author geektcp on 2019/9/16.
  */
-public class RedBlackTree<K extends Comparable<K>, V> {
+public class RedBlackTree<K extends AbstractKey<K>, V> {
 
     private static final boolean RED = true;
 
     private static final boolean BLACK = false;
 
+    @Data
     private class Node {
         K key;
         V value;
@@ -51,6 +52,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
     private Node root;
+    private Map<Object, Object> map;
 
     private int size;
 
@@ -59,8 +61,9 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         size = 0;
     }
 
-    protected void init(){
+    protected void init() {
         this.root = new Node();
+        this.map = new HashMap<>();
     }
 
     /**
@@ -136,14 +139,21 @@ public class RedBlackTree<K extends Comparable<K>, V> {
      */
     public void add(K key, V value) {
         add(root, key, value);
+
         root.color = BLACK;
     }
 
+    public void travel() {
+        travel(root, map);
+        Sys.p(JSON.toJSONString(map, true));
+    }
 
     private Node add(Node node, K key, V value) {
         if (Objects.isNull(node) || node.isEmpty()) {
             size++;
             node.init(key, value);
+
+
             return node;
         }
 
@@ -173,10 +183,27 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     }
 
-    private boolean addLeftChild(Node node, K key, V value) {
-        add(node.left, key, value);
-        return true;
+    private void travel(Node node, Map<Object, Object> map) {
+        if (Objects.isNull(node) || node.isEmpty()) {
+            return;
+        }
+        Map<Object, Object> data = new HashMap<>();
+        map.put(node.key.getKey(), data);
+
+        if (Objects.nonNull(node.left)) {
+            Map<Object, Object> left = new HashMap<>();
+            data.put("left", left);
+            travel(node.left, left);
+        }
+
+        if (Objects.nonNull(node.right)) {
+            Map<Object, Object> right = new HashMap<>();
+            data.put("right", right);
+            travel(node.right, right);
+        }
+
     }
+
 
     private Node rotate(Node node) {
         if (!isRed(node.left) && isRed(node.right)) {
@@ -343,36 +370,36 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         return ret;
     }
 
-    private void print(List<List<Node>> nodes) {
-        StringBuilder sb = new StringBuilder();
-        List<List<Node>> ret = new ArrayList<>();
-
-        for (List<Node> nodePair : nodes) {
-            sb.append("[");
-//            sb.append(Joiner.on(",").join(getStringPair(nodePair)));
-            sb.append("]");
-            nodePair.forEach(nodeChild -> {
-                List<Node> children = getChild(nodeChild);
-                if (Objects.nonNull(children) && !children.isEmpty()) {
-                    ret.add(children);
-                }
-            });
-        }
-        Sys.p(sb.toString());
-        if (!nodes.isEmpty()) {
-            print(ret);
-        }
-    }
-
-    private List<String> getStringPair(List<Node> nodePair) {
-        List<String> printStr = new ArrayList<>();
-        nodePair.forEach(node -> {
-                    printStr.add(node.key.toString());
-                    printStr.add(node.value.toString());
-                }
-        );
-        return printStr;
-    }
+//    private void print(List<List<Node>> nodes) {
+//        StringBuilder sb = new StringBuilder();
+//        List<List<Node>> ret = new ArrayList<>();
+//
+//        for (List<Node> nodePair : nodes) {
+//            sb.append("[");
+////            sb.append(Joiner.on(",").join(getStringPair(nodePair)));
+//            sb.append("]");
+//            nodePair.forEach(nodeChild -> {
+//                List<Node> children = getChild(nodeChild);
+//                if (Objects.nonNull(children) && !children.isEmpty()) {
+//                    ret.add(children);
+//                }
+//            });
+//        }
+//        Sys.p(sb.toString());
+//        if (!nodes.isEmpty()) {
+//            print(ret);
+//        }
+//    }
+//
+//    private List<String> getStringPair(List<Node> nodePair) {
+//        List<String> printStr = new ArrayList<>();
+//        nodePair.forEach(node -> {
+//                    printStr.add(node.key.toString());
+//                    printStr.add(node.value.toString());
+//                }
+//        );
+//        return printStr;
+//    }
 
     private int getCompare(Node node, K key) {
         return key.compareTo(node.key);

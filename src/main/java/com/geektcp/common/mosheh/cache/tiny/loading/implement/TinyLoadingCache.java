@@ -103,7 +103,12 @@ public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable 
 
     @Override
     public void print(){
-        this.tinyCache.print();
+        tinyCache.print();
+    }
+
+    @Override
+    public void travel(){
+        tinyCache.travel();
     }
 
 }

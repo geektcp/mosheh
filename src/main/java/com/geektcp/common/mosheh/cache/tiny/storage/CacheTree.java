@@ -6,7 +6,7 @@ import com.geektcp.common.mosheh.tree.RedBlackTree;
 /**
  * @author geektcp on 2023/3/12 19:55.
  */
-public class CacheTree<K extends Comparable<K>, V> extends RedBlackTree<K, V> implements Store<K, V> {
+public class CacheTree<K extends AbstractKey<K>, V> extends RedBlackTree<K, V> implements Store<K, V> {
 
     public CacheTree() {
         // to do

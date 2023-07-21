@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * @author geektcp on 2023/2/26 17:50.
  */
-public class TinyCache<K, V> extends AbstractCache<K, V> {
+public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     private Store<NodeKey, V> cacheTree;
 
@@ -83,4 +83,9 @@ public class TinyCache<K, V> extends AbstractCache<K, V> {
     public void print(){
         cacheTree.print();
     }
+
+    public void travel(){
+        cacheTree.travel();
+    }
+
 }
