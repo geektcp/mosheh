@@ -63,7 +63,7 @@ public class CacheBuilderTest {
         Sys.p("----------------");
         Sys.p("a: {}", loadingCache.get("a"));
         Sys.p("b: {}", loadingCache.get("b"));
-        Sys.p("f: {}", loadingCache.get("f"));
+        Sys.p("f: {}", loadingCache.get("f")); // not exist
         Sys.p("c: {}", loadingCache.get("c"));
         Sys.p("d: {}", loadingCache.get("d"));
         Assert.assertTrue(true);

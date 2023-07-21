@@ -45,7 +45,7 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
             return Objects.isNull(key);
         }
 
-        public void init(K key, V value) {
+        private void init(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -144,8 +144,8 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
 
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
     /**
      * @param node any node
      * @return boolean color
@@ -212,13 +212,11 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
         node.right.color = BLACK;
     }
 
-    private Node add(Node node, K key, V value) {
+    private void add(Node node, K key, V value) {
         if (Objects.isNull(node) || node.isEmpty()) {
             size++;
             node.init(key, value);
-
-
-            return node;
+            return;
         }
 
 //        int compare = getCompare(node, key);
@@ -235,16 +233,15 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
         if (Objects.isNull(node.left)) {
             node.left = new Node();
             add(node.left, key, value);
-            return node;
+            return;
         }
         if (Objects.isNull(node.right)) {
             node.right = new Node();
             add(node.right, key, value);
-            return node;
+            return;
         }
 
-        return add(node.left, key, value);
-
+        add(node.left, key, value);
     }
 
     private void travel(Node node, Map<Object, Object> map) {
