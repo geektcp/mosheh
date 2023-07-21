@@ -40,14 +40,17 @@ public class NodeKey<K> extends AbstractKey<K> implements Comparable<K> {
             return -1000;
         }
         NodeKey nodeKey = (NodeKey) k;
-        if (this.id > nodeKey.getId()) {
-            return 1;
-        }
-        if (this.id < nodeKey.getId()) {
-            return -1;
-        }
+//        if (this.id > nodeKey.getId()) {
+//            return 1;
+//        }
+//        if (this.id < nodeKey.getId()) {
+//            return -1;
+//        }
 
-        return 0;
+        if(this.currentKey.equals(nodeKey.getKey())){
+            return 0;
+        }
+        return -1;
     }
 
     @Override

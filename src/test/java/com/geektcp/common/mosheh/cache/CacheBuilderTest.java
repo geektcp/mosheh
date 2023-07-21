@@ -59,16 +59,19 @@ public class CacheBuilderTest {
         loadingCache.put("d", 42L);
         loadingCache.print();
         loadingCache.travel();
-
-        Long v = loadingCache.get("a");
-        Sys.p(v);
-
+        Sys.p("----------------");
+        Sys.p("----------------");
+        Sys.p("a: {}", loadingCache.get("a"));
+        Sys.p("b: {}", loadingCache.get("b"));
+        Sys.p("f: {}", loadingCache.get("f"));
+        Sys.p("c: {}", loadingCache.get("c"));
+        Sys.p("d: {}", loadingCache.get("d"));
         Assert.assertTrue(true);
     }
 
 
-    private Long myLoad(String key){
-       return IdGenerator.getId();
+    private Long myLoad(String key) {
+        return IdGenerator.getId();
     }
 
 }

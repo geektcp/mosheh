@@ -17,6 +17,10 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
 
     private static final boolean BLACK = false;
 
+    private static final String NODE_LEFT = "left";
+    private static final String NODE_RIGHT = "right";
+
+
     @Data
     private class Node {
         K key;
@@ -66,6 +70,82 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
         this.map = new HashMap<>();
     }
 
+
+    public boolean contains(K key) {
+        return getNode(root, key) != null;
+    }
+
+    public V get(K key) {
+        Node node = getNode(root, key);
+        return node == null ? null : node.value;
+    }
+
+    public void set(K key, V newValue) {
+        Node node = getNode(root, key);
+        if (node == null) {
+            throw new IllegalArgumentException(key + " not exist！");
+        }
+
+        node.value = newValue;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void print() {
+//        List<List<Node>> nodes = new ArrayList<>();
+//        List<Node> nodePair = new ArrayList<>();
+//        nodePair.add(root);
+//        nodes.add(nodePair);
+//        print(nodes);
+        print(root);
+    }
+
+    /**
+     * @param key any key
+     * @return value
+     */
+    public V remove(K key) {
+        Node node = getNode(root, key);
+        if (node != null) {
+            root = remove(root, key);
+            return node.value;
+        }
+
+        return null;
+    }
+
+
+    /**
+     * main add method
+     *
+     * @param key   any Key
+     * @param value any Value
+     */
+    public void add(K key, V value) {
+        add(root, key, value);
+
+        root.color = BLACK;
+    }
+
+    /**
+     * travel the all node
+     * then load it into map and u can print it
+     */
+    public void travel() {
+        travel(root, map);
+        Sys.p(JSON.toJSONString(map, true));
+    }
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param node any node
      * @return boolean color
@@ -79,12 +159,13 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
 
 
     /**
-     * look at x
-     * node                                       x
-     * /    \              left                  /    \
-     * T1     x           --------->            node    T3
-     * /   \                              /    \
-     * T2     T3                           T1    T2
+     *  left rotate, look at x
+     *
+     *        node                                   x
+     *       /    \              left             /    \
+     *      T1     x           --------->       node    T3
+     *     /   \                              /    \
+     *    T2    T3                           T1    T2
      *
      * @param node any node
      * @return node
@@ -102,12 +183,13 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
 
 
     /**
-     * look at x
-     * node                                       x
-     * /    \              right                 /    \
-     * x     T2           --------->             y     node
-     * /  \                                             /    \
-     * y   T1                                           T1    T2
+     *  right rotate, look at x
+     *
+     *        node                                    x
+     *       /    \              right              /   \
+     *      x     T2           --------->         y     node
+     *     /  \                                        /    \
+     *    y   T1                                      T1    T2
      *
      * @param node any node
      * @return node
@@ -128,24 +210,6 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
         node.color = RED;
         node.left.color = BLACK;
         node.right.color = BLACK;
-    }
-
-
-    /**
-     * main add method
-     *
-     * @param key   any Key
-     * @param value any Value
-     */
-    public void add(K key, V value) {
-        add(root, key, value);
-
-        root.color = BLACK;
-    }
-
-    public void travel() {
-        travel(root, map);
-        Sys.p(JSON.toJSONString(map, true));
     }
 
     private Node add(Node node, K key, V value) {
@@ -192,13 +256,13 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
 
         if (Objects.nonNull(node.left)) {
             Map<Object, Object> left = new HashMap<>();
-            data.put("left", left);
+            data.put(NODE_LEFT, left);
             travel(node.left, left);
         }
 
         if (Objects.nonNull(node.right)) {
             Map<Object, Object> right = new HashMap<>();
-            data.put("right", right);
+            data.put(NODE_RIGHT, right);
             travel(node.right, right);
         }
 
@@ -220,17 +284,28 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
     }
 
     private Node getNode(Node node, K key) {
-        if (node == null) {
+        if (Objects.isNull(node)) {
             return null;
         }
         int compare = getCompare(node, key);
         if (compare == 0) {
             return node;
-        } else if (compare < 0) {
-            return getNode(node.left, key);
-        } else { // if compare > 0
-            return getNode(node.right, key);
         }
+//        else if (compare < 0) {
+//            return getNode(node.left, key);
+//        } else { // if compare > 0
+//            return getNode(node.right, key);
+//        }
+
+        Node left = getNode(node.left, key);
+        if(Objects.nonNull(left)){
+            return left;
+        }
+        Node right = getNode(node.right, key);
+        if(Objects.nonNull(right)){
+            return right;
+        }
+        return null;
     }
 
     /**
@@ -261,20 +336,6 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
         node.right = null;
         size--;
         return rightNode;
-    }
-
-    /**
-     * @param key any key
-     * @return value
-     */
-    public V remove(K key) {
-        Node node = getNode(root, key);
-        if (node != null) {
-            root = remove(root, key);
-            return node.value;
-        }
-
-        return null;
     }
 
     /**
@@ -315,40 +376,7 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
         }
     }
 
-    public boolean contains(K key) {
-        return getNode(root, key) != null;
-    }
 
-    public V get(K key) {
-        Node node = getNode(root, key);
-        return node == null ? null : node.value;
-    }
-
-    public void set(K key, V newValue) {
-        Node node = getNode(root, key);
-        if (node == null) {
-            throw new IllegalArgumentException(key + " not exist！");
-        }
-
-        node.value = newValue;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public void print() {
-//        List<List<Node>> nodes = new ArrayList<>();
-//        List<Node> nodePair = new ArrayList<>();
-//        nodePair.add(root);
-//        nodes.add(nodePair);
-//        print(nodes);
-        print(root);
-    }
 
     private void print(Node node) {
         if (Objects.isNull(node)) {
