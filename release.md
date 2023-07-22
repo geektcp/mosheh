@@ -29,3 +29,8 @@ mosheh Release Notes
 ### 2023.5.29: version 1.0.2
 - develop tiny cache
 - build some test case for tiny cache
+
+### 2023.5.29: version 1.0.2
+- add clear feature for tiny cache
+- use weak reference to load travel data
+- add test case for this version
