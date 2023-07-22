@@ -22,7 +22,7 @@ public class CacheTree<K extends AbstractKey<K>, V> extends RedBlackTree<K, V> i
 
     @Override
     public boolean clear() {
-        return false;
+        return super.clear();
     }
 
     @Override

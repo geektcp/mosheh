@@ -63,7 +63,7 @@ public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable 
 
     @Override
     public boolean clear() {
-        return false;
+        return tinyCache.clear();
     }
 
     @Override

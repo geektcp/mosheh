@@ -6,6 +6,7 @@ import com.geektcp.common.mosheh.cache.tiny.storage.AbstractKey;
 import com.geektcp.common.mosheh.system.Sys;
 import lombok.Data;
 
+import java.lang.ref.WeakReference;
 import java.util.*;
 
 /**
@@ -45,18 +46,29 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
             return Objects.isNull(key);
         }
 
-        private void init(K key, V value) {
-            this.key = key;
-            this.value = value;
+
+        public boolean clear() {
+            this.setColor(false);
+            this.setKey(null);
+            this.setValue(null);
+            return true;
         }
+
 
         public void print() {
             Sys.p("key: {} | value: {}", key.toString(), value);
         }
+
+
+        /////////////////////
+        private void init(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 
     private Node root;
-    private Map<Object, Object> map;
+    private WeakReference<Map<Object, Object>> weakMap;
 
     private int size;
 
@@ -67,7 +79,7 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
 
     protected void init() {
         this.root = new Node();
-        this.map = new HashMap<>();
+        this.weakMap = new WeakReference<>(new HashMap<>());
     }
 
 
@@ -138,10 +150,20 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
      * then load it into map and u can print it
      */
     public void travel() {
+        Map<Object, Object> map = weakMap.get();
         travel(root, map);
         Sys.p(JSON.toJSONString(map, true));
     }
 
+    public boolean clear() {
+        try {
+            clear(root);
+            clear(weakMap);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 
     ////////////////////////////////////////////////////////////////
@@ -263,6 +285,45 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
             travel(node.right, right);
         }
 
+    }
+
+    /**
+     * clean all node data
+     * @param node the target which will be clear
+     */
+    private void clear(Node node) {
+        if (Objects.isNull(node) ) {
+            return;
+        }
+
+        if (Objects.nonNull(node.left)) {
+            clear(node.left);
+            node.left = null;
+        }
+
+        if (Objects.nonNull(node.right)) {
+            clear(node.right);
+            node.right = null;
+        }
+
+        node.clear();
+    }
+
+    /**
+     * clean travel data which load by weak reference
+     * @param mapWeakReference  map which build with weak reference
+     */
+    private void clear(WeakReference<Map<Object, Object>> mapWeakReference) {
+        if(Objects.isNull(mapWeakReference)){
+            return;
+        }
+
+        Map clearMap = mapWeakReference.get();
+        if(Objects.nonNull(clearMap)){
+            clearMap.clear();
+        }
+
+        mapWeakReference.clear();
     }
 
 

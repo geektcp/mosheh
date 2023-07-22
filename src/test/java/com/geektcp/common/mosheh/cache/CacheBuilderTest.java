@@ -11,6 +11,9 @@ import com.geektcp.common.mosheh.system.Sys;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -70,8 +73,45 @@ public class CacheBuilderTest {
     }
 
 
+
+    @Test
+    public void clear() {
+        LoadingCache<String, Long> loadingCache = CacheBuilder.newBuilder()
+                .refreshAfterWrite(7, TimeUnit.SECONDS)
+                .expireAfterWrite(5, TimeUnit.SECONDS)
+                .removalListener(localListener)
+                .build(new TinyLoader<String, Long>() {
+                    @Override
+                    public Long load(String key) {
+                        return myLoad(key);
+                    }
+                });
+
+        loadingCache.put("a", 1L);
+        loadingCache.put("b", 23L);
+        loadingCache.travel();
+        loadingCache.clear();
+        Sys.p("----------------");
+        loadingCache.travel();
+    }
+
     private Long myLoad(String key) {
         return IdGenerator.getId();
     }
 
+    @Test
+    public void testWeakReference(){
+        WeakReference<Map<Object, Object>> weakReference = new WeakReference<>(new HashMap<>());;
+        Map<Object, Object> map = weakReference.get();
+        map.put("111","sssff");
+        map.put("tytyhtyh","7889kk");
+
+        // weak reference do not clear, need wait GC
+        Sys.p(map.get("tytyhtyh"));
+        Sys.sleep(5000);
+        weakReference.clear();
+        Sys.p(map.get("tytyhtyh"));
+
+
+    }
 }

@@ -54,8 +54,7 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     @Override
     public boolean clear() {
-        cacheTree.clear();
-        return true;
+        return cacheTree.clear();
     }
 
     @Override
