@@ -36,8 +36,4 @@ public interface LoadingCache<K, V> extends Cache<K, V> {
 
     ConcurrentMap<K, V> asMap();
 
-    void print();
-
-    void travel();
-
 }

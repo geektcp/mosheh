@@ -25,4 +25,8 @@ public interface Store<K, V> {
 
     void travel();
 
+    void start();
+
+    void stop();
+
 }

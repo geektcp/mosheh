@@ -105,4 +105,12 @@ public class SimpleCache<K, V> implements Cache<K, V> {
     public void travel(){
 
     }
+
+    @Override
+    public void start(){
+    }
+
+    @Override
+    public void stop(){
+    }
 }

@@ -114,4 +114,31 @@ public class CacheBuilderTest {
 
 
     }
+
+
+    @Test
+    public void invalid() {
+        LoadingCache<String, Long> loadingCache = CacheBuilder.newBuilder()
+                .refreshAfterWrite(7, TimeUnit.SECONDS)
+                .expireAfterWrite(5, TimeUnit.SECONDS)
+                .removalListener(localListener)
+                .build(new TinyLoader<String, Long>() {
+                    @Override
+                    public Long load(String key) {
+                        return myLoad(key);
+                    }
+                });
+
+        loadingCache.travel();
+        loadingCache.stop();
+        loadingCache.put("stop", 1L);
+        loadingCache.travel();
+
+        Sys.p("----------------");
+
+        loadingCache.start();
+        loadingCache.put("start", 1L);
+        loadingCache.travel();
+
+    }
 }

@@ -8,8 +8,11 @@ import com.geektcp.common.mosheh.tree.RedBlackTree;
  */
 public class CacheTree<K extends AbstractKey<K>, V> extends RedBlackTree<K, V> implements Store<K, V> {
 
+    public static boolean IS_VALID = true;
+
     public CacheTree() {
         // to do
+        IS_VALID = true;
         this.init();
 
     }
@@ -27,6 +30,9 @@ public class CacheTree<K extends AbstractKey<K>, V> extends RedBlackTree<K, V> i
 
     @Override
     public boolean put(K k, V v) {
+        if(!IS_VALID){
+            return false;
+        }
         super.add(k, v);
         return true;
     }
@@ -63,5 +69,21 @@ public class CacheTree<K extends AbstractKey<K>, V> extends RedBlackTree<K, V> i
 
     public void print(){
         super.print();
+    }
+
+    public boolean invalid(){
+        IS_VALID = false;
+        return super.clear();
+    }
+
+    @Override
+    public void start(){
+        IS_VALID = true;
+    }
+
+    @Override
+    public void stop(){
+        IS_VALID = false;
+        super.clear();
     }
 }

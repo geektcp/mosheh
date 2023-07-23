@@ -78,4 +78,14 @@ public final class WeakCache<K, V> extends AbstractCache<K, V> implements Cache<
         return false;
     }
 
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
 }

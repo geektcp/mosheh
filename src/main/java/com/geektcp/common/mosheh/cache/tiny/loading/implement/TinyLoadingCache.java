@@ -111,4 +111,14 @@ public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable 
         tinyCache.travel();
     }
 
+    @Override
+    public void start(){
+        tinyCache.start();
+    }
+
+    @Override
+    public void stop(){
+        tinyCache.stop();
+    }
+
 }

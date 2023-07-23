@@ -35,7 +35,7 @@ public class LruCache<K, V> implements Cache<K, V> {
     private HashMap<K, Node> map;
     private int maxSize;
 
-    public LruCache(){
+    public LruCache() {
         this(1000);
     }
 
@@ -49,7 +49,7 @@ public class LruCache<K, V> implements Cache<K, V> {
 
             public K next() {
                 Node node = cur;
-                if(Objects.isNull(node)){
+                if (Objects.isNull(node)) {
                     throw new NoSuchElementException();
                 }
                 cur = cur.next;
@@ -75,12 +75,22 @@ public class LruCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public void print(){
+    public void print() {
 
     }
 
     @Override
-    public void travel(){
+    public void travel() {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
 
     }
 
@@ -173,7 +183,6 @@ public class LruCache<K, V> implements Cache<K, V> {
 
         return node;
     }
-
 
 
 }

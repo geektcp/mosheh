@@ -82,9 +82,18 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
     public void print(){
         cacheTree.print();
     }
-
+    @Override
     public void travel(){
         cacheTree.travel();
     }
 
+    @Override
+    public void start(){
+        cacheTree.start();
+    }
+
+    @Override
+    public void stop(){
+        cacheTree.stop();
+    }
 }

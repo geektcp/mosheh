@@ -323,9 +323,14 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
             clearMap.clear();
         }
 
-        mapWeakReference.clear();
     }
 
+    /**
+     * direct execute gc
+     */
+    private void gc() {
+        weakMap.clear();
+    }
 
     private Node rotate(Node node) {
         if (!isRed(node.left) && isRed(node.right)) {

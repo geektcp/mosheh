@@ -37,4 +37,9 @@ public interface Cache<K, V> {
     void print();
 
     void travel();
+
+    void start();
+
+    void stop();
+
 }
