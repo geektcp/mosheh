@@ -54,7 +54,7 @@ public class RedBlackBalancedSearchTree<Key extends Comparable<Key>, Value> exte
         }
         int cmp = key.compareTo(x.key);
         if (cmp == 0)
-            x.val = value;
+            x.value = value;
         else if (cmp < 0)
             x.left = put(x.left, key, value);
         else

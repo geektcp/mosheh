@@ -3,12 +3,13 @@ package com.geektcp.common.mosheh.collection;
 import com.geektcp.common.mosheh.system.Sys;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Lists<T> {
+@SuppressWarnings("unchecked")
+public class Lists {
 
-    @SuppressWarnings("unchecked")
     public static <T> T[] toArray(List<T> src, Class<T> cls) {
         if (Objects.isNull(src)) {
             Sys.p("List src is null");
@@ -23,7 +24,6 @@ public class Lists<T> {
         return dst;
     }
 
-    @SuppressWarnings("unchecked")
     public static <T> T[] toArray(List<T> src) {
         Class<?> cls = Object.class;
         if (Objects.isNull(src) || src.isEmpty()) {
@@ -54,6 +54,12 @@ public class Lists<T> {
         }
         return dst;
     }
+
+
+    public static <T> ArrayList<T> newArrayList() {
+        return new ArrayList();
+    }
+
 
 
 }

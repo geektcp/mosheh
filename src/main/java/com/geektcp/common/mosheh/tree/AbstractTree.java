@@ -4,11 +4,28 @@ package com.geektcp.common.mosheh.tree;
  * @author geektcp on 2019/1/21.
  */
 public abstract class AbstractTree {
+
     public Node root;
 
     protected int size;
 
     protected abstract Node createNode(int value, Node parent, Node left, Node right);
+
+    public static class Node {
+        public Node(Integer value, Node parent, Node left, Node right) {
+            super();
+            this.value = value;
+            this.parent = parent;
+            this.left = left;
+            this.right = right;
+        }
+
+        public Integer value;
+        public Node parent;
+        public Node left;
+        public Node right;
+    }
+
 
     public Node search(int element) {
         Node node = root;
@@ -60,24 +77,6 @@ public abstract class AbstractTree {
         }
     }
 
-    protected Node delete(Node deleteNode) {
-
-        return null;
-    }
-
-    private Node transplant(Node nodeToReplace, Node newNode) {
-        if (nodeToReplace.parent == null) {
-            this.root = newNode;
-        } else if (nodeToReplace == nodeToReplace.parent.left) {
-            nodeToReplace.parent.left = newNode;
-        } else {
-            nodeToReplace.parent.right = newNode;
-        }
-        if (newNode != null) {
-            newNode.parent = nodeToReplace.parent;
-        }
-        return newNode;
-    }
 
     public int getSize() {
         return size;
@@ -97,6 +96,30 @@ public abstract class AbstractTree {
             printTree(node.left, false, "");
         }
     }
+
+
+    //////////////////////////
+    protected Node delete(Node deleteNode) {
+
+        return null;
+    }
+
+
+    //////////////////////////
+    private Node transplant(Node nodeToReplace, Node newNode) {
+        if (nodeToReplace.parent == null) {
+            this.root = newNode;
+        } else if (nodeToReplace == nodeToReplace.parent.left) {
+            nodeToReplace.parent.left = newNode;
+        } else {
+            nodeToReplace.parent.right = newNode;
+        }
+        if (newNode != null) {
+            newNode.parent = nodeToReplace.parent;
+        }
+        return newNode;
+    }
+
 
     private void printNodeValue(Node node) {
         if (node.value == null) {
@@ -124,18 +147,4 @@ public abstract class AbstractTree {
         }
     }
 
-    public static class Node {
-        public Node(Integer value, Node parent, Node left, Node right) {
-            super();
-            this.value = value;
-            this.parent = parent;
-            this.left = left;
-            this.right = right;
-        }
-
-        public Integer value;
-        public Node parent;
-        public Node left;
-        public Node right;
-    }
 }

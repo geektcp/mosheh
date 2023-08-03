@@ -13,7 +13,7 @@ public class BalancedSearchTree<Key extends Comparable<Key>, Value> implements O
 
     protected class Node {
         Key key;
-        Value val;
+        Value value;
         Node left;
         Node right;
         int N;
@@ -21,7 +21,7 @@ public class BalancedSearchTree<Key extends Comparable<Key>, Value> implements O
 
         Node(Key key, Value val, int N) {
             this.key = key;
-            this.val = val;
+            this.value = value;
             this.N = N;
         }
     }
@@ -51,7 +51,7 @@ public class BalancedSearchTree<Key extends Comparable<Key>, Value> implements O
             return new Node(key, value, 1);
         int cmp = key.compareTo(x.key);
         if (cmp == 0)
-            x.val = value;
+            x.value = value;
         else if (cmp < 0)
             x.left = put(x.left, key, value);
         else
@@ -70,7 +70,7 @@ public class BalancedSearchTree<Key extends Comparable<Key>, Value> implements O
             return null;
         int cmp = key.compareTo(x.key);
         if (cmp == 0)
-            return x.val;
+            return x.value;
         else if (cmp < 0)
             return get(x.left, key);
         else

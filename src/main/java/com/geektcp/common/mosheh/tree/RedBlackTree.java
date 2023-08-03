@@ -4,7 +4,7 @@ package com.geektcp.common.mosheh.tree;
 import com.alibaba.fastjson.JSON;
 import com.geektcp.common.mosheh.cache.tiny.storage.AbstractKey;
 import com.geektcp.common.mosheh.system.Sys;
-import lombok.Data;
+import com.geektcp.common.mosheh.tree.node.AbstractBinaryNode;
 
 import java.lang.ref.WeakReference;
 import java.util.*;
@@ -22,13 +22,12 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
     private static final String NODE_RIGHT = "right";
 
 
-    @Data
-    private class Node {
-        K key;
-        V value;
-        Node left;
-        Node right;
-        boolean color;
+    private class Node extends AbstractBinaryNode {
+        private K key;
+        private V value;
+        private Node left;
+        private Node right;
+        private boolean color;
 
         Node() {
             // init
@@ -46,6 +45,33 @@ public class RedBlackTree<K extends AbstractKey<K>, V> {
             return Objects.isNull(key);
         }
 
+        public boolean isRoot() {
+            return this.root;
+        }
+
+        public void setColor(boolean color){
+            this.color = color;
+        }
+
+        public boolean getColor(){
+            return this.color;
+        }
+
+        public void setKey(K key){
+            this.key = key;
+        }
+
+        public K getKey(){
+            return this.key;
+        }
+
+        public void setValue(V value){
+            this.value = value;
+        }
+
+        public V getValue(){
+            return this.value;
+        }
 
         public boolean clear() {
             this.setColor(false);
