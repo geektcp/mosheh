@@ -52,38 +52,25 @@ public class CollectionUtils {
     }
 
     /**
-     * u can set the sortType SORT_ASC or SORT_DESC
+     * bubble sort algorithm
+     * user can set the sortType SORT_ASC or SORT_DESC
      * @param list this the disorder list
      * @param <T> the type of list element
-     * @return  return the ordered list
      */
     public static <T extends Sortable> List<T> sort(List<T> list, String sortType) {
         List<T> ret = Lists.newArrayList();
-        sort(list, sortType, ret);
-
+        List<T> listCopy = deepCopy(list);
+        int size = listCopy.size();
+        for (int i = 0; i < size; i++) {
+            T bubble = getBubble(listCopy, sortType);
+            listCopy.remove(bubble);
+            ret.add(bubble);
+        }
         return ret;
     }
 
 
     ////////////////////////////////////////////////////
-    /**
-     * bubble sort algorithm
-     * @param list this the disorder list
-     * @param <T> the type of list element
-     * @param sortedList this is the ordered list
-     */
-    @SuppressWarnings("unchecked")
-    private static <T extends Sortable> void sort(List<T> list, String sortType, List<T> sortedList) {
-        Class<List<T>> cls = (Class<List<T>>) list.getClass();
-        List<T> listCopy = ObjectUtils.deepCopyList(list, cls);
-        int size = listCopy.size();
-        for (int i = 0; i < size; i++) {
-            T bubble = getBubble(listCopy, sortType);
-            listCopy.remove(bubble);
-            sortedList.add(bubble);
-        }
-    }
-
     /**
      * get the Bubble
      * @param list the deep copied list
@@ -125,5 +112,11 @@ public class CollectionUtils {
             return src.compareTo(dst);
         }
         return -1;  // default asc
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends Sortable> List<T> deepCopy(List<T> list){
+        Class<List<T>> cls = (Class<List<T>>) list.getClass();
+        return ObjectUtils.deepCopyList(list, cls);
     }
 }
