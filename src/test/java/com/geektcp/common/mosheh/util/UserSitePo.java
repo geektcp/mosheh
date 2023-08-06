@@ -22,13 +22,12 @@ public class UserSitePo implements Sortable {
 
     private String siteLabelId;
 
-    private int sort;
+    private Integer sort;
 
 
     public Integer getSort(){
         return sort;
     }
-
 
     public void setName(String name){
         this.name = name;

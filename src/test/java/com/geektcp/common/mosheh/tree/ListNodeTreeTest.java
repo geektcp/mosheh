@@ -59,7 +59,7 @@ public class ListNodeTreeTest {
 
         UserDirVo tree = ListNodeTree.createTree(voList, UserDirVo.class);
 
-        Sys.p("{}",tree.toString());
+        Sys.pretty(tree);
     }
 
 

@@ -12,8 +12,21 @@ public interface Sortable extends Serializable {
      * for example: sorting , id, num etc.
      * just return the sort field as result and it is ok.
      *
+     * if someone use lombok, check that sort field type must be Integer type.
+     * correct example:
+     * @Data
+     * public class AnyThingPo implements Sortable {
+     *     private Integer sort;
+     * }
+     *
+     * wrong example:
+     * @Data
+     * public class AnyThingPo implements Sortable {
+     *     private int sort;  // do not use int type because return type is Integer
+     *
      * @return return Integer type ,not int type.
+     *
      */
-    Integer getSort();
+     Comparable getSort();
 
 }

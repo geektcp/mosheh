@@ -109,20 +109,21 @@ public class CollectionUtils {
      * @return the result of every comparison
      */
     private static <T extends Sortable> T compareSort(T src, T dst, String sortType) {
-        boolean compareResult = compareSort(src.getSort(), dst.getSort(), sortType);
-        if (compareResult) {
+        int compareResult = compareSort(src.getSort(), dst.getSort(), sortType);
+        if (compareResult > 0) {
             return src;
         }
         return dst;
     }
 
-    private static boolean compareSort(Integer src, Integer dst, String sortType) {
+    @SuppressWarnings("unchecked")
+    private static int compareSort(Comparable src, Comparable dst, String sortType) {
         if (SORT_ASC.equals(sortType)) {
-            return src < dst;
+            return dst.compareTo(src);
         }
         if (SORT_DESC.equals(sortType)) {
-            return src > dst;
+            return src.compareTo(dst);
         }
-        return false;  // default asc
+        return -1;  // default asc
     }
 }
