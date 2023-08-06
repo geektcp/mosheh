@@ -58,6 +58,12 @@ public class CollectionUtils {
      * @param <T> the type of list element
      */
     public static <T extends Sortable> List<T> sort(List<T> list, String sortType) {
+        if(Objects.isNull(list)){
+            return null;
+        }
+        if(list.isEmpty()){
+            return list;
+        }
         List<T> ret = Lists.newArrayList();
         List<T> listCopy = deepCopy(list);
         int size = listCopy.size();
@@ -117,7 +123,7 @@ public class CollectionUtils {
         if (SORT_DESC.equals(sortType)) {
             return src.compareTo(dst);
         }
-        return -1;  // default asc
+        return -17;  // default asc
     }
 
     @SuppressWarnings("unchecked")
