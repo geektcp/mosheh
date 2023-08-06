@@ -5,8 +5,6 @@ import com.geektcp.common.mosheh.system.Sys;
 
 import java.util.List;
 
-import static com.geektcp.common.mosheh.util.CollectionUtils.SORT_ASC;
-import static com.geektcp.common.mosheh.util.CollectionUtils.SORT_DESC;
 
 /**
  * @author geektcp on 2023/8/6 14:40.
@@ -39,9 +37,9 @@ public class CollectionUtilsTest {
         Class<?> cls = list.getClass();
         List<UserSitePo> ret = CollectionUtils.sort(list);
         Sys.pretty(ret);
-        List<UserSitePo> ret1 = CollectionUtils.sort(list,SORT_ASC);
+        List<UserSitePo> ret1 = CollectionUtils.sort(list, CollectionUtils.SORT_ASC);
         Sys.pretty(ret1);
-        List<UserSitePo> ret2 = CollectionUtils.sort(list,SORT_DESC);
+        List<UserSitePo> ret2 = CollectionUtils.sort(list, CollectionUtils.SORT_DESC);
         Sys.pretty(ret2);
 
     }
