@@ -20,6 +20,7 @@ package com.geektcp.common.mosheh.tree;
 
 import com.geektcp.common.mosheh.tree.node.AbstractListNode;
 import com.geektcp.common.mosheh.util.CollectionUtils;
+import com.geektcp.common.mosheh.util.ObjectUtils;
 
 import java.io.*;
 import java.util.*;
@@ -34,7 +35,7 @@ public class ListNodeTree {
             throws IllegalAccessException, InstantiationException{
         T currentNode = clazz.newInstance();
         currentNode.setRoot(true);
-        List<T> listCopy = (List<T>) deepCopy(list);
+        List<T> listCopy = (List<T>) ObjectUtils.deepCopy(list);
         if (Objects.nonNull(listCopy)) {
             listCopy.forEach(childNode -> {
                 insertNode(currentNode, childNode);
@@ -65,23 +66,7 @@ public class ListNodeTree {
 
 
     ////////////////////////////////////
-    /*
-     * para list will be modified when excute recursive inserting, so need deepcopy
-     *
-     * */
-    private static Object deepCopy(Object object) {
-        try {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(object);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-            ObjectInputStream objInputStream = new ObjectInputStream(inputStream);
-            return objInputStream.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
     private static <T extends AbstractListNode> boolean insertNode(T currentNode, T childNode) {
         Comparable currentId = currentNode.getId();

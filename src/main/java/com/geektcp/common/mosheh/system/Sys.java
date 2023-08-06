@@ -18,6 +18,8 @@
 package com.geektcp.common.mosheh.system;
 
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.File;
 import java.security.Key;
 import java.util.List;
@@ -50,6 +52,10 @@ public class Sys {
 
     public static void p(String str) {
         ThyStream.println(str);
+    }
+
+    public static void pretty(Object o) {
+        p("{}", JSON.toJSONString(o, true));
     }
 
     public static void println() {
