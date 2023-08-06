@@ -96,6 +96,12 @@ public class CollectionUtils {
      * @return the result of every comparison
      */
     private static <T extends Sortable> T compareSort(T src, T dst, String sortType) {
+        if(Objects.isNull(dst)){
+            return src;
+        }
+        if(Objects.isNull(src)){
+            return dst;
+        }
         int compareResult = compareSort(src.getSort(), dst.getSort(), sortType);
         if (compareResult > 0) {
             return src;
