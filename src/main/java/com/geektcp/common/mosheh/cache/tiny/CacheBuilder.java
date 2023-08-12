@@ -69,7 +69,9 @@ public class CacheBuilder<K, V>  {
 
     public  <K1 extends K, V1 extends V> LoadingCache<K1, V1> build(TinyLoader<? super K1, V1> loader) {
         this.checkWeightWithWeigher();
-        return new TinyLoadingCache<>(this, loader);
+        LoadingCache<K1, V1> tinyLoadingCache = new TinyLoadingCache<>(this, loader);
+        tinyLoadingCache.start();
+        return tinyLoadingCache;
     }
 
     private void checkWeightWithWeigher() {

@@ -24,9 +24,12 @@ import com.geektcp.common.mosheh.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.mosheh.cache.AbstractCache;
 import com.geektcp.common.mosheh.cache.tiny.storage.CacheTree;
 import com.geektcp.common.mosheh.cache.tiny.storage.NodeKey;
+import com.geektcp.common.mosheh.generator.IdGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author geektcp on 2023/2/26 17:50.
@@ -44,7 +47,7 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     public TinyCache() {
         // build complex cache
-        this.cacheTree = new CacheTree<>();
+        this.cacheTree = new CacheTree();
     }
 
     public TinyCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {

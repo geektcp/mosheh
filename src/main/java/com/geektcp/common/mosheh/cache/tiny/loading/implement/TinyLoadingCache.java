@@ -23,20 +23,28 @@ import com.geektcp.common.mosheh.cache.tiny.CacheBuilder;
 import com.geektcp.common.mosheh.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.mosheh.cache.tiny.loading.LoadingCache;
 import com.geektcp.common.mosheh.cache.tiny.local.TinyCache;
+import com.geektcp.common.mosheh.generator.IdGenerator;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author geektcp on 2023/2/26 18:28.
  */
-public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable {
+public class TinyLoadingCache<K, V> implements LoadingCache<K, V>, Serializable {
+
+    private Long id;
 
     private TinyCache<K, V> tinyCache;
 
     private CacheBuilder builder;
+
+    private BlockingQueue<Object> queue;
+
     private TinyLoader<? super K, V> loader;
 
     private Map<K, Long> expireTimeMap = new HashMap<>();
@@ -56,8 +64,10 @@ public class TinyLoadingCache<K, V> implements LoadingCache<K, V> ,Serializable 
     }
 
     public TinyLoadingCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
+        this.id = IdGenerator.getId();
         this.builder = builder;
         this.loader = loader;
+        this.queue = new LinkedBlockingQueue<>();
         this.tinyCache = new TinyCache<>();
     }
 

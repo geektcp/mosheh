@@ -26,7 +26,7 @@ import java.util.Objects;
 /**
  * @author geektcp on 2023/3/12 20:18.
  */
-public class NodeKey<K> extends AbstractKey<K> implements Comparable<K> {
+public class NodeKey<K> extends AbstractKey<K> {
 
     private Long id;
 
