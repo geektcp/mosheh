@@ -22,21 +22,18 @@ import com.geektcp.common.mosheh.cache.Store;
 import com.geektcp.common.mosheh.cache.tiny.CacheBuilder;
 import com.geektcp.common.mosheh.cache.tiny.loader.TinyLoader;
 import com.geektcp.common.mosheh.cache.AbstractCache;
-import com.geektcp.common.mosheh.cache.tiny.storage.CacheTree;
-import com.geektcp.common.mosheh.cache.tiny.storage.NodeKey;
-import com.geektcp.common.mosheh.generator.IdGenerator;
+import com.geektcp.common.mosheh.cache.tiny.storage.cache.TreeCacheFactory;
+import com.geektcp.common.mosheh.cache.tiny.storage.key.NodeKey;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author geektcp on 2023/2/26 17:50.
  */
 public class TinyCache<K , V> extends AbstractCache<K, V> {
 
-    private Store<NodeKey, V> cacheTree;
+    private Store<NodeKey, V> store;
 
     private Map<K, Long> expireTimeMap = new HashMap<>();
 
@@ -47,7 +44,7 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     public TinyCache() {
         // build complex cache
-        this.cacheTree = new CacheTree();
+        this.store = TreeCacheFactory.build().buildCache();
     }
 
     public TinyCache(CacheBuilder<? super K, ? super V> builder, TinyLoader<? super K, V> loader) {
@@ -57,7 +54,7 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     @Override
     public boolean clear() {
-        return cacheTree.clear();
+        return store.clear();
     }
 
     @Override
@@ -67,36 +64,36 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     @Override
     public V get(K k) {
-        return cacheTree.fetch(new NodeKey<>(k));
+        return store.fetch(new NodeKey<>(k));
     }
 
     @Override
     public boolean put(K k, V v) {
-        cacheTree.put(new NodeKey<>(k), v);
+        store.put(new NodeKey<>(k), v);
         return true;
     }
 
     @Override
     public boolean delete(K k) {
-        cacheTree.delete(new NodeKey<>(k));
+        store.delete(new NodeKey<>(k));
         return false;
     }
 
     public void print(){
-        cacheTree.print();
+        store.print();
     }
     @Override
     public void travel(){
-        cacheTree.travel();
+        store.travel();
     }
 
     @Override
     public void start(){
-        cacheTree.start();
+        store.start();
     }
 
     @Override
     public void stop(){
-        cacheTree.stop();
+        store.stop();
     }
 }

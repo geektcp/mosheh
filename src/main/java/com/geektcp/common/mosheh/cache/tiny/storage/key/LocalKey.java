@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.mosheh.cache.tiny.storage;
+package com.geektcp.common.mosheh.cache.tiny.storage.key;
 
 /**
  * @author geektcp on 2023/3/12 20:47.

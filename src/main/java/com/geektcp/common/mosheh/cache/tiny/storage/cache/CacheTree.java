@@ -16,9 +16,10 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.mosheh.cache.tiny.storage;
+package com.geektcp.common.mosheh.cache.tiny.storage.cache;
 
 import com.geektcp.common.mosheh.cache.Store;
+import com.geektcp.common.mosheh.cache.tiny.storage.key.AbstractKey;
 import com.geektcp.common.mosheh.tree.RedBlackTree;
 
 /**

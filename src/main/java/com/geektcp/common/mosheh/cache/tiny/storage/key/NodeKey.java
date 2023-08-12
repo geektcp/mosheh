@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.geektcp.common.mosheh.cache.tiny.storage;
+package com.geektcp.common.mosheh.cache.tiny.storage.key;
 
 
 import com.geektcp.common.mosheh.generator.IdGenerator;

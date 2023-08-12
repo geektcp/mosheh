@@ -20,7 +20,8 @@ package com.geektcp.common.mosheh.tree;
 
 
 import com.alibaba.fastjson.JSON;
-import com.geektcp.common.mosheh.cache.tiny.storage.AbstractKey;
+import com.geektcp.common.mosheh.cache.AbstractCacheTree;
+import com.geektcp.common.mosheh.cache.tiny.storage.key.AbstractKey;
 import com.geektcp.common.mosheh.system.Sys;
 import com.geektcp.common.mosheh.tree.node.AbstractBinaryNode;
 
@@ -30,7 +31,7 @@ import java.util.*;
 /**
  * @author geektcp on 2019/9/16.
  */
-public class RedBlackTree<K extends AbstractKey<K>, V> {
+public class RedBlackTree<K extends AbstractKey<K>, V> extends AbstractCacheTree<K,V> {
 
     private static final boolean RED = true;
 
