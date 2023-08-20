@@ -27,22 +27,38 @@ import java.util.List;
 
 /**
  * @author geektcp on 2023/8/3 10:29.
+ * <p>
+ * These names are used to prevent conflicts with existing user class:
+ * nodeId
+ * nodeName
+ * parentNodeId
+ * parentNodeName
+ * childrenNodeList
+ * rootNode
+ * <p>
+ * so mosheh do not use these names:
+ * id, parentId, name, parentName
+ *
  */
 public class AbstractListNode<K extends Comparable> implements Node {
 
-    protected K id;
+    protected K nodeId;
 
-    private K parentId;
+    private Object node;
+
+    private K parentNodeId;
+
+    private Object parentNode;
 
     private boolean root;
 
-    private List<AbstractListNode> children;
+    private List<AbstractListNode> childrenNodeList;
 
     public AbstractListNode() {
-        this.id = null;
-        this.parentId = null;
+        this.nodeId = null;
+        this.parentNodeId = null;
         this.root = false;
-        this.children = new LinkedList<>();
+        this.childrenNodeList = new LinkedList<>();
     }
 
     /////////////////////////
@@ -61,34 +77,51 @@ public class AbstractListNode<K extends Comparable> implements Node {
 
     /////////////////////////
     public final boolean abstractAddChild(AbstractListNode childNode) {
-        if (children == null) {
-            children = new LinkedList<>();
+        if (childrenNodeList == null) {
+            childrenNodeList = new LinkedList<>();
         }
-        return children.add(childNode);
+        return childrenNodeList.add(childNode);
     }
 
-    public final void setId(K id) {
-        this.id = id;
+    public final void setNodeId(K nodeId) {
+        this.nodeId = nodeId;
     }
 
-    public final K getId() {
-        return this.id;
+    public final K getNodeId() {
+        return this.nodeId;
     }
 
-    public final void setParentId(K parentId) {
-        this.parentId = parentId;
+
+    public final void setNodeName(Object node) {
+        this.node = node;
     }
 
-    public final K getParentId() {
-        return this.parentId;
+    public final Object getNode() {
+        return this.node;
     }
 
-    public final List<AbstractListNode> getChildren() {
-        return children;
+    public final void setParentNodeId(K parentNodeId) {
+        this.parentNodeId = parentNodeId;
     }
 
-    public final void setChildren(List<AbstractListNode> children) {
-        this.children = children;
+    public final K getParentNodeId() {
+        return this.parentNodeId;
+    }
+
+    public final void setParentNode(Object parentNode) {
+        this.parentNode = parentNode;
+    }
+
+    public final Object getParentNode() {
+        return this.parentNode;
+    }
+
+    public final List<AbstractListNode> getChildrenNodeList() {
+        return childrenNodeList;
+    }
+
+    public final void setChildrenNodeList(List<AbstractListNode> childrenNodeList) {
+        this.childrenNodeList = childrenNodeList;
     }
 
     @Override

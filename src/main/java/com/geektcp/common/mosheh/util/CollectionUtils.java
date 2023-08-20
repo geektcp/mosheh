@@ -125,6 +125,7 @@ public class CollectionUtils {
      * rule: null object < any not null object.
      * asc sort: pick the bigger ,if dst is null, return 100 then choose the before obj which is not null.
      * des sort: pick the litter, if src is null, return 100 then choose the before obj which is null.
+     * null is the number which is infinitesimal or minimum
      *
      * @param src      before sort value, index is n
      * @param dst      after sort value,  index is n+1
@@ -137,11 +138,17 @@ public class CollectionUtils {
             if (Objects.isNull(dst)) {
                 return 100;
             }
+            if (Objects.isNull(src)) {
+                return -200;
+            }
             return dst.compareTo(src);
         }
         if (SORT_DESC.equals(sortType)) {
             if (Objects.isNull(src)) {
                 return 100;
+            }
+            if (Objects.isNull(dst)) {
+                return -200;
             }
             return src.compareTo(dst);
         }

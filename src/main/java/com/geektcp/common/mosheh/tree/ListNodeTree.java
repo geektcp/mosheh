@@ -23,6 +23,7 @@ import com.geektcp.common.mosheh.util.CollectionUtils;
 import com.geektcp.common.mosheh.util.ObjectUtils;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -31,9 +32,21 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class ListNodeTree {
 
+    /**
+     * @param list  dataSource
+     * @param clazz return Object class
+     * @param <T>   node type
+     * @return one tree
+     * clazz.newInstance() is deprecated by jdk 11~17 version
+     */
     public static <T extends AbstractListNode> T createTree(List<T> list, Class<T> clazz)
-            throws IllegalAccessException, InstantiationException{
-        T currentNode = clazz.newInstance();
+            throws
+            NoSuchMethodException,
+            InstantiationException,
+            IllegalAccessException,
+            IllegalArgumentException,
+            InvocationTargetException {
+        T currentNode = clazz.getDeclaredConstructor().newInstance();
         currentNode.setRoot(true);
         List<T> listCopy = (List<T>) ObjectUtils.deepCopy(list);
         if (Objects.nonNull(listCopy)) {
@@ -45,19 +58,24 @@ public class ListNodeTree {
     }
 
     public static <T extends AbstractListNode> List createTreeList(List<T> list, Class<T> clazz)
-            throws IllegalAccessException, InstantiationException {
-        return createTree(list, clazz).getChildren();
+            throws
+            NoSuchMethodException,
+            InstantiationException,
+            IllegalAccessException,
+            IllegalArgumentException,
+            InvocationTargetException {
+        return createTree(list, clazz).getChildrenNodeList();
     }
 
-    public static <T extends AbstractListNode> List parseTreeList(List<T> treeList){
-        if (CollectionUtils.isEmpty(treeList)){
+    public static <T extends AbstractListNode> List parseTreeList(List<T> treeList) {
+        if (CollectionUtils.isEmpty(treeList)) {
             return Collections.emptyList();
         }
         List<T> resultList = new ArrayList<>();
         treeList.forEach(node -> {
             resultList.add(node);
-            List<T> childrenNode = parseTreeList(node.getChildren());
-            if (CollectionUtils.isNotEmpty(childrenNode)){
+            List<T> childrenNode = parseTreeList(node.getChildrenNodeList());
+            if (CollectionUtils.isNotEmpty(childrenNode)) {
                 resultList.addAll(childrenNode);
             }
         });
@@ -65,28 +83,39 @@ public class ListNodeTree {
     }
 
 
-    ////////////////////////////////////
-
-
+    ////////////////////////////////////////////////////////////////////////
+    /**
+     * @param currentNode node
+     * @param childNode   node
+     * @param <T>         node type
+     * @return true:success, false: failed
+     */
     private static <T extends AbstractListNode> boolean insertNode(T currentNode, T childNode) {
-        Comparable currentId = currentNode.getId();
-        Comparable childParentId = childNode.getParentId();
+        Comparable currentId = currentNode.getNodeId();
+        Comparable childParentId = childNode.getParentNodeId();
 
-        if(currentNode.isRoot() && Objects.isNull(childParentId)){
+        // add the node which parentNode is root node
+        if (currentNode.isRoot() && Objects.isNull(childParentId)) {
+            childNode.setParentNode(currentNode.getNode());
             currentNode.abstractAddChild(childNode);
             return true;
         }
 
-        if( Objects.nonNull(currentId) && currentId.equals(childParentId) ){
+        // add normal child node
+        if (Objects.nonNull(currentId) && currentId.equals(childParentId)) {
+            childNode.setParentNode(currentNode.getNode());
             currentNode.abstractAddChild(childNode);
             return true;
         }
-        if (Objects.nonNull(currentNode.getChildren())){
-            currentNode.getChildren().forEach(currentChildNode ->{
-                insertNode((T)currentChildNode, childNode);
+
+        // other wise, recursive call the insertNode
+        if (Objects.nonNull(currentNode.getChildrenNodeList())) {
+            currentNode.getChildrenNodeList().forEach(currentChildNode -> {
+                insertNode((T) currentChildNode, childNode);
             });
         }
 
+        // nodes without parent-child relationships
         return false;
     }
 
