@@ -92,7 +92,7 @@ public class AbstractListNode<K extends Comparable> implements Node {
     }
 
 
-    public final void setNodeName(Object node) {
+    public final void setNode(Object node) {
         this.node = node;
     }
 
