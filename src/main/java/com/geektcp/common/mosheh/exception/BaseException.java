@@ -57,7 +57,7 @@ public class BaseException extends RuntimeException implements Serializable {
 
     public BaseException(String desc) {
         this.code = 500;
-        this.desc = "";
+        this.desc = desc;
         this.args = new Object[]{};
     }
 
