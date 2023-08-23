@@ -22,6 +22,7 @@ import com.geektcp.common.mosheh.cache.AbstractCache;
 import com.geektcp.common.mosheh.cache.Cache;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,6 +45,9 @@ public final class WeakCache<K, V> extends AbstractCache<K, V> implements Cache<
 
     @Override
     public V get(K k) {
+        if(Objects.isNull(k)){
+            return null;
+        }
         V v = this.eden.get(k);
         if (v == null) {
             v = this.longTerm.get(k);
@@ -54,6 +58,9 @@ public final class WeakCache<K, V> extends AbstractCache<K, V> implements Cache<
     }
 
     public boolean put(K k, V v) {
+        if(Objects.isNull(k)){
+            return false;
+        }
         if (this.eden.size() >= size) {
             this.longTerm.putAll(this.eden);
             this.eden.clear();

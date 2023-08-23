@@ -27,6 +27,7 @@ import com.geektcp.common.mosheh.cache.tiny.storage.key.NodeKey;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author geektcp on 2023/2/26 17:50.
@@ -64,19 +65,24 @@ public class TinyCache<K , V> extends AbstractCache<K, V> {
 
     @Override
     public V get(K k) {
+        if(Objects.isNull(k)){
+            return null;
+        }
         return store.fetch(new NodeKey<>(k));
     }
 
     @Override
     public boolean put(K k, V v) {
+        if(Objects.isNull(k)){
+            return false;
+        }
         store.put(new NodeKey<>(k), v);
         return true;
     }
 
     @Override
     public boolean delete(K k) {
-        store.delete(new NodeKey<>(k));
-        return false;
+        return store.delete(new NodeKey<>(k));
     }
 
     public void print(){

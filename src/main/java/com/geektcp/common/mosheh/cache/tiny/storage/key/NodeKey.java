@@ -20,6 +20,7 @@ package com.geektcp.common.mosheh.cache.tiny.storage.key;
 
 
 import com.geektcp.common.mosheh.generator.IdGenerator;
+import com.geektcp.common.mosheh.system.Sys;
 
 import java.util.Objects;
 
@@ -57,17 +58,19 @@ public class NodeKey<K> extends AbstractKey<K> {
         if (Objects.isNull(k)) {
             return -1000;
         }
-        NodeKey nodeKey = (NodeKey) k;
-//        if (this.id > nodeKey.getId()) {
-//            return 1;
-//        }
-//        if (this.id < nodeKey.getId()) {
-//            return -1;
-//        }
-
-        if(this.currentKey.equals(nodeKey.getKey())){
-            return 0;
+        if (Objects.isNull(currentKey)) {
+            return -2000;
         }
+
+        try {
+            NodeKey nodeKey = (NodeKey) k;
+            if(this.currentKey.equals(nodeKey.getKey())){
+                return 0;
+            }
+        }catch (Exception e){
+            Sys.p("k is not NodeKey type!");
+        }
+
         return -1;
     }
 

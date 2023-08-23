@@ -121,6 +121,9 @@ public class LruCache<K, V> implements Cache<K, V> {
     }
 
     public V get(K key) {
+        if(Objects.isNull(key)){
+            return null;
+        }
         if (!map.containsKey(key)) {
             return null;
         }
@@ -133,7 +136,9 @@ public class LruCache<K, V> implements Cache<K, V> {
     }
 
     public boolean put(K key, V value) {
-
+        if(Objects.isNull(key)){
+            return false;
+        }
         if (map.containsKey(key)) {
             Node node = map.get(key);
             unlink(node);

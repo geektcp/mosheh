@@ -280,7 +280,10 @@ public class RedBlackTree<K extends AbstractKey<K>, V> extends AbstractCacheTree
     }
 
     private void add(Node node, K key, V value) {
-        if (Objects.isNull(node) || node.isEmpty()) {
+        if(Objects.isNull(node)){
+            return;
+        }
+        if (node.isEmpty()) {
             size++;
             node.init(key, value);
             return;
