@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Encoder;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * @author geektcp on 2023/9/13 21:05.
  */
-public class Base64Utils {
+public class DownUtils {
 
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "GET";
@@ -34,28 +35,31 @@ public class Base64Utils {
     private static final boolean FOLLOW_REDIRECTS = false;
 
 
-    public static String getBase64FromUrl(String imgUrl) {
-        return getBase64FromUrl(imgUrl, METHOD_GET,
-                CONNECT_TIME_OUT, READ_TIME_OUT, USE_CACHE, FOLLOW_REDIRECTS);
+    public static boolean downFileFromUrl(String imgUrl, String distFile) {
+        return downFileFromUrl(imgUrl, distFile,
+                METHOD_GET, CONNECT_TIME_OUT, READ_TIME_OUT, USE_CACHE, FOLLOW_REDIRECTS);
     }
 
-    public static String getBase64FromUrl(String imgUrl,
-                                          Integer timeout) {
-        return getBase64FromUrl(imgUrl, METHOD_GET, timeout, timeout, USE_CACHE, FOLLOW_REDIRECTS);
+    public static boolean downFileFromUrl(String remoteURL,
+                                           String distFile,
+                                           Integer timeout) {
+        return downFileFromUrl(remoteURL, distFile, METHOD_GET, timeout, timeout, USE_CACHE, FOLLOW_REDIRECTS);
     }
 
-    public static String getBase64FromUrl(String imgUrl,
-                                          String method,
-                                          Integer timeout) {
-        return getBase64FromUrl(imgUrl, method, timeout, timeout, USE_CACHE, FOLLOW_REDIRECTS);
+    public static boolean downFileFromUrl(String remoteURL,
+                                           String distFile,
+                                           String method,
+                                           Integer timeout) {
+        return downFileFromUrl(remoteURL, distFile, method, timeout, timeout, USE_CACHE, FOLLOW_REDIRECTS);
     }
 
-    public static String getBase64FromUrl(String imgUrl,
-                                          String method,
-                                          Integer timeout,
-                                          Boolean useCache,
-                                          Boolean followRedirects) {
-        return getBase64FromUrl(imgUrl, method, timeout, timeout, useCache, followRedirects);
+    public static boolean downFileFromUrl(String remoteURL,
+                                           String distFile,
+                                           String method,
+                                           Integer timeout,
+                                           Boolean useCache,
+                                           Boolean followRedirects) {
+        return downFileFromUrl(remoteURL, distFile, method, timeout, timeout, useCache, followRedirects);
     }
 
 
@@ -63,34 +67,35 @@ public class Base64Utils {
      * setUseCaches and setUseCaches must before getResponseCode
      * because getResponseCode update HttpURLConnection status to connected status
      *
-     * @param imgUrl         any image url
+     * @param remoteURL      any remote url
      * @param method         any HTTP METHOD ,String type
      * @param connectTimeout connect tcp port time out
      * @param readTimeout    read data from socket tunnel time out
      * @param useCache       is or not use http protocol cache
      * @return result, String type, base64 data of the image or any other resource
      */
-    public static String getBase64FromUrl(String imgUrl,
-                                          String method,
-                                          Integer connectTimeout,
-                                          Integer readTimeout,
-                                          Boolean useCache,
-                                          Boolean followRedirects
+    public static boolean downFileFromUrl(String remoteURL,
+                                           String distFile,
+                                           String method,
+                                           Integer connectTimeout,
+                                           Integer readTimeout,
+                                           Boolean useCache,
+                                           Boolean followRedirects
     ) {
-        if (invalidCheck(imgUrl, method,
+        if (invalidCheck(remoteURL, distFile, method,
                 connectTimeout, readTimeout, useCache, followRedirects)) {
-            return "";
+            return false;
         }
 
         InputStream inStream = null;
-        ByteArrayOutputStream outStream = null;
+        FileOutputStream outStream = null;
         HttpURLConnection httpConnection = null;
 
         try {
-            httpConnection = HttpUtils.buildConnect(imgUrl, method,
+            httpConnection = HttpUtils.buildConnect(remoteURL, method,
                     connectTimeout, readTimeout, useCache, followRedirects);
             if (Objects.isNull(httpConnection)) {
-                return "";
+                return false;
             }
             int code = httpConnection.getResponseCode();
             String msg = httpConnection.getResponseMessage();
@@ -98,7 +103,7 @@ public class Base64Utils {
                 String redirectURL = httpConnection.getHeaderField(HEAD_LOCATION);
                 if (StringUtils.isEmpty(redirectURL)) {
                     Sys.p(code + "|" + msg);
-                    throw new BaseException(700, msg);
+                    throw new BaseException(750, msg);
                 }
                 httpConnection.disconnect();
                 httpConnection = HttpUtils.buildConnect(redirectURL, method,
@@ -109,48 +114,41 @@ public class Base64Utils {
 
             if (code != 200) {
                 Sys.p(code + "|" + msg);
-                throw new BaseException(701, msg);
+                throw new BaseException(751, msg);
             }
 
             httpConnection.connect();                      // maybe connect timeout
             inStream = httpConnection.getInputStream();    // maybe read data timeout
 
-            outStream = new ByteArrayOutputStream();
+            outStream = new FileOutputStream(distFile);
             byte[] buffer = new byte[1024];
             int len = 0;
             while ((len = inStream.read(buffer)) != -1) {
                 outStream.write(buffer, 0, len);
             }
-            return encode(outStream.toByteArray());
+            return true;
         } catch (Exception e) {
             Sys.p(e.getMessage());
         } finally {
             HttpUtils.close(inStream, outStream, httpConnection);
         }
-
-        return "";
+        return false;
     }
 
     /////////////////////////////////////////////////////
-    private static String encode(byte[] image) {
-        BASE64Encoder decoder = new BASE64Encoder();
-        return replaceEnter(decoder.encode(image));
-    }
-
-    private static String replaceEnter(String str) {
-        String reg = "[\n-\r]";
-        Pattern p = Pattern.compile(reg);
-        Matcher m = p.matcher(str);
-        return m.replaceAll("");
-    }
 
     private static boolean invalidCheck(String imgUrl,
+                                        String distFile,
                                         String method,
                                         Integer connectTimeout,
                                         Integer readTimeout,
                                         Boolean useCache,
                                         Boolean followRedirects) {
         if (StringUtils.isEmpty(imgUrl)) {
+            return true;
+        }
+
+        if (StringUtils.isEmpty(distFile)) {
             return true;
         }
 
