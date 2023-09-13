@@ -1,6 +1,7 @@
 package com.geektcp.common.mosheh.util;
 
 import com.geektcp.common.mosheh.system.Sys;
+import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Encoder;
 
 import java.io.ByteArrayOutputStream;
@@ -23,6 +24,8 @@ public class Base64Utils {
 
     private static final int CONNECT_TIME_OUT = 1000 * 3;   // ms
     private static final int READ_TIME_OUT = 1000 * 10;     // ms
+    private static final int MAX_TIME_OUT = 1000 * 4 * 3600;     // ms
+
 
     private static final boolean useCache = false;
 
@@ -31,36 +34,43 @@ public class Base64Utils {
         return getBase64FromUrl(imgUrl, METHOD_GET, CONNECT_TIME_OUT, READ_TIME_OUT, useCache);
     }
 
-    public static String getBase64FromUrl(String imgUrl, int timeout) {
+    public static String getBase64FromUrl(String imgUrl,
+                                          Integer timeout) {
         return getBase64FromUrl(imgUrl, METHOD_GET, timeout, timeout, useCache);
     }
 
-    public static String getBase64FromUrl(String imgUrl, String method, int timeout) {
+    public static String getBase64FromUrl(String imgUrl,
+                                          String method,
+                                          Integer timeout) {
         return getBase64FromUrl(imgUrl, method, timeout, timeout, useCache);
     }
 
     public static String getBase64FromUrl(String imgUrl,
-                                          String method, int timeout,
-                                          boolean useCache) {
+                                          String method,
+                                          Integer timeout,
+                                          Boolean useCache) {
 
         return getBase64FromUrl(imgUrl, method, timeout, timeout, useCache);
     }
 
 
     /**
-     *
-     * @param imgUrl  any image url
-     * @param method any HTTP METHOD ,String type
+     * @param imgUrl         any image url
+     * @param method         any HTTP METHOD ,String type
      * @param connectTimeout connect tcp port time out
      * @param readTimeout    read data from socket tunnel time out
-     * @param useCache is or not use http protocol cache
+     * @param useCache       is or not use http protocol cache
      * @return result, String type, base64 data of the image or any other resource
      */
     public static String getBase64FromUrl(String imgUrl,
                                           String method,
-                                          int connectTimeout,
-                                          int readTimeout,
-                                          boolean useCache) {
+                                          Integer connectTimeout,
+                                          Integer readTimeout,
+                                          Boolean useCache) {
+        if (invalidCheck(imgUrl, method, connectTimeout, readTimeout, useCache)) {
+            return "";
+        }
+
         InputStream inStream = null;
         ByteArrayOutputStream outStream = null;
         HttpURLConnection httpConnection = null;
@@ -116,6 +126,42 @@ public class Base64Utils {
         Pattern p = Pattern.compile(reg);
         Matcher m = p.matcher(str);
         return m.replaceAll("");
+    }
+
+    private static boolean invalidCheck(String imgUrl,
+                                        String method,
+                                        Integer connectTimeout,
+                                        Integer readTimeout,
+                                        Boolean useCache) {
+        if (StringUtils.isEmpty(imgUrl)) {
+            return true;
+        }
+
+        if (StringUtils.isEmpty(method)) {
+            return true;
+        }
+
+        if (Objects.isNull(connectTimeout)) {
+            return true;
+        }
+        if (connectTimeout < 0) {
+            return true;
+        }
+        if (connectTimeout > MAX_TIME_OUT) {
+            return true;
+        }
+
+        if (Objects.isNull(readTimeout)) {
+            return true;
+        }
+        if (readTimeout < 0) {
+            return true;
+        }
+        if (readTimeout > MAX_TIME_OUT) {
+            return true;
+        }
+
+        return Objects.isNull(useCache);
     }
 
 }
