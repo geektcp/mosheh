@@ -1,5 +1,6 @@
 package com.geektcp.common.mosheh.util;
 
+import com.geektcp.common.mosheh.exception.BaseException;
 import com.geektcp.common.mosheh.system.Sys;
 import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Encoder;
@@ -22,39 +23,46 @@ public class Base64Utils {
     public static final String METHOD_HEAD = "HEAD";
     public static final String METHOD_OPTION = "OPTION";
 
+    public static final String HEAD_LOCATION = "LOCATION";
+
     private static final int CONNECT_TIME_OUT = 1000 * 3;   // ms
     private static final int READ_TIME_OUT = 1000 * 10;     // ms
     private static final int MAX_TIME_OUT = 1000 * 4 * 3600;     // ms
 
 
-    private static final boolean useCache = false;
+    private static final boolean USE_CACHE = false;
+    private static final boolean FOLLOW_REDIRECTS = false;
 
 
     public static String getBase64FromUrl(String imgUrl) {
-        return getBase64FromUrl(imgUrl, METHOD_GET, CONNECT_TIME_OUT, READ_TIME_OUT, useCache);
+        return getBase64FromUrl(imgUrl, METHOD_GET,
+                CONNECT_TIME_OUT, READ_TIME_OUT, USE_CACHE, FOLLOW_REDIRECTS);
     }
 
     public static String getBase64FromUrl(String imgUrl,
                                           Integer timeout) {
-        return getBase64FromUrl(imgUrl, METHOD_GET, timeout, timeout, useCache);
+        return getBase64FromUrl(imgUrl, METHOD_GET, timeout, timeout, USE_CACHE, FOLLOW_REDIRECTS);
     }
 
     public static String getBase64FromUrl(String imgUrl,
                                           String method,
                                           Integer timeout) {
-        return getBase64FromUrl(imgUrl, method, timeout, timeout, useCache);
+        return getBase64FromUrl(imgUrl, method, timeout, timeout, USE_CACHE, FOLLOW_REDIRECTS);
     }
 
     public static String getBase64FromUrl(String imgUrl,
                                           String method,
                                           Integer timeout,
-                                          Boolean useCache) {
-
-        return getBase64FromUrl(imgUrl, method, timeout, timeout, useCache);
+                                          Boolean useCache,
+                                          Boolean followRedirects) {
+        return getBase64FromUrl(imgUrl, method, timeout, timeout, useCache, followRedirects);
     }
 
 
     /**
+     * setUseCaches and setUseCaches must before getResponseCode
+     * because getResponseCode update HttpURLConnection status to connected status
+     *
      * @param imgUrl         any image url
      * @param method         any HTTP METHOD ,String type
      * @param connectTimeout connect tcp port time out
@@ -66,26 +74,47 @@ public class Base64Utils {
                                           String method,
                                           Integer connectTimeout,
                                           Integer readTimeout,
-                                          Boolean useCache) {
-        if (invalidCheck(imgUrl, method, connectTimeout, readTimeout, useCache)) {
+                                          Boolean useCache,
+                                          Boolean followRedirects
+    ) {
+        if (invalidCheck(imgUrl, method,
+                connectTimeout, readTimeout, useCache, followRedirects)) {
             return "";
         }
 
         InputStream inStream = null;
         ByteArrayOutputStream outStream = null;
         HttpURLConnection httpConnection = null;
+
+        boolean redirect = false;
         try {
-            SslUtils.ignoreSsl();
-            URL url = new URL(imgUrl);
-            httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection = buildConnect(imgUrl, method,
+                    connectTimeout, readTimeout, useCache, followRedirects);
+            if (Objects.isNull(httpConnection)) {
+                return "";
+            }
+            int code = httpConnection.getResponseCode();
+            String msg = httpConnection.getResponseMessage();
+            if (code >= 300 && code < 400) {
+                String redirectURL = httpConnection.getHeaderField(HEAD_LOCATION);
+                if (StringUtils.isEmpty(redirectURL)) {
+                    Sys.p(code + "|" + msg);
+                    throw new BaseException(700, msg);
+                }
+                httpConnection.disconnect();
+                httpConnection = buildConnect(redirectURL, method,
+                        connectTimeout, readTimeout, useCache, followRedirects);
+                code = httpConnection.getResponseCode();
+                msg = httpConnection.getResponseMessage();
+            }
 
-            httpConnection.setRequestMethod(method);
-            httpConnection.setConnectTimeout(connectTimeout);
-            httpConnection.setReadTimeout(readTimeout);
-            httpConnection.setUseCaches(useCache);
+            if (code != 200) {
+                Sys.p(code + "|" + msg);
+                throw new BaseException(701, msg);
+            }
 
-            httpConnection.connect();
-            inStream = httpConnection.getInputStream();
+            httpConnection.connect();                      // maybe connect timeout
+            inStream = httpConnection.getInputStream();    // maybe read data timeout
 
             outStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
@@ -112,7 +141,7 @@ public class Base64Utils {
             }
         }
 
-        return null;
+        return "";
     }
 
     /////////////////////////////////////////////////////
@@ -132,7 +161,8 @@ public class Base64Utils {
                                         String method,
                                         Integer connectTimeout,
                                         Integer readTimeout,
-                                        Boolean useCache) {
+                                        Boolean useCache,
+                                        Boolean followRedirects) {
         if (StringUtils.isEmpty(imgUrl)) {
             return true;
         }
@@ -160,8 +190,31 @@ public class Base64Utils {
         if (readTimeout > MAX_TIME_OUT) {
             return true;
         }
+        if (Objects.isNull(useCache)) {
+            return true;
+        }
+        return Objects.isNull(followRedirects);
+    }
 
-        return Objects.isNull(useCache);
+    private static HttpURLConnection buildConnect(String imgUrl,
+                                                  String method,
+                                                  Integer connectTimeout,
+                                                  Integer readTimeout,
+                                                  Boolean useCache,
+                                                  Boolean followRedirects) {
+        try {
+            SslUtils.ignoreSsl();
+            URL url = new URL(imgUrl);
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod(method);
+            httpConnection.setUseCaches(useCache);
+            httpConnection.setInstanceFollowRedirects(followRedirects);
+            httpConnection.setConnectTimeout(connectTimeout);
+            httpConnection.setReadTimeout(readTimeout);
+            return httpConnection;
+        } catch (Exception e) {
+            throw new BaseException(700, e.getMessage());
+        }
     }
 
 }

@@ -8,5 +8,6 @@ import com.geektcp.common.mosheh.system.Sys;
 public class Base64UtilsTest {
     public static void main(String[] args) {
         Sys.p(Base64Utils.getBase64FromUrl("https://baidu.com/favicon.ico"));
+        Sys.p(Base64Utils.getBase64FromUrl("https://everwar.cn/favicon.ico"));
     }
 }
