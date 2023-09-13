@@ -19,6 +19,8 @@
 package com.geektcp.common.mosheh.generator;
 
 
+import com.geektcp.common.mosheh.util.SeparatorUtils;
+
 import java.util.Objects;
 
 /**
@@ -52,7 +54,7 @@ public class IdGenerator {
 
     private static IdGenerator instance;
 
-    private static String separator = "_";
+    private static String separator = SeparatorUtils.SEPARATOR_STRING;
 
 
     private class IdException extends RuntimeException {
