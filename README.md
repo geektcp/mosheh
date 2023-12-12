@@ -52,7 +52,7 @@ public class RoomInfoServerImpl extends JpaBase implements RoomInfoServer {
         log.info("qo: {}", JSON.toJSONString(qo));
         
         // get result from tiny cache
-        List<RoomInfoVo> cacheResult =  roomCache.get(qo);
+        List<RoomInfoVo> cacheResult =  tinyCache.get(qo);
         if(Objects.nonNull(cacheResult)){
             return cacheResult;
         }
@@ -85,7 +85,7 @@ public class RoomInfoServerImpl extends JpaBase implements RoomInfoServer {
         }).collect(Collectors.toList());
 
         // add result to tiny cache
-        roomCache.put(qo, voList);
+        tinyCache.put(qo, voList);
         
         return voList;
     }
