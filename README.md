@@ -9,12 +9,11 @@ mosheh
 ### describe
 ```
 mosheh is a common library for Java, which release in maven repository:
-https://mvnrepository.com/artifact/com.geektcp.common/mosheh
-
 this is a tiny project. we can use it to develop big project.
 
 Furthermore, mosheh offers a convenient API for build many cache, collection, executor.
 ```
+<a href='https://mvnrepository.com/artifact/com.geektcp.common/mosheh' target='_blank'>https://mvnrepository.com/artifact/com.geektcp.common/mosheh</a>
 
 ### maven dependency
 ```
